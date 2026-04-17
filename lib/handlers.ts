@@ -3,8 +3,10 @@ export const handleDeleteById = < T extends {id: number} >(
     setFunc: React.Dispatch<React.SetStateAction<T[]>>
 ) => {
     setFunc(
-        prev => prev.filter( s => s.id !== id)
-    );
+        prev => prev.filter(s =>
+            s.id !== id
+        )
+    )
 };
 
 export const handleChangeById = < T extends {id: number}, K extends keyof T >(

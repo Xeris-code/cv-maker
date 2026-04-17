@@ -1,19 +1,22 @@
+import {styleInputTextArea} from "@/lib/styles"
+import Label from "./Label";
+
 type Props = {
+    label: string;
     placeholder: string;
-    classNameWrapper?: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export default function TextArea({
-    classNameWrapper="",
+    label,
     placeholder,
     onChange
-}: Props, key=""){
+}: Props){
 
-    const styleWrapper = `${classNameWrapper}`
-    const styleTextArea = "resize-none text-[#9ca3af] overflow-hidden focus:outline-none focus:-[#3b82f6] rounded-lg w-full border-[#475569] border-l-2 p-2 ring-2 ring-[#475569] focus:-[#3b82f6]"
+    const styleWrapper = `flex flex-col gap-1`
 
-    return <div className={styleWrapper} key={key}>
-            <textarea className={styleTextArea} placeholder={placeholder} onChange={onChange}/>
+    return <div className={styleWrapper}>
+            <Label label={label}/>
+            <textarea className={styleInputTextArea} placeholder={placeholder} onChange={onChange}/>
         </div>
 }

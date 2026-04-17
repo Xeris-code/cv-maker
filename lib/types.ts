@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export type BasicInformation = {
     name: string;
     surname: string;
@@ -8,9 +10,6 @@ export type BasicInformation = {
     summary: string;
     interest: string;
     driving: string;
-};
-
-export type Contacts = {
     mail: string;
     phone: string | number;
     adress_city: string;
@@ -90,3 +89,101 @@ export type Projects = {
     url: string
 }
 
+export type LanguageWebSelection = {
+    sk: boolean;
+    en: boolean;
+    de: boolean
+}
+
+export type AllowedLanguage = "sk" | "en" | "de"
+export type TranslationKeys = 
+    | "appTitle"
+    | "appDescription"
+    | "exportPdf"
+    | "formTitle"
+    | "personalTitle"
+    | "workTitle"
+    | "educationTitle"
+    | "coursesTitle"
+    | "skillsTitle"
+    | "languagesTitle"
+    | "interestsTitle"
+    | "projectsTitle"
+    | "name"
+    | "surname"
+    | "mail"
+    | "phone"
+    | "cityContact"
+    | "stateContact"
+    | "title"
+    | "titleFront"
+    | "titleBack"
+    | "birth"
+    | "birthDay"
+    | "birthMonth"
+    | "birthYear"
+    | "summary"
+    | "photo"
+    | "firstPhoto"
+    | "newPhoto"
+    | "positionWork"
+    | "companyWork"
+    | "cityWork"
+    | "stateWork"
+    | "fromWork"
+    | "endWork"
+    | "presentWork"
+    | "descriptionWork"
+    | "addWork"
+    | "titleEdu"
+    | "facultyEdu"
+    | "uniEdu"
+    | "fieldEdu"
+    | "cityEdu"
+    | "stateEdu"
+    | "degreeEdu"
+    | "fromEdu"
+    | "endEdu"
+    | "descriptionEdu"
+    | "addEdu"
+    | "langOption0"    
+    | "langOption1"
+    | "langOption2"
+    | "langOption3"
+    | "langOption4"
+    | "langOption5"
+    | "langOption6"
+    | "langOption7"
+    | "skillOption0"
+    | "skillOption1"
+    | "skillOption2"
+    | "skillOption3"
+    | "skillOption4"
+    | "skillOption5"
+    | "langButton"
+    | "skillButton"
+    | "nameCourse"
+    | "orgCourse"
+    | "linkCourse"
+    | "startCourse"
+    | "endCourse"
+    | "descriptionCourse"
+    | "addCourse"
+    | "nameProject"
+    | "techProject"
+    | "linkProject"
+    | "descriptionproject"
+    | "addProject"
+
+
+export type MenuCategory = 
+    | "personal"
+    | "work"
+    | "education"
+    | "courses"
+    | "skills"
+    | "languages"
+    | "interests"
+    | "projects"
+
+export type categoryMenuItem = {name: MenuCategory, icon: LucideIcon} 

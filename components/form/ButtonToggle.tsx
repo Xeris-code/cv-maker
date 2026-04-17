@@ -1,24 +1,28 @@
+import Label from "./Label";
+import { twMerge } from "tailwind-merge";
+import {styleButtonToggle, styleButtonToggleActive, styleButtonToggleDeactive,
+    styleButtonTogglePointer, styleButtonTogglePointerActive, styleButtonTogglePointerDeactive} from "@/lib/styles"
+
 type Props = {
     label: string;
+    classNameWrapper?: string;
     condition: boolean;
     func: () => void;
-
-    classNameWrapper?: string;
 }
 
 export default function ButtonToggle({
-    label, condition, func, classNameWrapper = ""
-}: Props, key=""){
+    label, condition, func, classNameWrapper=""
+}: Props){
 
-    const styleWrapper = `flex gap-2 items-center ${classNameWrapper}`
-    const styleLabel = ""
-    const styleButton = `cursor-pointer transition-all relative h-4 w-8 rounded-xl self-center ${condition ? "bg-[#3b82f6] " : "bg-[#6b7280]"}`
-    const stylePointer = `transition-all absolute top-0 left-0 h-4 w-4 rounded-full bg-[#ffffff] transition-transform duration-300 ${condition ? "translate-x-4" : ""}`
+    const styleWrapper = twMerge("flex flex-col gap-1", classNameWrapper)
 
-    return <div className={styleWrapper} key={key}>
-        <p className={styleLabel}>{label}</p>
-        <button className={styleButton} onClick={func}>
-            <div className={stylePointer} />
-        </button>
-    </div>
+    return <div className={styleWrapper}>
+            <div className="flex justify-start gap-2">
+                <Label label={label} />
+                <button className={`${styleButtonToggle} ${condition ? styleButtonToggleActive : styleButtonToggleDeactive}`} onClick={func}>
+                    <div className={`${styleButtonTogglePointer} ${condition ? styleButtonTogglePointerActive : styleButtonTogglePointerDeactive}`} />
+                </button>
+            </div>
+        </div>
+
 }

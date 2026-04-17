@@ -1,7 +1,6 @@
 import { SkillOption, LanguageOption } from "../../lib/types"
 
 type Props = {
-    id: number;
     name: string;
     level: number;
     onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +11,6 @@ type Props = {
 };
 
 export default function InputAddSelectText({
-    id,
     name,
     level= 0,
     options,
@@ -23,19 +21,15 @@ export default function InputAddSelectText({
 
 }: Props){
 
-    const style = "focus:outline-none focus:-[#3b82f6] rounded-lg w-2/5 border-[#475569] p-2 ring-2 ring-[#475569] focus:-[#3b82f6]";
-
-    return <div className="flex justify-between" key={`formField_${id}`}>
-        <div className="mt-2 w-full gap-2 flex justify-between">
-            <input className={`${style} text-[#9ca3af]`} value={name} onChange={onNameChange} placeholder={placeholderName}/>
-
-            <select className={`${style} w-3/5 bg-[#1e293b] text-[#9ca3af]`} value={level} onChange={onLevelChange}>
-                {options.map((s) => (<option key={s.value} value={s.value}>{s.label}</option>))}
-            </select>
-
-            <div className="self-center">
-                <button className="hover:text-red-300 hover:ring-red-300 w-6 h-6 ring-1 ring-[#475569] text-[#475569] rounded-lg" onClick={onClickDelete}>x</button>
+    return <div className="flex gap-2 ">
+            <div className="flex flex-col w-full">
+                <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={name} onChange={onNameChange} placeholder={placeholderName}/>
+                <select className="border-1 border-[#E2E8F0] border-t-0 p-2 bg-[#F1F5F9] text-[#475569] outline-none" value={level} onChange={onLevelChange}>
+                    {options.map((s) => (<option key={s.value} value={s.value}>{s.label}</option>))}
+                </select>
+            </div>
+            <div className="self-top">
+                <button className="self-center hover:text-red-300 hover:border-red-300 border-1 border-[#E2E8F0] w-6 h-6 text-[#475569]" onClick={onClickDelete}>x</button>
             </div>
         </div>
-    </div>;
 }

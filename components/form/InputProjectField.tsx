@@ -1,12 +1,13 @@
 import TextArea from "./TextArea"
-import { Projects } from "@/lib/types"
+import { Projects, TranslationKeys } from "@/lib/types"
 import { extendTextAreaArray, handleChangeById} from "@/lib/handlers"
-import InputText from "./InputFieldText"
 import ButtonDelete from "./ButtonDeleteId"
+import Label from "./Label"
 
 type Props = {
     index: number;
     project: Projects;
+    labels: Record<TranslationKeys, { name: string, placeholder: string }>;
     setFunc: React.Dispatch<React.SetStateAction<Projects[]>>;
 
 }
@@ -14,22 +15,19 @@ type Props = {
 export default function InputProjectField({
     index,
     project,
+    labels,
     setFunc
 }: Props){
 
-    const styleSelector = "w-full bg-[#1e293b] text-[#9ca3af] text-center placeholder:text-[#9ca3af] focus:outline-none focus:-[#3b82f6] rounded-lg border-[#475569] p-2 ring-2 ring-[#475569] focus:-[#3b82f6]";
-
-    return <div className="pt-2" key={`formprojectField_${project.id}`}>
-        <div className="flex justify-between">
-            <div className="content-center">
-                <label className="pl-2 pr-2">{index + 1}. Project</label>
+    return <div className="flex flex-col w-full gap-2 p-2 border">
+            <div className="flex justify-between">
+                <Label label={`${index + 1}. ${labels.titleProject.name}`}/>
                 <ButtonDelete id={project.id} setFunc={setFunc}/>
             </div>
+            <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={project.name} onChange={(e) => handleChangeById(project.id, "name", e.target.value, setFunc)} placeholder={labels.nameProject.name}/>
+            <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={project.tech} onChange={(e) => handleChangeById(project.id, "tech", e.target.value, setFunc)} placeholder={labels.techProject.name}/>
+            <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={project.url} onChange={(e) => handleChangeById(project.id, "url", e.target.value, setFunc)} placeholder={labels.linkProject.name}/>
+    
+            <TextArea label="" placeholder={labels.descriptionproject.placeholder} onChange={(e) => { extendTextAreaArray(e, project.id,  "description", setFunc)}}/>
         </div>
-        <InputText label="Name" value={project.name} placeholder="Name..." onChange={(e) => handleChangeById(project.id, "name", e.target.value, setFunc)}/>
-        <InputText label="Technology" value={project.tech} placeholder="e.g. React, Python..." onChange={(e) => handleChangeById(project.id, "tech", e.target.value, setFunc)}/>
-        <InputText label="Git / Demo" value={project.url} placeholder="www.project.com..." onChange={(e) => handleChangeById(project.id, "url", e.target.value, setFunc)}/>
-        
-        <TextArea classNameWrapper="mt-3" key={`formprojectField_textArea_${project.id}`} placeholder="Description" onChange={(e) => { extendTextAreaArray(e, project.id,  "description", setFunc)}}/>
-    </div>
 }

@@ -1,75 +1,73 @@
 import TextArea from "./TextArea"
-import { CoursesCertificates } from "@/lib/types"
+import { CoursesCertificates, TranslationKeys } from "@/lib/types"
 import { extendTextAreaArray, handleChangeById} from "@/lib/handlers"
 import InputText from "./InputFieldText"
 import ButtonDelete from "./ButtonDeleteId"
+import Label from "./Label"
 
-import { monthDateOptions, yearDateOptions } from "@/lib/constants"
+import { getMonthOptions, getYearOptions } from "@/lib/constants";
 
 type Props = {
     index: number;
     course: CoursesCertificates;
+    labels: Record<TranslationKeys, { name: string, placeholder: string }>;
     setFunc: React.Dispatch<React.SetStateAction<CoursesCertificates[]>>;
 
 }
 
-type WrapperProps = {
-    children: React.ReactNode;
-    label: string
-}
-
-function DateSelectorWrapper({children, label}: WrapperProps){
-    return <div className="col-span-2 bg-[#334155] flex gap-4 ring-[#475569] ring-2 rounded-lg">
-            <label className="content-center pl-2" >
-                {label}
-            </label>
-            {children}
-        </div>
-}
 
 export default function InputCourseField({
     index,
     course,
+    labels,
     setFunc
 }: Props){
 
-    const styleSelector = "w-full bg-[#1e293b] text-[#9ca3af] text-center placeholder:text-[#9ca3af] focus:outline-none focus:-[#3b82f6] rounded-lg border-[#475569] p-2 ring-2 ring-[#475569] focus:-[#3b82f6]";
+    const monthDateOptions = getMonthOptions(labels.birthMonth.name)
+    const yearDateOptions = getYearOptions(labels.birthYear.name)
 
-    return <div className="pt-2" key={`formcourseField_${course.id}`}>
+    const style = "border border-[#E2E8F0] focus:border-[#3B82F6] focus:outline-none p-2 pl-3 pr-3 rounded w-full text-[15px] text-[#94A3B8]"
+
+    return <div className="flex flex-col w-full gap-2 p-2 border">
         <div className="flex justify-between">
-            <div className="content-center">
-                <label className="pl-2 pr-2">{index + 1}. Course / Certificate</label>
-                <ButtonDelete id={course.id} setFunc={setFunc}/>
+            <Label label={`${index + 1}. ${labels.titleCourse.name}`}/>
+            <ButtonDelete id={course.id} setFunc={setFunc}/>
+        </div>
+        <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={course.name} onChange={(e) => handleChangeById(course.id, "name", e.target.value, setFunc)} placeholder={labels.nameCourse.name}/>
+        <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={course.org} onChange={(e) => handleChangeById(course.id, "org", e.target.value, setFunc)} placeholder={labels.orgCourse.name}/>
+        <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={course.url} onChange={(e) => handleChangeById(course.id, "url", e.target.value, setFunc)} placeholder={labels.linkCourse.name}/>
+
+        <div className="grid grid-cols-5 gap-2 w-full">
+            <div className="w-full content-center border-r-1 text-center">
+                <label className="text-[16px] text-[#475569] w-fit ">{labels.fromWork.name}</label>
+            </div>
+            <div className="col-span-2">
+                <select className={style} value={course.start.month} onChange={(e) => handleChangeById(course.id, "start", {month: e.target.value, year: course.start.year}, setFunc)}>
+                    {monthDateOptions.map((s) => (<option key={`month_${s.num}`} value={s.name}>{s.name}</option>))}
+                </select>
+            </div>
+            <div className="col-span-2">
+                <select className={style} value={course.start.year} onChange={(e) => handleChangeById(course.id, "start", {month: course.start.month, year: Number(e.target.value)}, setFunc)}>
+                    {yearDateOptions.map((s) => (<option key={`year_${s.num}`} value={s.num}>{s.label}</option>))}
+                </select>
             </div>
         </div>
-        <InputText label="Name" value={course.name} placeholder="Name..." onChange={(e) => handleChangeById(course.id, "name", e.target.value, setFunc)}/>
-        <InputText label="Organization" value={course.org} placeholder="Organization..." onChange={(e) => handleChangeById(course.id, "org", e.target.value, setFunc)}/>
-        <InputText label="Link" value={course.url} placeholder="www.course.com..." onChange={(e) => handleChangeById(course.id, "url", e.target.value, setFunc)}/>
-        
-            <div className="grid grid-cols-5 gap-3 mt-3">
-                <div className="col-span-1 content-center text-center border-r-1 border-[#334155]">Start</div>
-                <DateSelectorWrapper label="Month" key={`formcourseField_startMonth_${course.id}`}>
-                    <select className={styleSelector} value={course.start.month} onChange={(e) => handleChangeById(course.id, "start", {month: e.target.value, year: course.start.year}, setFunc)}>
-                        {monthDateOptions.map((s) => (<option key={`month_${s.num}`} value={s.name}>{s.name}</option>))}
-                    </select>
-                </DateSelectorWrapper>
-                <DateSelectorWrapper label="Year" key={`formcourseField_startYear_${course.id}`}>
-                    <select className={styleSelector} value={course.start.year} onChange={(e) => handleChangeById(course.id, "start", {month: course.start.month, year: Number(e.target.value)}, setFunc)}>
-                        {yearDateOptions.map((s) => (<option key={`year_${s.num}`} value={s.num}>{s.label}</option>))}
-                    </select>
-                </DateSelectorWrapper>
-                <div className="col-span-1 content-center text-center border-r-1 border-[#334155] mt-2.5">End</div>
-                    <DateSelectorWrapper label="Month" key={`formcourseField_endMonth_${course.id}`}>
-                    <select className={styleSelector} value={course.end.month} onChange={(e) => handleChangeById(course.id, "end", {month: e.target.value, year: course.end.year}, setFunc)}>
-                        {monthDateOptions.map((s) => (<option key={`month_${s.num}`} value={s.name}>{s.name}</option>))}
-                    </select>
-                    </DateSelectorWrapper>
-                    <DateSelectorWrapper label="Year" key={`formcourseField_endYear_${course.id}`}>
-                    <select className={styleSelector} value={course.end.year} onChange={(e) => handleChangeById(course.id, "end", {month: course.end.month, year: Number(e.target.value)}, setFunc)}>
-                        {yearDateOptions.map((s) => (<option key={`year_${s.num}`} value={s.num}>{s.label}</option>))}
-                    </select>
-                    </DateSelectorWrapper>
+        <div className="grid grid-cols-5 gap-2 w-full">
+            <div className="w-full content-center border-r-1 text-center">
+                <label className="text-[16px] text-[#475569] w-fit ">{labels.endWork.name}</label>
             </div>
-            <TextArea classNameWrapper="mt-3" key={`formcourseField_textArea_${course.id}`} placeholder="Description" onChange={(e) => { extendTextAreaArray(e, course.id,  "description", setFunc)}}/>
+            <div className="col-span-2">
+                <select className={style} value={course.end.month} onChange={(e) => handleChangeById(course.id, "end", {month: e.target.value, year: course.end.year}, setFunc)}>
+                    {monthDateOptions.map((s) => (<option key={`month_${s.num}`} value={s.name}>{s.name}</option>))}
+                </select>
+            </div>
+            <div className="col-span-2">
+                <select className={style} value={course.end.year} onChange={(e) => handleChangeById(course.id, "end", {month: course.end.month, year: Number(e.target.value)}, setFunc)}>
+                    {yearDateOptions.map((s) => (<option key={`year_${s.num}`} value={s.num}>{s.label}</option>))}
+                </select>
+            </div>
+            
+        </div>
+        <TextArea label="" placeholder={labels.descriptionCourse.placeholder} onChange={(e) => { extendTextAreaArray(e, course.id,  "description", setFunc)}}/>
     </div>
 }
