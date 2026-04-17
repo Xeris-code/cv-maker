@@ -174,6 +174,8 @@ export type TranslationKeys =
     | "linkProject"
     | "descriptionproject"
     | "addProject"
+    | "titleProject"
+    | "titleCourse"
 
 
 export type MenuCategory = 

@@ -1,8 +1,6 @@
 import TextArea from "./TextArea"
 import { Education, TranslationKeys } from "@/lib/types"
 import { extendTextAreaArray, handleChangeById} from "@/lib/handlers"
-import InputText from "./InputFieldText"
-import ButtonToggle from "./ButtonToggle"
 import ButtonDelete from "./ButtonDeleteId"
 import Label from "./Label"
 
