@@ -1,48 +1,22 @@
 "use client";
 
-import {useState} from "react";
-
 import { useReducer } from "react";
 import { cvReducer, initialState } from "@/lib/cvReducer";
 
-import Button from "../components/builder/sections/components/Button"
-
-import AddSkill from "../components/preview/AddSkill";
-import AddLang from "@/components/preview/AddLang";
-import InputText from "../components/builder/sections/components/InputText"
-import HeadingForm from "../components/form/HeadingForm";
-import ButtonToggle from "../components/builder/sections/components/ButtonToggle";
-import InputAddSelectText from "../components/builder/sections/components/InputAddSelectText"
 import HeadingPreview from "../components/preview/HeadingPreview";
-import DateSelect from "@/components/builder/sections/components/DateSelect";
-import TextArea from "@/components/builder/sections/components/TextArea";
 import AddWork from "@/components/preview/AddWork";
-import InputEduField from "@/components/form/InputEduField";
-import InputCourseField from "@/components/form/InputCourseField";
-import InputProjectField from "@/components/form/InputProjectField";
 import AddCourse from "@/components/preview/AddCourse";
+import { Mail, MapPinHouse, Phone, Cake } from "lucide-react";
 
-import { handleDeleteById, handleChangeById, getPhoto, extendTextArea, extendTextAreaDispatch} from "@/lib/handlers";
-
-
-import { Mail, MapPinHouse, Phone, Cake, User, BriefcaseBusiness, GraduationCap, LanguagesIcon, Layers, ScrollText, FileUserIcon, BikeIcon, CameraIcon, ContactRoundIcon } from "lucide-react";
-
-import { Skill, Language, BasicInformation,
-    BirthDate, WorkExperience, Education,
-    CoursesCertificates, Projects, AllowedLanguage,
-    TranslationKeys,
-    MenuCategory, categoryMenuItem
+import { WorkExperience, Education,
+    CoursesCertificates, Projects, 
   } from "../lib/types"
 
-import InputWorkField from "@/components/form/InputWorkField";
 import AddEducation from "@/components/preview/AddEducation";
 import AddProject from "@/components/preview/AddProject";
 
 
 import { translations } from "@/lib/translations";
-import { styleMenuButtonIcon, styleMenuWindow, styleMenuWrapper } from "@/lib/styles";
-import MenuButton from "@/components/builder/MenuButton";
-import Label from "@/components/builder/sections/components/Label";
 import MainHeader from "@/components/MainHeader";
 import BuilderSidebar from "@/components/builder/BuilderSidebar";
 import BuilderForms from "@/components/builder/BuilderForms";
