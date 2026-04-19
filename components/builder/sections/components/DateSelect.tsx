@@ -1,14 +1,16 @@
-import { getDayOptions, getMonthOptions, getYearOptions } from "@/lib/constants";
-import { twMerge } from "tailwind-merge";
 import Label from "./Label";
+import { twMerge } from "tailwind-merge";
+import { months } from "@/lib/translations";
+import { AllowedLanguage } from "@/lib/types";
 
 type Props = {
     label: string;
     classNameWrapper?: string;
-    day: number;
-    month: number;
-    year: number;
-    webLang: {day: string, month: string, year: string};
+    day: number | null;
+    month: number | null;
+    year: number | null;
+    webLang: AllowedLanguage;
+    selectionPlaceholder: {day: string, month: string, year: string};
     onDayChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
     onMonthChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
     onYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
@@ -20,16 +22,35 @@ export default function DateSelect({
     month,
     year,
     webLang,
+    selectionPlaceholder,
     onDayChange,
     onMonthChange,
     onYearChange
 }: Props){
 
     const styleWrapper = twMerge("flex flex-col gap-1", classNameWrapper)
+    
+    const dayDateOptions = Array.from({length: 32}, (_, i) => 
+        i === 0
+            ? { num: 0, label: selectionPlaceholder.day }
+            : { num: i, label: String(i) }
+    )
 
-    const dayDateOptions = getDayOptions(webLang.day)
-    const monthDateOptions = getMonthOptions(webLang.month)
-    const yearDateOptions = getYearOptions(webLang.year)
+    const month_list = months[webLang]
+    const monthDateOptions = Array.from({length: 13}, (_, i) => 
+        i === 0 
+            ? {num: 0, label: String(0), name: selectionPlaceholder.month}
+            : {num: i, label: String(i), name: month_list[i]}
+    )
+    
+    const currentYear = new Date().getFullYear()
+    const yearDateOptions = Array.from({length: 102}, (_, i) => 
+        i === 0
+            ? {num: 0, label: selectionPlaceholder.year}
+            : i === 1 
+                ? {num: currentYear, label: String(currentYear)}
+                : {num: currentYear - i + 1, label: String(currentYear - i + 1)}
+    )
 
     const style = "border border-[#E2E8F0] focus:border-[#3B82F6] focus:outline-none p-2 pl-3 pr-3 rounded w-full text-[15px] text-[#94A3B8]"
     
@@ -37,19 +58,19 @@ export default function DateSelect({
         <Label label={label}/>
         <div className="w-full flex justify-center gap-3">
                 <div className="w-full">
-                    <select className={style} value={day} onChange={onDayChange}>
+                    <select className={style} value={day ? day : 0} onChange={onDayChange}>
                         {dayDateOptions.map((s) => (<option key={`day_${s.num}`} value={s.num}>{s.label}</option>))}
                     </select>
                 </div>
                 <div className="border-r-1 border-[#E2E8F0]"></div>
                 <div className="w-full">
-                    <select className={style} value={month} onChange={onMonthChange}>
+                    <select className={style} value={month ? month : 0} onChange={onMonthChange}>
                         {monthDateOptions.map((s) => (<option key={`month_${s.num}`} value={s.num}>{s.name}</option>))}
                     </select>
                 </div>
                 <div className="border-r-1 border-[#E2E8F0]"></div>
                 <div className="w-full">
-                    <select className={style} value={year} onChange={onYearChange}>
+                    <select className={style} value={year ? year : 0} onChange={onYearChange}>
                         {yearDateOptions.map((s) => (<option key={`year_${s.num}`} value={s.num}>{s.label}</option>))}
                     </select>
                 </div>

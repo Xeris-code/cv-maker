@@ -17,9 +17,9 @@ export type BasicInformation = {
 };
 
 export type BirthDate = {
-    day: number;
-    month: number;
-    year: number
+    day: number | null;
+    month: number | null;
+    year: number | null
 }
 
 export type Skill = {

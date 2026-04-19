@@ -1,5 +1,49 @@
-import { colorPlaceholder } from "./styles"
 import { AllowedLanguage, TranslationKeys } from "./types"
+
+export const months: Record<AllowedLanguage, string[]> = {
+  sk: [
+    "január",
+    "február",
+    "marec",
+    "apríl",
+    "máj",
+    "jún",
+    "júl",
+    "august",
+    "september",
+    "október",
+    "november",
+    "december",
+  ],
+  en: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  de: [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ],
+} 
 
 export const translations: Record<AllowedLanguage, Record<TranslationKeys, { name: string, placeholder: string }>> = {
   sk: {
@@ -20,7 +64,7 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     projectsTitle: { name: "Projekty", placeholder: "" },
 
     name: { name: "Meno", placeholder: "napr. Peter" },
-    surname: { name: "Priezvisko", placeholder: "napr. Čižovský" },
+    surname: { name: "Priezvisko", placeholder: "napr. Kováč" },
 
     mail: { name: "Email", placeholder: "napr. peter@email.com" },
     phone: { name: "Telefónne číslo", placeholder: "napr. +421 901 234 567" },

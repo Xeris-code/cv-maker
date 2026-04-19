@@ -9,7 +9,7 @@ export const colorPlaceholder = "[##94A3B8]"
 /* Style Header */
 
 /* Style Print Button */
-export const stylePrintButton = "cursor-pointer h-fit bg-[#2563EB] hover:bg-[#1D4ED8] pt-2 pb-2 pl-4 pr-4 shadow-lg rounded-lg"
+export const stylePrintButton = "cursor-pointer text-[#FFFFFF] h-fit bg-[#2563EB] hover:bg-[#1D4ED8] pt-2 pb-2 pl-4 pr-4 shadow-lg rounded-lg"
 
 /* Style Language Button */
 export const styleLanguageSwitchWrapper = "grid h-fit grid-cols-8 bg-[#F1F5F9] font-bold pl-2 pr-2 text-[#64748B] text-[14px] border-2 border-[#E2E8F0] rounded-md self-center"
