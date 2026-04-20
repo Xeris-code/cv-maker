@@ -11,6 +11,23 @@ type EducationSectionProps = {
     t: Record<TranslationKeys, {name: string, placeholder: string}>
 }
 
+function extendTextAreaDispatch(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    id: number,
+    field: keyof Education,
+    dispatch: React.Dispatch<CvAction>
+) {
+    dispatch({
+    type: "UPDATE_EDUCATION",
+    id,
+    field,
+    value: e.target.value,
+    })
+
+    e.target.style.height = "auto"
+    e.target.style.height = e.target.scrollHeight + "px"
+}
+
 
 export default function EducationSection({ state, dispatch, t}: EducationSectionProps){
 
@@ -27,22 +44,6 @@ export default function EducationSection({ state, dispatch, t}: EducationSection
 
     const style = "border border-[#E2E8F0] focus:border-[#3B82F6] focus:outline-none p-2 pl-3 pr-3 rounded w-full text-[15px] text-[#94A3B8]"
 
-    function extendTextAreaDispatch(
-          e: React.ChangeEvent<HTMLTextAreaElement>,
-          id: number,
-          field: keyof Education,
-          dispatch: React.Dispatch<CvAction>
-        ) {
-          dispatch({
-            type: "UPDATE_EDUCATION",
-            id,
-            field,
-            value: e.target.value,
-          })
-        
-          e.target.style.height = "auto"
-          e.target.style.height = e.target.scrollHeight + "px"
-        }
 
     return <>
         <TitleSection label={t["workTitle"].name}/>
@@ -63,7 +64,7 @@ export default function EducationSection({ state, dispatch, t}: EducationSection
                         <input className="border-1 border-[#E2E8F0] p-2 pl-3 focus:border-[#3B82F6] focus:outline-none border-[#475569] text-[#475569] placeholder-[#94A3B8]" value={education.degree} onChange={(e) => dispatch({type: "UPDATE_EDUCATION", id: education.id, field: "degree", value: e.target.value})} placeholder={`${t["degreeEdu"].name} / ${t["degreeEdu"].placeholder}`}/>
                         <div className="grid grid-cols-3 gap-2 w-full">
                             <div className="w-full content-center border-r-1 text-center">
-                                <label className="text-[16px] text-[#475569] w-fit ">{t["fromWork"].name}</label>
+                                <label className="text-[16px] text-[#475569] w-fit ">{t["fromEdu"].name}</label>
                             </div>
                             
                             <div className="col-span-2">
@@ -74,7 +75,7 @@ export default function EducationSection({ state, dispatch, t}: EducationSection
                         </div>
                         <div className="grid grid-cols-3 gap-2 w-full">
                             <div className="w-full content-center border-r-1 text-center">
-                                <label className="text-[16px] text-[#475569] w-fit ">{t["endWork"].name}</label>
+                                <label className="text-[16px] text-[#475569] w-fit ">{t["endEdu"].name}</label>
                             </div>
                             <div className="col-span-2">
                                 <select className={style} value={education.end.year} onChange={(e) => dispatch({type: "UPDATE_EDUCATION", id: education.id, field: "end", value: {year: Number(e.target.value)}})}>

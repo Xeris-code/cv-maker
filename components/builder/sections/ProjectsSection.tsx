@@ -11,27 +11,26 @@ type ProjectsSectionProps = {
     t: Record<TranslationKeys, {name: string, placeholder: string}>
 }
 
+function extendTextAreaDispatch(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    id: number,
+    field: keyof Projects,
+    dispatch: React.Dispatch<CvAction>
+) {
+    dispatch({
+    type: "UPDATE_PROJECT",
+    id,
+    field,
+    value: e.target.value,
+    })
+
+    e.target.style.height = "auto"
+    e.target.style.height = e.target.scrollHeight + "px"
+}
 
 export default function ProjectsSection({ state, dispatch, t}: ProjectsSectionProps){
 
     const { projects } = state
-
-    function extendTextAreaDispatch(
-          e: React.ChangeEvent<HTMLTextAreaElement>,
-          id: number,
-          field: keyof Projects,
-          dispatch: React.Dispatch<CvAction>
-        ) {
-          dispatch({
-            type: "UPDATE_PROJECT",
-            id,
-            field,
-            value: e.target.value,
-          })
-        
-          e.target.style.height = "auto"
-          e.target.style.height = e.target.scrollHeight + "px"
-        }
 
     return <>
         <TitleSection label={t["projectsTitle"].name}/>

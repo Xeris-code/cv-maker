@@ -66,8 +66,10 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     name: { name: "Meno", placeholder: "napr. Peter" },
     surname: { name: "Priezvisko", placeholder: "napr. Kováč" },
 
+    contactsTitle: { name: "Kontakt", placeholder: "" },
     mail: { name: "Email", placeholder: "napr. peter@email.com" },
     phone: { name: "Telefónne číslo", placeholder: "napr. +421 901 234 567" },
+    adress: { name: "Adresa", placeholder: "" },
     cityContact: { name: "Mesto", placeholder: "napr. Bratislava" },
     stateContact: { name: "Štát", placeholder: "napr. Slovensko" },
 
@@ -89,6 +91,7 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     skillButton: {name: "Pridať zručnosť", placeholder: "Pridať zručnosť..."},
 
     positionWork: {name: "Pozícia", placeholder: "Pozícia..."},
+    currentPosition: {name: "Aktuálna pozícia", placeholder: "Aktuálna pozícia..."},
     companyWork: {name: "Spoločnosť", placeholder: "Spoločnosť..."},
     cityWork: {name: "Mesto", placeholder: "Mesto..."},
     stateWork: {name: "Krajina", placeholder: "Krajina..."},
@@ -163,8 +166,10 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     name: { name: "First Name", placeholder: "e.g. Peter" },
     surname: { name: "Last Name", placeholder: "e.g. Smith" },
 
+    contactsTitle: { name: "Contact", placeholder: "" },
     mail: { name: "Email", placeholder: "e.g. peter@email.com" },
     phone: { name: "Phone Number", placeholder: "e.g. +421 901 234 567" },
+    adress: { name: "Adress", placeholder: "" },
     cityContact: { name: "City", placeholder: "e.g. Bratislava" },
     stateContact: { name: "Country", placeholder: "e.g. Slovakia" },
 
@@ -186,6 +191,7 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     skillButton: {name: "Add skill", placeholder: "Add skill..."},
 
     positionWork: {name: "Position", placeholder: "Position..."},
+    currentPosition: {name: "Current position", placeholder: "Current position..."},
     companyWork: {name: "Company", placeholder: "Company..."},
     cityWork: {name: "City", placeholder: "City..."},
     stateWork: {name: "Country", placeholder: "Country..."},
@@ -260,8 +266,10 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     name: { name: "Vorname", placeholder: "z.B. Peter" },
     surname: { name: "Nachname", placeholder: "z.B. Müller" },
 
+    contactsTitle: { name: "Kontakt", placeholder: "" },
     mail: { name: "E-Mail", placeholder: "z.B. peter@email.com" },
     phone: { name: "Telefonnummer", placeholder: "z.B. +49 123 456789" },
+    adress: { name: "", placeholder: "" },
     cityContact: { name: "Stadt", placeholder: "z.B. Bratislava" },
     stateContact: { name: "Land", placeholder: "z.B. Slowakei" },
 
@@ -283,6 +291,7 @@ export const translations: Record<AllowedLanguage, Record<TranslationKeys, { nam
     skillButton: {name: "Fähigkeit hinzufügen", placeholder: "Fähigkeit hinzufügen..."},
 
     positionWork: {name: "Position", placeholder: "Position..."},
+    currentPosition: {name: "Current position", placeholder: "Current position..."},
     companyWork: {name: "Unternehmen", placeholder: "Unternehmen..."},
     cityWork: {name: "Stadt", placeholder: "Stadt..."},
     stateWork: {name: "Land", placeholder: "Land..."},

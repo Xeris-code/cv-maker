@@ -12,6 +12,23 @@ type CourseSectionProps = {
     t: Record<TranslationKeys, {name: string, placeholder: string}>
 }
 
+function extendTextAreaDispatch(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    id: number,
+    field: keyof CoursesCertificates,
+    dispatch: React.Dispatch<CvAction>
+) {
+    dispatch({
+    type: "UPDATE_COURSE",
+    id,
+    field,
+    value: e.target.value,
+    })
+
+    e.target.style.height = "auto"
+    e.target.style.height = e.target.scrollHeight + "px"
+}
+
 
 export default function CourseSection({ state, dispatch, t}: CourseSectionProps){
 
@@ -35,22 +52,7 @@ export default function CourseSection({ state, dispatch, t}: CourseSectionProps)
 
     const style = "border border-[#E2E8F0] focus:border-[#3B82F6] focus:outline-none p-2 pl-3 pr-3 rounded w-full text-[15px] text-[#94A3B8]"
 
-    function extendTextAreaDispatch(
-          e: React.ChangeEvent<HTMLTextAreaElement>,
-          id: number,
-          field: keyof CoursesCertificates,
-          dispatch: React.Dispatch<CvAction>
-        ) {
-          dispatch({
-            type: "UPDATE_COURSE",
-            id,
-            field,
-            value: e.target.value,
-          })
-        
-          e.target.style.height = "auto"
-          e.target.style.height = e.target.scrollHeight + "px"
-        }
+    
 
     return <>
         <TitleSection label={t["workTitle"].name}/>

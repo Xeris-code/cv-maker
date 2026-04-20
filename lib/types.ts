@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { CvState } from "./cvReducer";
 
 export type BasicInformation = {
     name: string;
@@ -96,6 +97,7 @@ export type LanguageWebSelection = {
 }
 
 export type AllowedLanguage = "sk" | "en" | "de"
+
 export type TranslationKeys = 
     | "appTitle"
     | "appDescription"
@@ -111,8 +113,10 @@ export type TranslationKeys =
     | "projectsTitle"
     | "name"
     | "surname"
+    | "contactsTitle"
     | "mail"
     | "phone"
+    | "adress"
     | "cityContact"
     | "stateContact"
     | "title"
@@ -127,6 +131,7 @@ export type TranslationKeys =
     | "firstPhoto"
     | "newPhoto"
     | "positionWork"
+    | "currentPosition"
     | "companyWork"
     | "cityWork"
     | "stateWork"
@@ -189,3 +194,28 @@ export type MenuCategory =
     | "projects"
 
 export type categoryMenuItem = {name: MenuCategory, icon: LucideIcon} 
+
+
+export type AllowedTemplate = 
+    | "classic"
+    | "modern"
+    | "graphic"
+    | "initial"
+
+export type TemplateOption = {
+  id: AllowedTemplate
+  label: string
+  description?: string
+}
+
+export const templates: TemplateOption[] = [
+  { id: "classic", label: "Classic" },
+  { id: "modern", label: "Modern" },
+  { id: "graphic", label: "Graphic" },
+  { id: "initial", label: "Initial" },
+]
+
+export type TemplateComponent = React.FC<{
+    state: CvState
+    t: Record<TranslationKeys, { name: string; placeholder: string}>
+}>

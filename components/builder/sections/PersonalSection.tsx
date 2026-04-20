@@ -15,6 +15,35 @@ type PersonalSectionProps = {
     t: Record<TranslationKeys, {name: string, placeholder: string}>
 }
 
+function extendTextAreaDispatch(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    field: keyof BasicInformation,
+    dispatch: React.Dispatch<CvAction>
+) {
+    dispatch({
+    type: "SET_BASICS_FIELD",
+    field,
+    value: e.target.value,
+    })
+
+    e.target.style.height = "auto"
+    e.target.style.height = e.target.scrollHeight + "px"
+}
+
+function getPhoto(
+    e: React.ChangeEvent<HTMLInputElement>,
+    dispatch: React.Dispatch<CvAction>
+) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const imageUrl = URL.createObjectURL(file)
+    dispatch({
+        type: "SET_BASICS_FIELD",
+        field: "photo",
+        value: imageUrl,
+    })
+}
+
 
 export default function PersonalSection({ state, dispatch, t }: PersonalSectionProps){
 
@@ -22,35 +51,6 @@ export default function PersonalSection({ state, dispatch, t }: PersonalSectionP
 
     const zeroNullConverter = (value: number) => {
         return value === 0 ? null: value
-    }
-
-    function getPhoto(
-        e: React.ChangeEvent<HTMLInputElement>,
-        dispatch: React.Dispatch<CvAction>
-    ) {
-        const file = e.target.files?.[0]
-        if (!file) return
-        const imageUrl = URL.createObjectURL(file)
-        dispatch({
-            type: "SET_BASICS_FIELD",
-            field: "photo",
-            value: imageUrl,
-        })
-    }
-
-    function extendTextAreaDispatch(
-      e: React.ChangeEvent<HTMLTextAreaElement>,
-      field: keyof BasicInformation,
-      dispatch: React.Dispatch<CvAction>
-    ) {
-      dispatch({
-        type: "SET_BASICS_FIELD",
-        field,
-        value: e.target.value,
-      })
-    
-      e.target.style.height = "auto"
-      e.target.style.height = e.target.scrollHeight + "px"
     }
 
     return <>

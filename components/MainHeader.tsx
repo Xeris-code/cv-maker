@@ -1,6 +1,7 @@
 import { CvAction, CvState } from "@/lib/cvReducer"
 import { TranslationKeys } from "@/lib/types"
 import { styleLanguageSwitchWrapper, styleLanguageSwitchDivider, stylePrintButton, styleLanguageSwitchBase, styleLanguageSwitchBaseActive, styleLanguageSwitchBaseDeactive } from "@/lib/styles"
+import { ChevronDown } from "lucide-react"
 
 type MainHeaderProps = {
     state: CvState
@@ -38,6 +39,9 @@ export default function MainHeader({ state, dispatch, t }: MainHeaderProps){
 
             </div>
             <button  className={stylePrintButton} onClick={(e) => handlePrint()}>{t["exportPdf"].name}</button>
+            <button className="relative top-19 left-15 cursor-pointer text-[#FFFFFF] h-fit bg-[#2563EB] hover:bg-[#1D4ED8] pt-2 pb-2 pl-4 pr-4 shadow-lg rounded-b-lg" 
+            onClick={(e) => dispatch({type: "SET_TEMPLATE_WINDOW", value: !state.templateWindow})}><ChevronDown className={`transition-transform ${state.templateWindow ? "rotate-x-180" : ""}`}/></button>
         </div>
+        
     </div>
 }

@@ -6,6 +6,7 @@ import Label from "./components/Label"
 import Button from "./components/Button"
 import ButtonToggle from "./components/ButtonToggle"
 import { months } from "@/lib/translations"
+import InputText from "./components/InputText"
 
 type WorkSectionProps = {
     state: CvState
@@ -13,6 +14,22 @@ type WorkSectionProps = {
     t: Record<TranslationKeys, {name: string, placeholder: string}>
 }
 
+function extendTextAreaDispatch(
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    id: number,
+    field: keyof WorkExperience,
+    dispatch: React.Dispatch<CvAction>
+) {
+    dispatch({
+    type: "UPDATE_WORK",
+    id,
+    field,
+    value: e.target.value,
+    })
+
+    e.target.style.height = "auto"
+    e.target.style.height = e.target.scrollHeight + "px"
+}
 
 export default function WorkSection({ state, dispatch, t}: WorkSectionProps){
 
@@ -36,26 +53,14 @@ export default function WorkSection({ state, dispatch, t}: WorkSectionProps){
 
     const style = "border border-[#E2E8F0] focus:border-[#3B82F6] focus:outline-none p-2 pl-3 pr-3 rounded w-full text-[15px] text-[#94A3B8]"
 
-    function extendTextAreaDispatch(
-          e: React.ChangeEvent<HTMLTextAreaElement>,
-          id: number,
-          field: keyof WorkExperience,
-          dispatch: React.Dispatch<CvAction>
-        ) {
-          dispatch({
-            type: "UPDATE_WORK",
-            id,
-            field,
-            value: e.target.value,
-          })
-        
-          e.target.style.height = "auto"
-          e.target.style.height = e.target.scrollHeight + "px"
-        }
-
     return <>
         <TitleSection label={t["workTitle"].name}/>
         <div className="flex flex-col gap-3">
+            <InputText
+            label={t["currentPosition"].name}
+            value={state.currentPosition}
+            placeholder={t["currentPosition"].placeholder}
+            onChange={(e) => dispatch({type: "SET_CURRENT_POSITION", value: e.target.value})}/>
             {work.map((work: WorkExperience, index: number) => (
                 <div className="flex flex-col w-full gap-2 p-2 border" key={`formWorkField_${index}`}>
                         <div className="flex justify-between">
@@ -107,7 +112,7 @@ export default function WorkSection({ state, dispatch, t}: WorkSectionProps){
                         <TextArea label="" placeholder={t["descriptionWork"].placeholder} onChange={(e) => { extendTextAreaDispatch(e, work.id,  "description", dispatch)}}/>
                     </div>
             ))}
-            <Button label={t["addEdu"].name} onClick={() => dispatch({type: "ADD_WORK"})}/>
+            <Button label={t["addWork"].name} onClick={() => dispatch({type: "ADD_WORK"})}/>
         </div>
     </>
 }

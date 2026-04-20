@@ -5,10 +5,13 @@ import {
     BirthDate,
     AllowedLanguage,
     MenuCategory,
+    AllowedTemplate,
 } from "@/lib/types"
 
 export type CvState = {
     webLang: AllowedLanguage,
+    template: AllowedTemplate,
+    templateWindow: boolean,
     menuCategory: MenuCategory,
     basics: BasicInformation,
     birth: BirthDate,
@@ -18,6 +21,7 @@ export type CvState = {
     education: Education[],
     courses: CoursesCertificates[],
     projects: Projects[],
+    currentPosition: string,
     nextSkillId: number,
     nextLangId: number,
     nextWorkId: number,
@@ -28,6 +32,8 @@ export type CvState = {
 
 export const initialState: CvState = {
   webLang: "sk",
+  template: "modern",
+  templateWindow: false,
   menuCategory: "personal",
   basics: {
     name: "",
@@ -51,6 +57,7 @@ export const initialState: CvState = {
   education: [],
   courses: [],
   projects: [],
+  currentPosition: "",
   nextSkillId: 1,
   nextLangId: 1,
   nextWorkId: 1,
@@ -61,6 +68,9 @@ export const initialState: CvState = {
 
 export type CvAction = 
     | { type: "SET_LANGUAGE", value: AllowedLanguage}
+    | { type: "SET_TEMPLATE", value: AllowedTemplate}
+    | { type: "SET_TEMPLATE_WINDOW", value: boolean}
+    | { type: "SET_CURRENT_POSITION", value: string}
     | { type: "SET_ACTIVE_MENU", value: MenuCategory}
     | { type: "SET_BASICS_FIELD", field: keyof BasicInformation, value: string | boolean | null }
     | { type: "SET_BIRTH_FIELD", field: keyof BirthDate, value: number | null }
@@ -87,6 +97,15 @@ export function cvReducer(state: CvState, action: CvAction): CvState {
     switch(action.type) {
         case "SET_LANGUAGE":
             return {...state, webLang: action.value}
+
+        case "SET_TEMPLATE":
+            return {...state, template: action.value}
+        
+        case "SET_TEMPLATE_WINDOW":
+            return {...state, templateWindow: action.value}
+
+        case "SET_CURRENT_POSITION":
+            return {...state, currentPosition: action.value}
 
         case "SET_ACTIVE_MENU":
             return {...state, menuCategory: action.value}

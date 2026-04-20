@@ -11,9 +11,7 @@ type SidebarProps = {
     t: Record<TranslationKeys, { name: string, placeholder: string }>
 }
 
-export default function BuilderSidebar({ state, dispatch, t }: SidebarProps){
-
-    const categoryMenuList: categoryMenuItem[] = [
+const categoryMenuList: categoryMenuItem[] = [
         {name: "personal", icon: User},
         {name: "work", icon: BriefcaseBusiness},
         {name: "education", icon: GraduationCap},
@@ -23,6 +21,10 @@ export default function BuilderSidebar({ state, dispatch, t }: SidebarProps){
         {name: "interests", icon: BikeIcon},
         {name: "projects", icon: FileUserIcon}
     ]
+
+export default function BuilderSidebar({ state, dispatch, t }: SidebarProps){
+
+    
 
     return <div className={styleMenuWindow}>
         <div className={styleMenuWrapper}>
