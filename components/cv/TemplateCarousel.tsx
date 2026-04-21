@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { templates } from "@/lib/types"
 import { AllowedTemplate } from "@/lib/types"
-import { CvAction } from "@/lib/cvReducer"
+import { CvAction } from "@/lib/reducer/cvReducer"
 import { ChevronsLeft, ChevronsRight } from "lucide-react"
 
 type TemplateCarouselProps = {

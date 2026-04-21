@@ -1,12 +1,13 @@
-import { CvState, CvAction } from "@/lib/cvReducer"
-import { BasicInformation, TranslationKeys } from "@/lib/types"
+import { CvState, CvAction } from "@/lib/reducer/cvReducer"
+import { BasicInformation } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import TextArea from "@/components/builder/sections/components/TextArea"
+import { TranslationSchema } from "@/lib/i18n/types"
 
 type InterestsSectionProps = {
     state: CvState
     dispatch: React.Dispatch<CvAction>
-    t: Record<TranslationKeys, {name: string, placeholder: string}>
+    t: TranslationSchema
 }
 
 function extendTextAreaDispatch(
@@ -27,10 +28,10 @@ function extendTextAreaDispatch(
 export default function InterestsSection({ state, dispatch, t}: InterestsSectionProps){
 
     return <>
-        <TitleSection label={t["interestsTitle"].name}/>
+        <TitleSection label={t.sections.common.interests}/>
         <TextArea
             label=""
-            placeholder={t["interestsTitle"].placeholder}
+            placeholder={t.fields.interests.placeholder}
             onChange={(e) => { extendTextAreaDispatch(e, "interest", dispatch)}}/>
     </>
 }

@@ -3,13 +3,14 @@ import {
     WorkExperience, Education,
     CoursesCertificates, Projects, BasicInformation,
     BirthDate,
-    AllowedLanguage,
     MenuCategory,
     AllowedTemplate,
 } from "@/lib/types"
 
+import { WebLanguage } from "../i18n"
+
 export type CvState = {
-    webLang: AllowedLanguage,
+    webLang: WebLanguage,
     template: AllowedTemplate,
     templateWindow: boolean,
     menuCategory: MenuCategory,
@@ -67,7 +68,7 @@ export const initialState: CvState = {
 }
 
 export type CvAction = 
-    | { type: "SET_LANGUAGE", value: AllowedLanguage}
+    | { type: "SET_LANGUAGE", value: WebLanguage}
     | { type: "SET_TEMPLATE", value: AllowedTemplate}
     | { type: "SET_TEMPLATE_WINDOW", value: boolean}
     | { type: "SET_CURRENT_POSITION", value: string}

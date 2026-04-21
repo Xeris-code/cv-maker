@@ -1,5 +1,4 @@
-import { CvAction, CvState } from "@/lib/cvReducer"
-import { TranslationKeys } from "@/lib/types"
+import { CvAction, CvState } from "@/lib/reducer/cvReducer"
 import PersonalSection from "./sections/PersonalSection";
 import SkillsSection from "./sections/SkillsSection";
 import LanguagesSection from "./sections/LanguagesSection";
@@ -8,11 +7,12 @@ import ProjectsSection from "./sections/ProjectsSection";
 import WorkSection from "./sections/WorkSection";
 import CourseSection from "./sections/CoursesSection";
 import EducationSection from "./sections/EducationSection";
+import { TranslationSchema } from "@/lib/i18n/types";
 
 type FormProps = {
     state: CvState;
     dispatch: React.Dispatch<CvAction>;
-    t: Record<TranslationKeys, { name: string, placeholder: string }>
+    t: TranslationSchema
 }
 
 export default function BuilderForms({ state, dispatch, t}: FormProps){

@@ -1,7 +1,6 @@
 import Label from "./Label";
 import { twMerge } from "tailwind-merge";
-import { months } from "@/lib/translations";
-import { AllowedLanguage } from "@/lib/types";
+import { TranslationSchema } from "@/lib/i18n/types";
 
 type Props = {
     label: string;
@@ -9,8 +8,7 @@ type Props = {
     day: number | null;
     month: number | null;
     year: number | null;
-    webLang: AllowedLanguage;
-    selectionPlaceholder: {day: string, month: string, year: string};
+    t: TranslationSchema
     onDayChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
     onMonthChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
     onYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
@@ -21,8 +19,7 @@ export default function DateSelect({
     day,
     month,
     year,
-    webLang,
-    selectionPlaceholder,
+    t,
     onDayChange,
     onMonthChange,
     onYearChange
@@ -32,21 +29,21 @@ export default function DateSelect({
     
     const dayDateOptions = Array.from({length: 32}, (_, i) => 
         i === 0
-            ? { num: 0, label: selectionPlaceholder.day }
+            ? { num: 0, label: t.fields.birth.day }
             : { num: i, label: String(i) }
     )
 
-    const month_list = months[webLang]
+    const month_list = t.date.months
     const monthDateOptions = Array.from({length: 13}, (_, i) => 
         i === 0 
-            ? {num: 0, label: String(0), name: selectionPlaceholder.month}
+            ? {num: 0, label: String(0), name: t.fields.birth.month}
             : {num: i, label: String(i), name: month_list[i]}
     )
     
     const currentYear = new Date().getFullYear()
     const yearDateOptions = Array.from({length: 102}, (_, i) => 
         i === 0
-            ? {num: 0, label: selectionPlaceholder.year}
+            ? {num: 0, label: t.fields.birth.year}
             : i === 1 
                 ? {num: currentYear, label: String(currentYear)}
                 : {num: currentYear - i + 1, label: String(currentYear - i + 1)}

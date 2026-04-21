@@ -1,9 +1,9 @@
-import { CvState } from "@/lib/cvReducer"
-import { TranslationKeys } from "@/lib/types"
+import { TranslationSchema } from "@/lib/i18n/types";
+import { CvState } from "@/lib/reducer/cvReducer"
 
 type InitialTemplateProps = {
     state: CvState;
-    t: Record<TranslationKeys, { name: string, placeholder: string }>
+    t: TranslationSchema
 }
 
 export default function InitialTemplate({}: InitialTemplateProps){

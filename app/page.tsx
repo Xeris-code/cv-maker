@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducer } from "react";
-import { cvReducer, initialState } from "@/lib/cvReducer";
+import { cvReducer, initialState } from "@/lib/reducer/cvReducer";
 
 import HeadingPreview from "../components/preview/HeadingPreview";
 import AddWork from "@/components/preview/AddWork";
@@ -16,7 +16,7 @@ import AddEducation from "@/components/preview/AddEducation";
 import AddProject from "@/components/preview/AddProject";
 
 
-import { translations } from "@/lib/translations";
+import { translations } from "@/lib/i18n";
 import MainHeader from "@/components/MainHeader";
 import BuilderSidebar from "@/components/builder/BuilderSidebar";
 import BuilderForms from "@/components/builder/BuilderForms";

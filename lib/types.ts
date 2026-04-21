@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
-import { CvState } from "./cvReducer";
+import { CvState } from "./reducer/cvReducer";
+import { LanguageLevel, SkillLevel, TranslationSchema } from "./i18n/types";
 
 export type BasicInformation = {
     name: string;
@@ -26,7 +27,7 @@ export type BirthDate = {
 export type Skill = {
     id: number;
     name: string;
-    level: number
+    level: SkillLevel
 };
 
 export type SkillOption = {
@@ -37,7 +38,7 @@ export type SkillOption = {
 export type Language = {
     id: number;
     name: string;
-    level: number
+    level: LanguageLevel
 };
 
 export type LanguageOption = {
@@ -90,98 +91,6 @@ export type Projects = {
     url: string
 }
 
-export type LanguageWebSelection = {
-    sk: boolean;
-    en: boolean;
-    de: boolean
-}
-
-export type AllowedLanguage = "sk" | "en" | "de"
-
-export type TranslationKeys = 
-    | "appTitle"
-    | "appDescription"
-    | "exportPdf"
-    | "formTitle"
-    | "personalTitle"
-    | "workTitle"
-    | "educationTitle"
-    | "coursesTitle"
-    | "skillsTitle"
-    | "languagesTitle"
-    | "interestsTitle"
-    | "projectsTitle"
-    | "name"
-    | "surname"
-    | "contactsTitle"
-    | "mail"
-    | "phone"
-    | "adress"
-    | "cityContact"
-    | "stateContact"
-    | "title"
-    | "titleFront"
-    | "titleBack"
-    | "birth"
-    | "birthDay"
-    | "birthMonth"
-    | "birthYear"
-    | "summary"
-    | "photo"
-    | "firstPhoto"
-    | "newPhoto"
-    | "positionWork"
-    | "currentPosition"
-    | "companyWork"
-    | "cityWork"
-    | "stateWork"
-    | "fromWork"
-    | "endWork"
-    | "presentWork"
-    | "descriptionWork"
-    | "addWork"
-    | "titleEdu"
-    | "facultyEdu"
-    | "uniEdu"
-    | "fieldEdu"
-    | "cityEdu"
-    | "stateEdu"
-    | "degreeEdu"
-    | "fromEdu"
-    | "endEdu"
-    | "descriptionEdu"
-    | "addEdu"
-    | "langOption0"    
-    | "langOption1"
-    | "langOption2"
-    | "langOption3"
-    | "langOption4"
-    | "langOption5"
-    | "langOption6"
-    | "langOption7"
-    | "skillOption0"
-    | "skillOption1"
-    | "skillOption2"
-    | "skillOption3"
-    | "skillOption4"
-    | "skillOption5"
-    | "langButton"
-    | "skillButton"
-    | "nameCourse"
-    | "orgCourse"
-    | "linkCourse"
-    | "startCourse"
-    | "endCourse"
-    | "descriptionCourse"
-    | "addCourse"
-    | "nameProject"
-    | "techProject"
-    | "linkProject"
-    | "descriptionproject"
-    | "addProject"
-    | "titleProject"
-    | "titleCourse"
-
 
 export type MenuCategory = 
     | "personal"
@@ -217,5 +126,5 @@ export const templates: TemplateOption[] = [
 
 export type TemplateComponent = React.FC<{
     state: CvState
-    t: Record<TranslationKeys, { name: string; placeholder: string}>
+    t: TranslationSchema
 }>

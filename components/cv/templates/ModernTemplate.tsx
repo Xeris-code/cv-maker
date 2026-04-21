@@ -1,5 +1,6 @@
-import { CvState } from "@/lib/cvReducer"
-import { Skill, Language, TranslationKeys } from "@/lib/types"
+import { TranslationSchema } from "@/lib/i18n/types"
+import { CvState } from "@/lib/reducer/cvReducer"
+import { Skill, Language } from "@/lib/types"
 
 type HeadingProps = {
     label: string
@@ -11,13 +12,10 @@ function Heading({label}: HeadingProps){
 
 type ModernTemplateProps = {
     state: CvState;
-    t: Record<TranslationKeys, { name: string, placeholder: string }>
+    t: TranslationSchema
 }
 
 export default function ModernTemplate({state, t}: ModernTemplateProps){
-
-    const skillMap: Record<number, TranslationKeys> = { 1: "skillOption1", 2: "skillOption2", 3: "skillOption3", 4: "skillOption4", 5: "skillOption5", }
-    const languageMap: Record<number, TranslationKeys> = { 1: "langOption1", 2: "langOption2", 3: "langOption3", 4: "langOption4", 5: "langOption5", 6: "langOption6", 7: "langOption7", }
 
     return <div className="flex h-full text-black">
         <div className={`bg-[#F1F5F9] w-1/3 h-full ${
@@ -33,43 +31,43 @@ export default function ModernTemplate({state, t}: ModernTemplateProps){
         }
             pl-10 pr-10 flex flex-col gap-10 text-[14px]`}>
             {<div className="flex flex-col gap-3">
-                <Heading label={t["contactsTitle"].name.toUpperCase()}/>
+                <Heading label={t.sections.common.contacts.toUpperCase()}/>
                 <div className="flex flex-col gap-4">
                     {(state.basics.adress_city || state.basics.adress_state) && <div className="flex flex-col gap-1">
-                    <p>{t["adress"].name}</p>
+                    <p>{t.fields.address.name}</p>
                     <p className="text-[12px]">
                         {`${state.basics.adress_city}${state.basics.adress_city && state.basics.adress_state ? ", " : ""}${state.basics.adress_state}`}
                     </p></div>}
                     {state.basics.phone && <div className="flex flex-col gap-1">
-                        <p>{t["phone"].name}</p>
+                        <p>{t.fields.phone.name}</p>
                         <p className="text-[12px]">{state.basics.phone}</p>
                     </div>}
                     {state.basics.mail && <div className="flex flex-col gap-1">
-                        <p>{t["mail"].name}</p>
+                        <p>{t.fields.email.name}</p>
                         <p className="text-[12px]">{state.basics.mail}</p>
                     </div>}
                 </div>
             </div>}
             {state.skills.length > 0 && <div className="flex flex-col gap-3">
-                <Heading label={t["skillsTitle"].name.toUpperCase()}/>
+                <Heading label={t.sections.common.skills.toUpperCase()}/>
                 {state.skills.map((skill: Skill) => (skill.name &&
                     <div key={`languagePreview${skill.id}`} className="grid grid-cols-2">
                         <p>{skill.name}</p>
-                        {skill.level > 0 && <p className="text-[12px] text-end">{t[skillMap[skill.level]].name}</p>}
+                        {skill.level > 0 && <p className="text-[12px] text-end">{t.options.skills[skill.level]}</p>}
                     </div>
                 ))}
             </div>}
             {state.langs.length > 0 && <div className="flex flex-col gap-3">
-                <Heading label={t["languagesTitle"].name.toUpperCase()}/>
+                <Heading label={t.sections.common.languages.toUpperCase()}/>
                 {state.langs.map((lang: Language) => (lang.name &&
                     <div key={`languagePreview${lang.id}`} className="">
                         <p>{lang.name}</p>
-                        {lang.level > 0 && <p className="text-[12px]">{t[languageMap[lang.level]].name}</p>}
+                        {lang.level > 0 && <p className="text-[12px]">{t.options.language[lang.level]}</p>}
                     </div>
                 ))}
             </div>}
             {state.basics.interest && <div className="flex flex-col gap-3">
-                <Heading label={t["interestsTitle"].name.toUpperCase()}/>
+                <Heading label={t.sections.common.interests.toUpperCase()}/>
                 <p className="whitespace-pre-line break-words">{state.basics.interest}</p>
             </div>}
         </div>
@@ -80,19 +78,19 @@ export default function ModernTemplate({state, t}: ModernTemplateProps){
             </div>
             <div className="pt-28 pl-10 pr-10 flex flex-col gap-10">
                 <div className="">
-                    <Heading label={t["summary"].name.toUpperCase()}/>
+                    <Heading label={t.fields.summary.name.toUpperCase()}/>
                 </div>
                 <div className="">
-                    <Heading label={t["workTitle"].name.toUpperCase()}/>
+                    <Heading label={t.sections.common.work.toUpperCase()}/>
                 </div>
                 <div className="">
-                    <Heading label={t["educationTitle"].name.toUpperCase()}/>
+                    <Heading label={t.sections.common.education.toUpperCase()}/>
                 </div>
                 <div className="">
-                    <Heading label={t["coursesTitle"].name.toUpperCase()}/>
+                    <Heading label={t.sections.common.courses.toUpperCase()}/>
                 </div>
                 <div className="">
-                    <Heading label={t["projectsTitle"].name.toUpperCase()}/>
+                    <Heading label={t.sections.common.projects.toUpperCase()}/>
                 </div>
             </div>
             
