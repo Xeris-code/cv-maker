@@ -6,7 +6,6 @@ export const sk: TranslationSchema = {
         name: "CV - Maker",
         description: "Vytvorte si svoj životopis rýchlo a zadarmo.",
     },
-    common: {},
 
     sections: {
         common: {
@@ -23,7 +22,6 @@ export const sk: TranslationSchema = {
         form: {
             name: "Formulár",
         },
-        preview: {},
     },
 
     fields: {

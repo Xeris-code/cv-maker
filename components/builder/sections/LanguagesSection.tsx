@@ -1,9 +1,9 @@
 import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { Language } from "@/lib/types"
+import { Language, LanguageOption } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import InputAddSelectText from "./components/InputAddSelectText"
 import Button from "@/components/builder/sections/components/Button"
-import { TranslationSchema } from "@/lib/i18n/types"
+import { LanguageLevel, TranslationSchema } from "@/lib/i18n/types"
 
 type LanguagesSectionProps = {
     state: CvState
@@ -14,8 +14,8 @@ type LanguagesSectionProps = {
 
 export default function LanguagesSection({ state, dispatch, t}: LanguagesSectionProps){
 
-    const {langs} = state
-    const langsOptions = [
+    const {languages} = state
+    const langsOptions: LanguageOption[] = [
         {value: 0, label: t.options.language[0]},
         {value: 1, label: t.options.language[1]},
         {value: 2, label: t.options.language[2]},
@@ -29,15 +29,15 @@ export default function LanguagesSection({ state, dispatch, t}: LanguagesSection
     return <>
         <TitleSection label={t.sections.common.languages}/>
         <div className="flex flex-col gap-3">
-            {langs.map((lang: Language) => (
+            {languages.items.map((lang: Language) => (
                 <InputAddSelectText 
                 key={`formLanguageField_${lang.id}`}
                 name={lang.name} level={lang.level} placeholderName={t.fields.languages.placeholder} options={langsOptions}
-                onNameChange={e => dispatch({type: "UPDATE_LANGUAGE", id: lang.id, field: "name", value: e.target.value})}
-                onLevelChange={e => dispatch({type: "UPDATE_LANGUAGE", id: lang.id, field: "level", value: Number(e.target.value)})}
-                onClickDelete={() => dispatch({type: "DELETE_LANGUAGE", id: lang.id})}/>
+                onNameChange={e => dispatch({type: "UPDATE", target: "languages", id: lang.id, field: "name", value: e.target.value})}
+                onLevelChange={e => dispatch({type: "UPDATE", target: "languages", id: lang.id, field: "level", value: Number(e.target.value) as LanguageLevel})}
+                onClickDelete={() => dispatch({type: "DELETE", target: "languages", id: lang.id})}/>
             ))}
-            <Button label={t.actions.addLanguage} onClick={() => dispatch({type: "ADD_LANGUAGE"})}/>
+            <Button label={t.actions.addLanguage} onClick={() => dispatch({type: "ADD", target: "languages"})}/>
         </div>
     </>
 }

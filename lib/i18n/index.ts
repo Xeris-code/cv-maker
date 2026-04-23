@@ -7,6 +7,3 @@ export const translations = {
     sk,
     de
 } as const;
-
-
-export type WebLanguage = keyof typeof translations;

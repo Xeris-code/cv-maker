@@ -1,10 +1,9 @@
-import { CvAction, CvState } from "@/lib/reducer/cvReducer"
 import { styleMenuWindow, styleMenuWrapper } from "@/lib/styles";
 import { categoryMenuItem } from "@/lib/types";
 import { User, BriefcaseBusiness, GraduationCap,
     ScrollText, Layers, LanguagesIcon, BikeIcon, FileUserIcon } from "lucide-react";
 import MenuButton from "./MenuButton";
-import { TranslationSchema } from "@/lib/i18n/types";
+import { TranslationSchema, CvAction, CvState } from "@/lib/types";
 
 type SidebarProps = {
     state: CvState;
@@ -33,8 +32,8 @@ export default function BuilderSidebar({ state, dispatch, t }: SidebarProps){
                 <MenuButton
                 key = {menu.name}
                 label={t.sections.common[menu.name]}
-                setFunc={() => dispatch({type: "SET_ACTIVE_MENU", value: menu.name})}
-                condition={state.menuCategory===menu.name}
+                setFunc={() => dispatch({type: "SET", target: "menu", value: menu.name})}
+                condition={state.menu===menu.name}
                 Icon={menu.icon}/>
             ))}
         </div>

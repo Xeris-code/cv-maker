@@ -1,13 +1,11 @@
 "use client"
 
 import { useRef } from "react"
-import { templates } from "@/lib/types"
-import { AllowedTemplate } from "@/lib/types"
-import { CvAction } from "@/lib/reducer/cvReducer"
+import { CvAction, TemplateOption, AllowedTemplateType } from "@/lib/types"
 import { ChevronsLeft, ChevronsRight } from "lucide-react"
 
 type TemplateCarouselProps = {
-  selectedTemplate: AllowedTemplate
+  selectedTemplate: AllowedTemplateType
   dispatch: React.Dispatch<CvAction>
 }
 
@@ -15,6 +13,14 @@ export default function TemplateCarousel({
   selectedTemplate,
   dispatch,
 }: TemplateCarouselProps) {
+
+  const templates: TemplateOption[] = [
+    {type: "classic", label: "Classic"},
+    {type: "modern", label: "Modern"},
+    {type: "graphic", label: "Graphic"},
+    {type: "initial", label: "Initial"},
+  ]
+
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   function scrollLeft() {
@@ -40,16 +46,17 @@ export default function TemplateCarousel({
           className="flex flex-1 gap-4 overflow-x-auto scroll-smooth"
         >
           {templates.map((template) => {
-            const isActive = selectedTemplate === template.id
+            const isActive = selectedTemplate === template.type
 
             return (
               <button
-                key={template.id}
+                key={template.type}
                 type="button"
                 onClick={() =>
                   dispatch({
-                    type: "SET_TEMPLATE",
-                    value: template.id,
+                    type: "SET",
+                    target: "template",
+                    value: template.type,
                   })
                 }
                 className={[
@@ -60,7 +67,7 @@ export default function TemplateCarousel({
                 ].join(" ")}
               >
                 <div className="mb-3 h-24 rounded-lg border bg-gray-50 p-2">
-                  {template.id === "classic" && (
+                  {template.type === "classic" && (
                     <div className="space-y-2">
                       <div className="h-2 w-2/3 rounded bg-gray-800" />
                       <div className="h-2 w-full rounded bg-gray-300" />
@@ -69,7 +76,7 @@ export default function TemplateCarousel({
                     </div>
                   )}
 
-                  {template.id === "modern" && (
+                  {template.type === "modern" && (
                     <div>
                         <div className="h-4 rounded border-1 border-black mb-2"/>
                         <div className="grid grid-cols-[1fr_2fr] gap-2">
@@ -91,7 +98,7 @@ export default function TemplateCarousel({
                     </div>
                   )}
 
-                  {template.id === "graphic" && (
+                  {template.type === "graphic" && (
                     <div className="space-y-2">
                       <div className="h-3 w-1/2 rounded bg-gray-800" />
                       <div className="grid grid-cols-3 gap-1">
@@ -102,7 +109,7 @@ export default function TemplateCarousel({
                     </div>
                   )}
 
-                  {template.id === "initial" && (
+                  {template.type === "initial" && (
                     <div className="">
                         <div className="flex gap-1">
                         <div className="h-6 w-4/5 rounded bg-gray-800" />
@@ -122,7 +129,7 @@ export default function TemplateCarousel({
                   )}
                 </div>
 
-                <div className="text-sm font-semibold">{template.label}</div>
+                <div className="text-sm font-semibold text-gray-600 text-center">{template.label}</div>
               </button>
             )
           })}

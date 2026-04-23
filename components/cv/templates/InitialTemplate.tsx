@@ -1,5 +1,4 @@
-import { TranslationSchema } from "@/lib/i18n/types";
-import { CvState } from "@/lib/reducer/cvReducer"
+import { CvState, TranslationSchema } from "@/lib/types";
 
 type InitialTemplateProps = {
     state: CvState;

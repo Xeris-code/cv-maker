@@ -1,4 +1,4 @@
-import { Language, LanguageOption } from "../../lib/types"
+import { Language, LanguageOption } from "@/lib/types"
 import { styleFullDot, styleEmptyDot } from "@/lib/styles"
 
 type Props = {

@@ -1,4 +1,4 @@
-import { CvAction, CvState } from "@/lib/reducer/cvReducer"
+import { CvAction, CvState } from "@/lib/types"
 import PersonalSection from "./sections/PersonalSection";
 import SkillsSection from "./sections/SkillsSection";
 import LanguagesSection from "./sections/LanguagesSection";
@@ -7,7 +7,7 @@ import ProjectsSection from "./sections/ProjectsSection";
 import WorkSection from "./sections/WorkSection";
 import CourseSection from "./sections/CoursesSection";
 import EducationSection from "./sections/EducationSection";
-import { TranslationSchema } from "@/lib/i18n/types";
+import { TranslationSchema } from "@/lib/types";
 
 type FormProps = {
     state: CvState;
@@ -18,7 +18,7 @@ type FormProps = {
 export default function BuilderForms({ state, dispatch, t}: FormProps){
 
     function renderContent() {
-        switch (state.menuCategory) {
+        switch (state.menu) {
             case "personal":
                 return <PersonalSection state={state} dispatch={dispatch} t={t}/>
             case "work":

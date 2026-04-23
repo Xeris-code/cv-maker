@@ -6,7 +6,6 @@ export const de: TranslationSchema = {
         name: "CV - Maker",
         description: "Erstellen Sie Ihren Lebenslauf schnell und kostenlos.",
     },
-    common: {},
 
     sections: {
         common: {
@@ -23,7 +22,6 @@ export const de: TranslationSchema = {
         form: {
             name: "Formular",
         },
-        preview: {},
     },
 
     fields: {

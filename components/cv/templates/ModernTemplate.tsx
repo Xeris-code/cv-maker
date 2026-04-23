@@ -1,6 +1,4 @@
-import { TranslationSchema } from "@/lib/i18n/types"
-import { CvState } from "@/lib/reducer/cvReducer"
-import { Skill, Language } from "@/lib/types"
+import { Skill, Language, CvState, TranslationSchema } from "@/lib/types"
 
 type HeadingProps = {
     label: string
@@ -48,18 +46,18 @@ export default function ModernTemplate({state, t}: ModernTemplateProps){
                     </div>}
                 </div>
             </div>}
-            {state.skills.length > 0 && <div className="flex flex-col gap-3">
+            {state.skills.items.length > 0 && <div className="flex flex-col gap-3">
                 <Heading label={t.sections.common.skills.toUpperCase()}/>
-                {state.skills.map((skill: Skill) => (skill.name &&
+                {state.skills.items.map((skill: Skill) => (skill.name &&
                     <div key={`languagePreview${skill.id}`} className="grid grid-cols-2">
                         <p>{skill.name}</p>
                         {skill.level > 0 && <p className="text-[12px] text-end">{t.options.skills[skill.level]}</p>}
                     </div>
                 ))}
             </div>}
-            {state.langs.length > 0 && <div className="flex flex-col gap-3">
+            {state.languages.items.length > 0 && <div className="flex flex-col gap-3">
                 <Heading label={t.sections.common.languages.toUpperCase()}/>
-                {state.langs.map((lang: Language) => (lang.name &&
+                {state.languages.items.map((lang: Language) => (lang.name &&
                     <div key={`languagePreview${lang.id}`} className="">
                         <p>{lang.name}</p>
                         {lang.level > 0 && <p className="text-[12px]">{t.options.language[lang.level]}</p>}

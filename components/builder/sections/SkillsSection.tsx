@@ -1,9 +1,9 @@
 import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { Skill } from "@/lib/types"
+import { Skill, SkillOption } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import InputAddSelectText from "./components/InputAddSelectText"
 import Button from "@/components/builder/sections/components/Button"
-import { TranslationSchema } from "@/lib/i18n/types"
+import { SkillLevel, TranslationSchema } from "@/lib/i18n/types"
 
 type SkillsSectionProps = {
     state: CvState
@@ -15,7 +15,7 @@ type SkillsSectionProps = {
 export default function SkillsSection({ state, dispatch, t}: SkillsSectionProps){
 
     const {skills} = state
-    const skillOptions = [
+    const skillOptions: SkillOption[] = [
         {value: 0, label: t.options.skills[0]},
         {value: 1, label: t.options.skills[1]},
         {value: 2, label: t.options.skills[2]},
@@ -27,15 +27,15 @@ export default function SkillsSection({ state, dispatch, t}: SkillsSectionProps)
     return <>
         <TitleSection label={t.sections.common.skills}/>
         <div className="flex flex-col gap-3">
-            {skills.map((skill: Skill) => (
+            {skills.items.map((skill: Skill) => (
                 <InputAddSelectText 
                 key={`formSkillField_${skill.id}`}
                 name={skill.name} level={skill.level} placeholderName={t.fields.skills.placeholder} options={skillOptions}
-                onNameChange={e => dispatch({type: "UPDATE_SKILL", id: skill.id, field: "name", value: e.target.value})}
-                onLevelChange={e => dispatch({type: "UPDATE_SKILL", id: skill.id, field: "level", value: Number(e.target.value)})}
-                onClickDelete={() => dispatch({type: "DELETE_SKILL", id: skill.id})}/>
+                onNameChange={e => dispatch({type: "UPDATE", target: "skills", id: skill.id, field: "name", value: e.target.value})}
+                onLevelChange={e => dispatch({type: "UPDATE", target: "skills", id: skill.id, field: "level", value: Number(e.target.value) as SkillLevel})}
+                onClickDelete={() => dispatch({type: "DELETE", target: "skills", id: skill.id})}/>
             ))}
-            <Button label={t.actions.addSkill} onClick={() => dispatch({type: "ADD_SKILL"})}/>
+            <Button label={t.actions.addSkill} onClick={() => dispatch({type: "ADD", target: "skills"})}/>
         </div>
     </>
 }

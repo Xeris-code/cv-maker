@@ -1,13 +1,8 @@
-import { Languages } from "lucide-react";
-
 export const en = {
 
     app: {
         name: "CV - Maker",
         description: "Create your personal CV quickly and for free.",
-    },
-    common: {
-
     },
 
     sections: {
@@ -24,10 +19,6 @@ export const en = {
         },
         form: {
             name: "Form",
-            
-        },
-        preview: {
-
         },
     },
 
@@ -204,7 +195,6 @@ export const en = {
     },
 
     actions: {
-        
         addWork: "Add work experience",
         addSkill: "Add skill",
         addPhoto: "Upload Photo",

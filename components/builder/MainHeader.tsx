@@ -1,7 +1,7 @@
-import { CvAction, CvState } from "@/lib/reducer/cvReducer"
+
 import { styleLanguageSwitchWrapper, styleLanguageSwitchDivider, stylePrintButton, styleLanguageSwitchBase, styleLanguageSwitchBaseActive, styleLanguageSwitchBaseDeactive } from "@/lib/styles"
 import { ChevronDown } from "lucide-react"
-import { TranslationSchema } from "@/lib/i18n/types"
+import { TranslationSchema, CvAction, CvState } from "@/lib/types"
 
 type MainHeaderProps = {
     state: CvState
@@ -25,22 +25,22 @@ export default function MainHeader({ state, dispatch, t }: MainHeaderProps){
             <div className={styleLanguageSwitchWrapper}>
 
                 <button className={`${styleLanguageSwitchBase} ${state.webLang === "sk" ? styleLanguageSwitchBaseActive : styleLanguageSwitchBaseDeactive}`} 
-                onClick={()=>dispatch({type: "SET_LANGUAGE", value: "sk"})}>SK</button>
+                onClick={()=>dispatch({type: "SET", target: "webLang", value: "sk"})}>SK</button>
 
                 <div className={styleLanguageSwitchDivider}>|</div>
 
                 <button className={`${styleLanguageSwitchBase} ${state.webLang === "en" ? styleLanguageSwitchBaseActive : styleLanguageSwitchBaseDeactive}`} 
-                onClick={()=>dispatch({type: "SET_LANGUAGE", value: "en"})}>EN</button>
+                onClick={()=>dispatch({type: "SET", target: "webLang", value: "en"})}>EN</button>
 
                 <div className={styleLanguageSwitchDivider}>|</div>
 
                 <button className={`${styleLanguageSwitchBase} ${state.webLang === "de" ? styleLanguageSwitchBaseActive : styleLanguageSwitchBaseDeactive}`} 
-                onClick={()=>dispatch({type: "SET_LANGUAGE", value: "de"})}>DE</button>
+                onClick={()=>dispatch({type: "SET", target: "webLang", value: "de"})}>DE</button>
 
             </div>
             <button  className={stylePrintButton} onClick={(e) => handlePrint()}>{t.actions.exportPdf}</button>
             <button className="relative top-19 left-15 cursor-pointer text-[#FFFFFF] h-fit bg-[#2563EB] hover:bg-[#1D4ED8] pt-2 pb-2 pl-4 pr-4 shadow-lg rounded-b-lg" 
-            onClick={(e) => dispatch({type: "SET_TEMPLATE_WINDOW", value: !state.templateWindow})}><ChevronDown className={`transition-transform ${state.templateWindow ? "rotate-x-180" : ""}`}/></button>
+            onClick={(e) => dispatch({type: "SWITCH", target: "templateSelector", value: !state.templateSelector})}><ChevronDown className={`transition-transform ${state.templateSelector ? "rotate-x-180" : ""}`}/></button>
         </div>
         
     </div>
