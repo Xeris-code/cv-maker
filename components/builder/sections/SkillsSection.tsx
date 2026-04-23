@@ -1,9 +1,7 @@
-import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { Skill, SkillOption } from "@/lib/types"
+import { Skill, SkillOption, CvState, CvAction, SkillLevel, TranslationSchema } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import InputAddSelectText from "./components/InputAddSelectText"
 import Button from "@/components/builder/sections/components/Button"
-import { SkillLevel, TranslationSchema } from "@/lib/i18n/types"
 
 type SkillsSectionProps = {
     state: CvState

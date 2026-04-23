@@ -1,5 +1,4 @@
-import { CvAction, CvState } from "@/lib/reducer/cvReducer"
-import { BasicInformation } from "@/lib/types"
+import { BasicInformation, TranslationSchema, CvAction, CvState } from "@/lib/types"
 import { styleMenuButtonIcon } from "@/lib/styles"
 import { ContactRoundIcon } from "lucide-react"
 import TitleSection from "./components/TitleSection"
@@ -8,7 +7,6 @@ import ButtonToggle from "./components/ButtonToggle"
 import DateSelect from "./components/DateSelect"
 import TextArea from "@/components/builder/sections/components/TextArea"
 import Label from "./components/Label"
-import { TranslationSchema } from "@/lib/i18n/types"
 
 type PersonalSectionProps = {
     state: CvState

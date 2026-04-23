@@ -1,10 +1,8 @@
-import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { CoursesCertificates } from "@/lib/types"
+import { CvState, CvAction, TranslationSchema, CoursesCertificates } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import TextArea from "@/components/builder/sections/components/TextArea"
 import Label from "./components/Label"
 import Button from "./components/Button"
-import { TranslationSchema } from "@/lib/i18n/types"
 
 type CourseSectionProps = {
     state: CvState

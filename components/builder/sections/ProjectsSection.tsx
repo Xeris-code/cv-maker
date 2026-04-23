@@ -1,10 +1,8 @@
-import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { Projects } from "@/lib/types"
+import { Projects, CvState, CvAction, TranslationSchema } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import TextArea from "@/components/builder/sections/components/TextArea"
 import Label from "./components/Label"
 import Button from "./components/Button"
-import { TranslationSchema } from "@/lib/i18n/types"
 
 type ProjectsSectionProps = {
     state: CvState

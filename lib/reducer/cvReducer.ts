@@ -1,4 +1,4 @@
-import { CvState, CvAction, Factory, CollectionKey } from "../types";
+import { CvState, CvAction, Factory, CollectionKey } from "@/lib/types";
 
 const factories: Factory = {
     skills: (id: number) => ({ id: id, name: "", level: 0}),

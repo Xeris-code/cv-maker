@@ -1,12 +1,10 @@
-import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { WorkExperience } from "@/lib/types"
+import { WorkExperience, CvState, CvAction, TranslationSchema } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import TextArea from "@/components/builder/sections/components/TextArea"
 import Label from "./components/Label"
 import Button from "./components/Button"
 import ButtonToggle from "./components/ButtonToggle"
 import InputText from "./components/InputText"
-import { TranslationSchema } from "@/lib/i18n/types"
 
 type WorkSectionProps = {
     state: CvState
@@ -44,7 +42,7 @@ export default function WorkSection({ state, dispatch, t}: WorkSectionProps){
             label={t.fields.position.name}
             value={state.currentPosition}
             placeholder={t.fields.position.placeholder}
-            onChange={(e) => dispatch({type: "SET_CURRENT_POSITION", value: e.target.value})}/>
+            onChange={(e) => dispatch({type: "SET", target: "currentPosition", value: e.target.value})}/>
             {work.items.map((work: WorkExperience, index: number) => (
                 <div className="flex flex-col w-full gap-2 p-2 border" key={`formWorkField_${index}`}>
                         <div className="flex justify-between">

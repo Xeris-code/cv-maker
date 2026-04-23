@@ -1,9 +1,7 @@
-import { CvState, CvAction } from "@/lib/reducer/cvReducer"
-import { Language, LanguageOption } from "@/lib/types"
+import { Language, LanguageOption, CvState, CvAction, LanguageLevel, TranslationSchema } from "@/lib/types"
 import TitleSection from "./components/TitleSection"
 import InputAddSelectText from "./components/InputAddSelectText"
 import Button from "@/components/builder/sections/components/Button"
-import { LanguageLevel, TranslationSchema } from "@/lib/i18n/types"
 
 type LanguagesSectionProps = {
     state: CvState
