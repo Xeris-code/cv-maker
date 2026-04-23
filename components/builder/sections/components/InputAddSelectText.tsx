@@ -1,4 +1,4 @@
-import { SkillOption, LanguageOption } from "../../../../lib/types"
+import { SkillOption, LanguageOption } from "@/lib/types"
 
 type Props = {
     name: string;

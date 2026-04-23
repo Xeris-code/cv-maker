@@ -1,6 +1,6 @@
 import Label from "./Label";
 import { twMerge } from "tailwind-merge";
-import { TranslationSchema } from "@/lib/i18n/types";
+import { TranslationSchema } from "@/lib/types";
 
 type Props = {
     label: string;

@@ -1,4 +1,4 @@
-import { Skill, SkillOption } from "../../lib/types"
+import { Skill, SkillOption } from "@/lib/types"
 import { styleFullDot, styleEmptyDot } from "@/lib/styles"
 
 type Props = {
