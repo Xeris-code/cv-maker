@@ -1,4 +1,4 @@
-import { TranslationSchema } from "./types";
+import { TranslationSchema } from "@/lib/types";
 
 export const de: TranslationSchema = {
 
