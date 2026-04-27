@@ -201,6 +201,8 @@ export const sk: TranslationSchema = {
         addCourse: "Pridať kurz",
         addProject: "Pridať projekt",
         exportPdf: "PDF",
+        demo: "Demo",
+        reset: "Reset",
     },
 
     options: {

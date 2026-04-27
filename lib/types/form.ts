@@ -27,7 +27,7 @@ export type BasicInformation = {
     interest: string;
     driving: string;
     mail: string;
-    phone: string | number;
+    phone: string;
     adress_city: string;
     adress_state: string;
 };
@@ -147,4 +147,6 @@ export type CvAction =
     | UpdateActionType
     | { type: "SET_BASICS_FIELD", field: keyof BasicInformation, value: BasicInformation[keyof BasicInformation] }
     | { type: "SET_BIRTH_FIELD", field: keyof BirthDate, value: number | null }
+    | { type: "LOAD_DEMO" }
+    | { type: "CLEAR" }
 

@@ -15,6 +15,10 @@ type ModernTemplateProps = {
 
 export function ModernTemplate({state, t}: ModernTemplateProps){
 
+    const { basics, skills, languages, work, education, courses, projects } = state
+
+    const hasAdress = basics.adress_state || basics.adress_city
+
     return <div className="flex h-full text-black">
         <div className={`bg-[#F1F5F9] w-1/3 h-full ${
             state.basics.name || state.basics.surname || state.currentPosition

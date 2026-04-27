@@ -200,6 +200,8 @@ export const en = {
         addCourse: "Add course",
         addProject: "Add project",
         exportPdf: "PDF",
+        demo: "Demo",
+        reset: "Reset",
     },
 
     options: {

@@ -38,7 +38,7 @@ export function TemplateSelector({ templates, selectorActive, selectedTemplate, 
 
                             return (
                             <button key={template.type} type="button" onClick={() => onTemplateChange(template.type)}
-                                className={["min-w-[160px] rounded-2xl border p-3 text-left transition",
+                                className={["min-w-[160px] rounded-2xl border p-3 text-left transition mx-1",
                                 isActive
                                     ? "border-blue-500 ring-2 ring-blue-200"
                                     : "border-gray-200 hover:border-gray-300",].join(" ")}>

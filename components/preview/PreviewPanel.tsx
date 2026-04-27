@@ -13,11 +13,11 @@ const templateMap: Record<AllowedTemplateType, TemplateComponent> = {
     initial: InitialTemplate
 }
 
-export default function CvPreview({ state, t }: PreviewProps){
+export function PreviewPanel({ state, t }: PreviewProps){
 
-    const Template = templateMap[state.template] ?? ClassicTemplate
+    const Template = templateMap[state.template];
 
-    return <div className="preview-panel bg-[#ffffff] p-10">
+    return <div className="preview-panel">
         <div className="cv-page">
                 <Template state={state} t={t}/>
         </div>

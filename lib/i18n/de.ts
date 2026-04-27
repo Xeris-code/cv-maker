@@ -201,6 +201,8 @@ export const de: TranslationSchema = {
         addCourse: "Kurs hinzufügen",
         addProject: "Projekt hinzufügen",
         exportPdf: "PDF",
+        demo: "Demo",
+        reset: "Reset",
     },
 
     options: {

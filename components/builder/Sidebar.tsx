@@ -33,9 +33,9 @@ export function Sidebar({
         {name: "projects", icon: FileUserIcon},
     ];
 
-    function renderMenuButton(menu: CategoryMenuItem, label: string, Icon: LucideIcon){
+    function renderMenuButton(id: number, menu: CategoryMenuItem, label: string, Icon: LucideIcon){
         return (
-            <button className={`${styles.button} ${activeMenu === menu.name ? styles.buttonActive : styles.buttonNotActive}`} onClick={() => onMenuChange(menu.name)}>
+            <button key={id} type="button" className={`${styles.button} ${activeMenu === menu.name ? styles.buttonActive : styles.buttonNotActive}`} onClick={() => onMenuChange(menu.name)}>
                 <Icon className={styles.icon}/>
                 {label}
             </button>
@@ -44,8 +44,8 @@ export function Sidebar({
 
     return <div className={styles.sidebar}>
         <div className={styles.wrapper}>
-            {categoryMenuList.map((menu) => (
-                renderMenuButton(menu, translations[menu.name], menu.icon)
+            {categoryMenuList.map((menu, index) => (
+                renderMenuButton(index, menu, translations[menu.name], menu.icon)
             ))}
         </div>
     </div>

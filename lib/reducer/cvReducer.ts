@@ -1,5 +1,6 @@
 import { CvState, CvAction, Factory, CollectionKey } from "@/lib/types";
-
+import { demoState } from "./demoState";
+import { initialState } from "./initialState";
 
 const factories: Factory = {
     skills: (id: number) => ({ id: id, name: "", level: 0}),
@@ -42,6 +43,12 @@ export function cvReducer(state: CvState, action: CvAction): CvState {
         
         case "SET_BIRTH_FIELD":
             return {...state, birth: {...state.birth, [action.field]: action.value}}
+
+        case "LOAD_DEMO":
+            return demoState
+
+        case "CLEAR":
+            return initialState
 
         default:
             return state

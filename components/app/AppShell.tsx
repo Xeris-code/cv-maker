@@ -4,7 +4,7 @@ import { translations } from "@/lib/i18n";
 import { Sidebar, BuilderPanel } from "../builder";
 import { WebLanguage, TemplateOption, AllowedTemplateType, MenuCategory, CollectionKey, BasicInformation, BirthDate, SingleUpdateAction, OnCollectionChange, CollectionItem, CvAction } from "@/lib/types";
 import { VisualClassicTemplate, VisualGraphicTemplate, VisualInitialTemplate, VisualModernTemplate } from "@/components/templates";
-import CvPreview from "@/components/preview/PreviewPanel";
+import { PreviewPanel } from "@/components/preview";
 
 import { MainLayout, Header, TemplateSelector} from "@/components/app";
 
@@ -30,6 +30,14 @@ export function AppShell(){
     
     const handlePrint = () => {
         window.print();
+    };
+
+    const handleDemo = () => {
+        dispatch({ type: "LOAD_DEMO" });
+    };
+
+    const handleReset = () => {
+        dispatch({ type: "CLEAR" });
     };
 
     const handleTemplateChange = ( template: AllowedTemplateType ) => {
@@ -79,11 +87,15 @@ export function AppShell(){
                     appTitle={t.app.name}
                     appDescription={t.app.description}
                     printButtonTitle={t.actions.exportPdf}
+                    demoTitle={t.actions.demo}
+                    resetTitle={t.actions.reset}
                     language={state.webLang}
                     templateSelector={state.templateSelector}
                     onLanguageChange={handleLanguageChange}
                     onToggleTemplateSelector={handleToggleTemplateSelector}
                     onPrint={handlePrint}
+                    onDemo={handleDemo}
+                    onReset={handleReset}
                 />}
             selector = {
                 <TemplateSelector 
@@ -109,7 +121,7 @@ export function AppShell(){
                 onPersonalChange={handlePersonalChange}
                 onCollectionChange={handleCollectionChange}
             />
-            <CvPreview 
+            <PreviewPanel
                 state={state}
                 t={t}
             />

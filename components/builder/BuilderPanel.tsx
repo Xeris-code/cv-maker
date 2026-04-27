@@ -37,7 +37,17 @@ export function BuilderPanel({
     };
 
     const bindPhotoChange = () => {
-        return (e: React.ChangeEvent<HTMLInputElement>) => onPersonalChange("photo", e.target.value);
+        return (e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                onPersonalChange("photo", reader.result as string);
+            };
+
+        reader.readAsDataURL(file);
+        };
     };
 
     const bindPersonalChange = (field: keyof BasicInformation) => {

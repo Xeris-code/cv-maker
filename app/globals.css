@@ -111,6 +111,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background-color: #ffffff;
+  padding: 2.5rem;
 }
 
 .cv-page {

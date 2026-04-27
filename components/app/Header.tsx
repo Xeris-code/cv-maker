@@ -5,14 +5,18 @@ type HeaderProps = {
     appTitle: string;
     appDescription: string;
     printButtonTitle: string;
+    demoTitle: string;
+    resetTitle: string;
     language: WebLanguage;
     templateSelector: boolean;
     onLanguageChange: (language: WebLanguage) => void;
     onToggleTemplateSelector: () => void;
     onPrint: () => void;
+    onDemo: () => void;
+    onReset: () => void;
 };
 
-export function Header( { appTitle, appDescription, printButtonTitle, language, templateSelector, onLanguageChange, onToggleTemplateSelector, onPrint }: HeaderProps ){
+export function Header( { appTitle, appDescription, printButtonTitle, demoTitle, resetTitle, language, templateSelector, onLanguageChange, onToggleTemplateSelector, onPrint, onDemo, onReset }: HeaderProps ){
 
     const styles = {
         title: "text-[32px] text-[#0F172A]",
@@ -43,6 +47,8 @@ export function Header( { appTitle, appDescription, printButtonTitle, language, 
                     {renderLanguageButton("de")}
                 </div>
                 <button type="button" className={styles.buttonPrint} onClick={onPrint}>{printButtonTitle}</button>
+                <button type="button" className={styles.buttonPrint} onClick={onDemo}>{demoTitle}</button>
+                <button type="button" className={styles.buttonPrint} onClick={onReset}>{resetTitle}</button>
             </div>
         </div>
         <button type="button" style={{ perspective: "600px" }} className={styles.buttonTemplates} onClick={onToggleTemplateSelector}>
