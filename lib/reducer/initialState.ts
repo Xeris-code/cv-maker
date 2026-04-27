@@ -1,0 +1,31 @@
+import { CvState } from "../types";
+
+export const initialState: CvState = {
+  webLang: "sk",
+  template: "modern",
+  templateSelector: false,
+  menu: "personal",
+  currentPosition: "",
+  basics: {
+    name: "",
+    surname: "",
+    titleActive: false,
+    titleFront: "",
+    titleBack: "",
+    photo: null,
+    summary: "",
+    interest: "",
+    driving: "",
+    mail: "",
+    phone: "",
+    adress_city: "",
+    adress_state: "",
+  },
+  birth: { day: null, month: null, year: null, },
+  skills: {items: [], nextId: 1},
+  languages: {items: [], nextId: 1},
+  work: {items: [], nextId: 1},
+  education: {items: [], nextId: 1},
+  courses: {items: [], nextId: 1},
+  projects: {items: [], nextId: 1},
+};

@@ -1,13 +1,4 @@
 import { LucideIcon } from "lucide-react";
+import { MenuCategory } from "./i18n";
 
-export type MenuCategory = 
-    | "personal"
-    | "work"
-    | "education"
-    | "courses"
-    | "skills"
-    | "languages"
-    | "interests"
-    | "projects"
-
-export type categoryMenuItem = {name: MenuCategory, icon: LucideIcon} 
+export type CategoryMenuItem = {name: MenuCategory, icon: LucideIcon} 

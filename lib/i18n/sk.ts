@@ -19,9 +19,6 @@ export const sk: TranslationSchema = {
             interests: "Záujmy a koníčky",
             projects: "Projekty",
         },
-        form: {
-            name: "Formulár",
-        },
     },
 
     fields: {
@@ -167,8 +164,8 @@ export const sk: TranslationSchema = {
                 name: "Popis",
                 placeholder: "Stručne opíšte, čo ste sa naučili alebo dosiahli...",
             },
-            from: "Začiatok",
-            end: "Koniec"
+            from: "Od",
+            end: "Do"
         },
         project: {
             name: "Projekt",
@@ -228,7 +225,7 @@ export const sk: TranslationSchema = {
     },
 
     date: {
-        months : [
+        months: [
             "Január",
             "Február",
             "Marec",
@@ -242,6 +239,13 @@ export const sk: TranslationSchema = {
             "November",
             "December",
         ],
+    },
+
+    templates: {
+        classic: "Klasická",
+        modern: "Moderná",
+        graphic: "Grafická",
+        initial: "Demo",
     },
 
 };

@@ -1,0 +1,5 @@
+export * from "./layouts"
+export * from "./ClassicTemplates"
+export * from "./ModernTemplate"
+export * from "./GraphicTemplate"
+export * from "./InitialTemplate"

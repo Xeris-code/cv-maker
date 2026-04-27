@@ -6,6 +6,8 @@ export type TemplateComponent = React.FC<{
     t: TranslationSchema;
 }>;
 
+export type VisualTemplateComponent = React.ReactNode
+
 export type AllowedTemplateType = 
     | "classic"
     | "modern"
@@ -17,4 +19,6 @@ export type TemplateOption = {
     name?: string;
     label: string;
     description?: string;
+    visual: VisualTemplateComponent;
 };
+

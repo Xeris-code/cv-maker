@@ -1,5 +1,6 @@
 import { CvState, CvAction, Factory, CollectionKey } from "@/lib/types";
 
+
 const factories: Factory = {
     skills: (id: number) => ({ id: id, name: "", level: 0}),
     languages: (id: number) => ({ id: id, name: "", level: 0}),
@@ -7,36 +8,6 @@ const factories: Factory = {
     education: (id: number) => ({id: id, start: {year: 0}, end: {year: 0}, present: false, faculty: "", university: "", field: "", degree: "", city: "", state: "", description: ""}),
     courses: (id: number) => ({id: id, name: "", org: "", description: "", start: {month: "", year: 0}, end: {month: "", year: 0}, url: "" }),
     projects: (id: number) => ({id: id, name: "", description: "", tech: "", url: "" }),
-};
-
-export const initialState: CvState = {
-  webLang: "sk",
-  template: "modern",
-  templateSelector: false,
-  menu: "personal",
-  currentPosition: "",
-  basics: {
-    name: "",
-    surname: "",
-    titleActive: false,
-    titleFront: "",
-    titleBack: "",
-    photo: null,
-    summary: "",
-    interest: "",
-    driving: "",
-    mail: "",
-    phone: "",
-    adress_city: "",
-    adress_state: "",
-  },
-  birth: { day: null, month: null, year: null, },
-  skills: {items: [], nextId: 1},
-  languages: {items: [], nextId: 1},
-  work: {items: [], nextId: 1},
-  education: {items: [], nextId: 1},
-  courses: {items: [], nextId: 1},
-  projects: {items: [], nextId: 1},
 };
 
 function addItem<T extends CollectionKey>(collection: CvState[T], factoryType: T): CvState[T]{

@@ -17,9 +17,6 @@ export const en = {
             interests: "Interests & Hobbies",
             projects: "Projects",
         },
-        form: {
-            name: "Form",
-        },
     },
 
     fields: {
@@ -111,7 +108,7 @@ export const en = {
             },
             present: "Present",
             from: "From",
-            end: "End",
+            end: "To",
         },
         education: {
             name: "Education",
@@ -145,7 +142,7 @@ export const en = {
             },
             present: "Present",
             from: "From",
-            end: "End",
+            end: "To",
         },
         courses: {
             name: "Course",
@@ -165,8 +162,8 @@ export const en = {
                 name: "Description",
                 placeholder: "Briefly describe what you learned, achieved or focused on...",
             },
-            from: "Start",
-            end: "End"
+            from: "From",
+            end: "To"
         },
         project: {
             name: "Project",
@@ -227,7 +224,7 @@ export const en = {
     },
 
     date: {
-        months : [
+        months: [
             "January",
             "February",
             "March",
@@ -241,6 +238,13 @@ export const en = {
             "November",
             "December",
         ],
+    },
+
+    templates: {
+        classic: "Classic",
+        modern: "Modern",
+        graphic: "Graphic",
+        initial: "Initial",
     },
 
 } as const;

@@ -80,6 +80,7 @@ body {
     overflow: hidden !important;
   }
 
+  .header,
   .app-shell,
   .app-layout,
   .preview-panel {
@@ -100,6 +101,8 @@ body {
     minmax(0, 1fr);
   min-height: calc(100vh - 80px);
   gap: 0;
+  border-bottom: 2px solid #E2E8F0;
+  border-top: 2px solid #E2E8F0;
 }
 
 .preview-panel {
@@ -118,4 +121,20 @@ body {
   border: solid 2px;
   border-color: #E2E8F0;
   box-shadow: 10px 10px 84px -7px rgba(0, 0, 0, 0.19);
+}
+
+.app-shell {
+  min-width: max-content;
+  min-height: screen;
+  background: #F8FAFC;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 7.25rem;
+  padding-right: 7.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid #E2E8F0;
 }

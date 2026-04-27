@@ -1,5 +1,6 @@
 import { en } from "../i18n/en";
-import { translations } from "../i18n";
+
+export const languageCodes = ["en", "sk", "de"] as const;
 
 type DeepWiden<T> =
   T extends string 
@@ -11,14 +12,28 @@ type DeepWiden<T> =
         : T;
 
 export type TranslationSchema = DeepWiden<typeof en>;
+export type WebLanguage = (typeof languageCodes)[number];
 
-export type SkillLevel = keyof typeof en["options"]["skills"];
-export type SkillOption = { value: SkillLevel, label: string };
 export type Skill = { id: number, name: string, level: SkillLevel };
+export type SkillTranslations = Record<keyof TranslationSchema["fields"]["skills"], string>
+export type SkillLevel = keyof TranslationSchema["options"]["skills"];
+export type SkillOption = { value: SkillLevel, label: string };
+export type SkillOptionTranslations = Record<SkillLevel, string>
 
-export type LanguageLevel = keyof typeof en["options"]["language"];
-export type LanguageOption = { value: LanguageLevel, label: string };
 export type Language = { id: number, name: string, level: LanguageLevel };
+export type LanguageTranslations = Record<keyof TranslationSchema["fields"]["languages"], string>
+export type LanguageLevel = keyof TranslationSchema["options"]["language"];
+export type LanguageOption = { value: LanguageLevel, label: string };
+export type LanguageOptionTranslations = Record<LanguageLevel, string>
 
-export type WebLanguage = keyof typeof translations;
+export type MenuCategory = keyof TranslationSchema["sections"]["common"]
+export type MenuTranslations = Record<MenuCategory, string>
 
+export type ProjectsTranslations = TranslationSchema["fields"]["project"]
+export type CoursesTranslations = TranslationSchema["fields"]["courses"]
+export type WorkTranslations = TranslationSchema["fields"]["work"]
+export type EducationTranslations = TranslationSchema["fields"]["education"]
+export type InterestsTranslations = TranslationSchema["fields"]["interests"]
+
+export type CurrentPositionTranslations = TranslationSchema["fields"]["position"]
+export type FieldTranslations = TranslationSchema["fields"]

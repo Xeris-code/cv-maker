@@ -1,5 +1,21 @@
 import { Skill, Language, WebLanguage, AllowedTemplateType, MenuCategory } from "@/lib/types";
 
+export type DayOption = {
+    num: number;
+    label: string;
+}
+
+export type MonthOption = {
+    num: number;
+    label: string;
+    name: string;
+}
+
+export type YearOption = {
+    num: number;
+    label: string;
+}
+
 export type BasicInformation = {
     name: string;
     surname: string;
@@ -107,6 +123,13 @@ export type SingleUpdateAction<
     F extends keyof CollectionItem<T>
 > = { type: "UPDATE"; target: T; id: number; field: F; value: CollectionItem<T>[F] };
 
+export type OnCollectionChange = <
+    T extends CollectionKey,
+    F extends Extract<keyof CollectionItem<T>, string>,
+>( target: T, id: number, field: F, value: CollectionItem<T>[F] ) => void;
+
+
+
 export type UpdateActionType = {
     [T in CollectionKey]:
     {[F in keyof CollectionItem<T>]: SingleUpdateAction<T, F>}[keyof CollectionItem<T>];
@@ -122,5 +145,6 @@ export type CvAction =
     | { type: "SET", target: StringKey, value: string }
     | { type: "SWITCH", target: BoolKey, value: boolean }
     | UpdateActionType
-    | { type: "SET_BASICS_FIELD", field: keyof BasicInformation, value: string | boolean | null }
+    | { type: "SET_BASICS_FIELD", field: keyof BasicInformation, value: BasicInformation[keyof BasicInformation] }
     | { type: "SET_BIRTH_FIELD", field: keyof BirthDate, value: number | null }
+

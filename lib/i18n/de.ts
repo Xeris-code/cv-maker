@@ -19,9 +19,6 @@ export const de: TranslationSchema = {
             interests: "Interessen & Hobbys",
             projects: "Projekte",
         },
-        form: {
-            name: "Formular",
-        },
     },
 
     fields: {
@@ -228,7 +225,7 @@ export const de: TranslationSchema = {
     },
 
     date: {
-        months : [
+        months: [
             "Januar",
             "Februar",
             "März",
@@ -242,6 +239,13 @@ export const de: TranslationSchema = {
             "November",
             "Dezember",
         ],
+    },
+
+    templates: {
+        classic: "Classic",
+        modern: "Modern",
+        graphic: "Graphic",
+        initial: "Initial",
     },
 
 };
