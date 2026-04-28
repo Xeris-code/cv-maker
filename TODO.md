@@ -1,12 +1,8 @@
-CODE:
-- update/add README file [ ]
-- translation handling update [X]
-- reduce reducer repetition [ ]
-- delete/reduce styles file [ ]
-- reduce types file [ ]
+Code:
 
-FEATURES:
-- add templates [ ]
-- add templates visualization in templates menu [ ]
-- add [ ]
-- add more languages [ ]
+add button to remove current photo
+add driving license
+add local save for refresh protection
+add more interests option
+copy of already filled collection
+reorder of collections

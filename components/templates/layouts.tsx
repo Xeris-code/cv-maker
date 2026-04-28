@@ -10,22 +10,21 @@ export const VisualClassicTemplate: VisualTemplateComponent = (
 );
 
 export const VisualModernTemplate: VisualTemplateComponent = (
-    <div>
-        <div className="h-4 rounded border-1 border-black mb-2"/>
-        <div className="grid grid-cols-[1fr_2fr] gap-2">
-            <div className="space-y-1">
-                <div className="h-2 rounded bg-gray-400" />
-                <div className="h-2 rounded bg-gray-300" />
-                <div className="h-2 rounded bg-gray-400" />
-                <div className="h-2 rounded bg-gray-300" />
-                <div className="h-2 rounded bg-gray-300" />
+    <div className="h-full">
+        <div className="grid grid-cols-[1fr_2fr] h-full">
+            <div className="space-y-1 h-full bg-slate-700 px-1">
+                <div className="h-6 w-6 rounded-full mx-auto my-1 bg-gray-400" />
+                <div className="h-2 bg-gray-300" />
+                <div className="h-2 bg-gray-400" />
+                <div className="h-2 bg-gray-300" />
             </div>
-            <div className="space-y-1">
-                <div className="h-2 rounded bg-gray-800" />
-                <div className="h-2 rounded bg-gray-300" />
-                <div className="h-2 rounded bg-gray-800" />
-                <div className="h-2 rounded bg-gray-300" />
-                <div className="h-2 rounded bg-gray-300" />
+            <div className="space-y-1 p-1">
+                <div className="h-1 w-8 bg-gray-800" />
+                <div className="h-3 w-8 rounded bg-gray-300" />
+                <div className="h-1 rounded bg-gray-800" />
+                <div className="h-3 rounded bg-gray-300" />
+                <div className="h-1 rounded bg-gray-800" />
+                <div className="h-3 rounded bg-gray-300" />
             </div>
         </div>
     </div>

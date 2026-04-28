@@ -19,7 +19,6 @@ export const demoState: CvState = {
       "Frontend developer focused on building clean, responsive and user-friendly web applications using React and TypeScript.",
     interest:
       "Cycling, coding side projects, UI/UX design, learning new technologies",
-    photo: "",
   },
 
   birth: {
@@ -54,11 +53,11 @@ export const demoState: CvState = {
         company: "Tech Solutions s.r.o.",
         city: "Bratislava",
         state: "Slovakia",
-        start: { month: "01", year: 2022 },
-        end: { month: "03", year: 2024 },
+        start: { month: 1, year: 2022 },
+        end: { month: 3, year: 2024 },
         present: false,
         description:
-          "Developed and maintained web applications using React and TypeScript. Collaborated with designers to improve UI/UX and optimized performance of existing applications.",
+          "Developed and maintained web applications using React and TypeScript. \n Collaborated with designers to improve UI/UX and optimized performance of existing applications.",
         tasks: [],
       },
       {
@@ -67,11 +66,11 @@ export const demoState: CvState = {
         company: "Startup Hub",
         city: "Vienna",
         state: "Austria",
-        start: { month: "06", year: 2021 },
-        end: { month: "12", year: 2021 },
+        start: { month: 6, year: 2021 },
+        end: { month: 12, year: 2021 },
         present: false,
         description:
-          "Worked on internal tools and landing pages using JavaScript and CSS. Learned best practices in version control and teamwork.",
+          "Worked on internal tools and landing pages using JavaScript and CSS. \n Learned best practices in version control and teamwork.",
         tasks: [],
       },
     ], nextId: 3,
@@ -102,8 +101,8 @@ export const demoState: CvState = {
         id: 1,
         name: "React - The Complete Guide",
         org: "Udemy",
-        start: { month: "03", year: 2022 },
-        end: { month: "06", year: 2022 },
+        start: { month: 3, year: 2022 },
+        end: { month: 6, year: 2022 },
         description:
           "Learned advanced React concepts including hooks, state management and performance optimization.",
         url: ""
@@ -112,8 +111,8 @@ export const demoState: CvState = {
         id: 2,
         name: "TypeScript Fundamentals",
         org: "Frontend Masters",
-        start: { month: "08", year: 2022 },
-        end: { month: "09", year: 2022 },
+        start: { month: 8, year: 2022 },
+        end: { month: 9, year: 2022 },
         description:
           "Deep dive into TypeScript types, generics and best practices.",
         url: ""

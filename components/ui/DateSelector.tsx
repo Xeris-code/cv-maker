@@ -14,7 +14,7 @@ export function DateSelector({value, options, onChange}: DateSelectorProps){
         return "name" in option;
     }
 
-    return <select className={style} value={value ? value : 0} onChange={onChange}>
+    return <select className={style} value={value ?? 0} onChange={onChange}>
             {options.map((s) => (
                 <option key={s.num} value={s.num}>
                     {isMonthOption(s) ? s.name : s.label}

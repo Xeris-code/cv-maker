@@ -15,7 +15,7 @@ export function getMonthOptions(t: TranslationSchema){
     return Array.from({length: 13}, (_, i) => 
         i === 0 
             ? {num: 0, label: String(0), name: t.fields.birth.month}
-            : {num: i, label: String(i), name: month_list[i]}
+            : {num: i, label: String(i), name: month_list[i-1]}
     ) as MonthOption[];
 };
 

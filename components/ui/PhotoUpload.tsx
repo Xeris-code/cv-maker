@@ -15,7 +15,9 @@ export function PhotoUpload({
     placeholder,
     onPhotoChange,
 }: PhotoUploadProps) {
+    console.log("photo prop", photo);
     return (
+        
         <div className="flex flex-col gap-1">
             <Label label={sectionLabel}/>
             <div className="border-1 border-[#94A3B8] border-dashed rounded-xl bg-[#F1F5F9] py-5 flex flex-col gap-3">

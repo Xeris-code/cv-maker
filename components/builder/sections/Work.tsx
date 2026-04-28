@@ -59,28 +59,28 @@ export function WorkSection({
                                 <DateSelector
                                     value={work.start.month}
                                     options={monthDateOptions}
-                                    onChange={(e) => onWorkChange(work.id, "start", {month: e.target.value, year: work.end.year})}
+                                    onChange={(e) => onWorkChange(work.id, "start", {month: Number(e.target.value), year: work.start.year})}
                                 />
                             </div>
                             <div className="col-span-2">
                                 <DateSelector
                                     value={work.start.year}
                                     options={yearDateOptions}
-                                    onChange={(e) => onWorkChange(work.id, "start", {month: work.end.month, year: Number(e.target.value)})}
+                                    onChange={(e) => onWorkChange(work.id, "start", {month: work.start.month, year: Number(e.target.value)})}
                                 />
                             </div>
                         </DateSelectorWrapper>
 
 
 
-                        {work.present && <DateSelectorWrapper
+                        {!work.present && <DateSelectorWrapper
                             label={translationWork.end}
                             wrapperClass="grid grid-cols-5 gap-2 w-full">
                             <div className="col-span-2">
                                 <DateSelector
                                     value={work.end.month}
                                     options={monthDateOptions}
-                                    onChange={(e) => onWorkChange(work.id, "end", {month: e.target.value, year: work.end.year})}
+                                    onChange={(e) => onWorkChange(work.id, "end", {month: Number(e.target.value), year: work.end.year})}
                                 />
                             </div>
                             <div className="col-span-2">

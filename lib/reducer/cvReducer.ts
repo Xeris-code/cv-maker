@@ -21,37 +21,42 @@ function deleteItem<T extends CollectionKey>(collection: CvState[T], id: number)
     return {items: collection.items.filter((item) => item.id != id), nextId: collection.nextId} as CvState[T];
 };
 
+const preserveUIState = (base: CvState, state: CvState): CvState => (
+
+    {...base, webLang: state.webLang, template: state.template, templateSelector: state.templateSelector, menu: state.menu}
+);
+
 export function cvReducer(state: CvState, action: CvAction): CvState {
     switch(action.type) {
         case "ADD":
-            return {...state, [action.target]: addItem(state[action.target], action.target)}
+            return {...state, [action.target]: addItem(state[action.target], action.target)};
 
         case "DELETE":
-            return {...state, [action.target]: deleteItem(state[action.target], action.id)}
+            return {...state, [action.target]: deleteItem(state[action.target], action.id)};
 
         case "SET":
-            return {...state, [action.target]: action.value}
+            return {...state, [action.target]: action.value};
 
         case "SWITCH":
-            return {...state, [action.target]: action.value}
+            return {...state, [action.target]: action.value};
 
         case "UPDATE":
-            return {...state, [action.target]: {items: state[action.target].items.map((item) => item.id === action.id ? { ...item, [action.field]: action.value } : item), nextId: state[action.target].nextId}}
+            return {...state, [action.target]: {items: state[action.target].items.map((item) => item.id === action.id ? { ...item, [action.field]: action.value } : item), nextId: state[action.target].nextId}};
 
         case "SET_BASICS_FIELD":
-            return {...state, basics: {...state.basics, [action.field]: action.value}}
+            return {...state, basics: {...state.basics, [action.field]: action.value}};
         
         case "SET_BIRTH_FIELD":
-            return {...state, birth: {...state.birth, [action.field]: action.value}}
+            return {...state, birth: {...state.birth, [action.field]: action.value}};
 
         case "LOAD_DEMO":
-            return demoState
+            return preserveUIState(demoState, state);
 
         case "CLEAR":
-            return initialState
+            return preserveUIState(initialState, state);
 
         default:
-            return state
+            return state;
     };
 };
 

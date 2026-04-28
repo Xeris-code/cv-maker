@@ -45,14 +45,14 @@ export function CourseSection({
                                 <DateSelector
                                     value={course.start.month}
                                     options={monthDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "start", {month: e.target.value, year: course.end.year})}
+                                    onChange={(e) => onCourseChange(course.id, "start", {month: Number(e.target.value), year: course.start.year})}
                                 />
                             </div>
                             <div className="col-span-2">
                                 <DateSelector
                                     value={course.start.year}
                                     options={yearDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "start", {month: course.end.month, year: Number(e.target.value)})}
+                                    onChange={(e) => onCourseChange(course.id, "start", {month: course.start.month, year: Number(e.target.value)})}
                                 />
                             </div>
                         </DateSelectorWrapper>
@@ -63,7 +63,7 @@ export function CourseSection({
                                 <DateSelector
                                     value={course.end.month}
                                     options={monthDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "end", {month: e.target.value, year: course.end.year})}
+                                    onChange={(e) => onCourseChange(course.id, "end", {month: Number(e.target.value), year: course.end.year})}
                                 />
                             </div>
                             <div className="col-span-2">

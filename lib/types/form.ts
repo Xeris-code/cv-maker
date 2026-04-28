@@ -40,8 +40,8 @@ export type BirthDate = {
 
 export type WorkExperience = {
     id: number;
-    start: {month: string, year: number};
-    end: {month: string, year: number};
+    start: {month: number, year: number};
+    end: {month: number, year: number};
     present: boolean;
     position: string;
     company: string;
@@ -70,8 +70,8 @@ export type CoursesCertificates = {
     name: string;
     org: string;
     description: string;
-    start: {month: string, year: number};
-    end: {month: string, year: number};
+    start: {month: number, year: number};
+    end: {month: number, year: number};
     url: string;
 };
 

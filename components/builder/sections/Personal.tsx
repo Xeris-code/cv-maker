@@ -125,7 +125,7 @@ export function PersonalSection({
                 sectionLabel={translation.photo.name}
                 photoLabel={addButtonPhotoLabel}
                 placeholder={translation.photo.placeholder}
-                onPhotoChange={(e) => onPhotoChange(e)}
+                onPhotoChange={onPhotoChange}
             />
         </div>
     </>

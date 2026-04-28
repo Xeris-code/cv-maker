@@ -43,7 +43,12 @@ export function BuilderPanel({
 
             const reader = new FileReader();
             reader.onload = () => {
+                console.log("reader result", reader.result);
+                if (typeof reader.result !== "string") return;
+
                 onPersonalChange("photo", reader.result as string);
+
+                e.target.value = "";
             };
 
         reader.readAsDataURL(file);
@@ -78,7 +83,7 @@ export function BuilderPanel({
                     addButtonPhotoLabel={t.actions.addPhoto}
                     onBirthChange={onBirthChange}
                     onPersonalChange={onPersonalChange}
-                    onPhotoChange={bindPhotoChange}
+                    onPhotoChange={bindPhotoChange()}
                 />
             case "work":
                 return <WorkSection 
