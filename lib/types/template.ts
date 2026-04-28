@@ -13,6 +13,7 @@ export type AllowedTemplateType =
     | "modern"
     | "graphic"
     | "initial"
+    | "centralized"
 
 export type TemplateOption = {
     type: AllowedTemplateType;

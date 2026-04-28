@@ -248,6 +248,7 @@ export const de: TranslationSchema = {
         modern: "Modern",
         graphic: "Graphic",
         initial: "Initial",
+        centralized: "Centralized",
     },
 
 };

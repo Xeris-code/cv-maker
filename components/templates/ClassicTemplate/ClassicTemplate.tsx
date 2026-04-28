@@ -1,4 +1,4 @@
-import { CvState, TranslationSchema } from "@/lib/types";
+import { CvState, TranslationSchema } from "@/lib/types"
 
 type ClassicTemplateProps = {
     state: CvState;
@@ -6,9 +6,9 @@ type ClassicTemplateProps = {
 }
 
 export function ClassicTemplate({state, t}: ClassicTemplateProps){
-    return (
-        <div className={'flex flex-col min-h-full'}>
 
-        </div>
-    );
+
+    return (
+        <p>UNDER DEVELOPMENT</p>   
+    )
 };

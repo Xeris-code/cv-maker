@@ -9,6 +9,15 @@ export const VisualClassicTemplate: VisualTemplateComponent = (
     </div>
 );
 
+export const VisualCentralizedTemplate: VisualTemplateComponent = (
+    <div className="space-y-2">
+        <div className="h-2 w-2/3 rounded bg-gray-800" />
+        <div className="h-2 w-full rounded bg-gray-300" />
+        <div className="h-2 w-full rounded bg-gray-300" />
+        <div className="h-2 w-4/5 rounded bg-gray-300" />
+    </div>
+);
+
 export const VisualModernTemplate: VisualTemplateComponent = (
     <div className="h-full">
         <div className="grid grid-cols-[1fr_2fr] h-full">

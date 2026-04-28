@@ -3,7 +3,7 @@ import { cvReducer, initialState } from "@/lib/reducer";
 import { translations } from "@/lib/i18n";
 import { Sidebar, BuilderPanel } from "../builder";
 import { WebLanguage, TemplateOption, AllowedTemplateType, MenuCategory, CollectionKey, BasicInformation, BirthDate, SingleUpdateAction, OnCollectionChange, CollectionItem, CvAction } from "@/lib/types";
-import { VisualClassicTemplate, VisualGraphicTemplate, VisualInitialTemplate, VisualModernTemplate } from "@/components/templates";
+import { VisualClassicTemplate, VisualGraphicTemplate, VisualCentralizedTemplate, VisualInitialTemplate, VisualModernTemplate } from "@/components/templates";
 import { PreviewPanel } from "@/components/preview";
 
 import { MainLayout, Header, TemplateSelector} from "@/components/app";
@@ -18,6 +18,7 @@ export function AppShell(){
         { type: "modern", label: t.templates.modern, visual: VisualModernTemplate },
         { type: "graphic", label: t.templates.graphic, visual: VisualGraphicTemplate },
         { type: "initial", label: t.templates.initial, visual: VisualInitialTemplate },
+        { type: "centralized", label: t.templates.centralized, visual: VisualCentralizedTemplate },
       ];
     
     const handleLanguageChange = ( language: WebLanguage ) => { 

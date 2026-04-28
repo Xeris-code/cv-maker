@@ -247,6 +247,7 @@ export const en = {
         modern: "Modern",
         graphic: "Graphic",
         initial: "Initial",
+        centralized: "Centralized",
     },
 
 } as const;

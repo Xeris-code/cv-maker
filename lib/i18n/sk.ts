@@ -244,10 +244,11 @@ export const sk: TranslationSchema = {
     },
 
     templates: {
-        classic: "Klasická",
-        modern: "Moderná",
-        graphic: "Grafická",
+        classic: "Klasický",
+        modern: "Moderný",
+        graphic: "Grafický",
         initial: "Demo",
+        centralized: "Centrovaný",
     },
 
 };
