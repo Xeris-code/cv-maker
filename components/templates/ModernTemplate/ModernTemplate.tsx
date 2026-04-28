@@ -28,7 +28,7 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
     return (
         <div className={`flex min-h-[1123px] ${inter.className}`}>
             
-            <div className="bg-white text-[#0F172A] flex flex-col h-full">
+            <div className="bg-white text-[#0F172A] flex flex-col h-full w-full">
                 <div className="flex-1 pb-10">
                     {hasHeader &&
                     <MainHeader basics={basics} currentPosition={currentPosition} hasName={hasName} hasAdress={hasAdress}/>}
