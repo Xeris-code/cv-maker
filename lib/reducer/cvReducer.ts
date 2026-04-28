@@ -5,9 +5,9 @@ import { initialState } from "./initialState";
 const factories: Factory = {
     skills: (id: number) => ({ id: id, name: "", level: 0}),
     languages: (id: number) => ({ id: id, name: "", level: 0}),
-    work: (id: number) => ({id: id, start: {month: "", year: 0}, end: {month: "", year: 0}, present: false, position: "", company: "", city: "", state: "", description: "",  tasks: [] }),
+    work: (id: number) => ({id: id, start: {month: 0, year: 0}, end: {month: 0, year: 0}, present: false, position: "", company: "", city: "", state: "", description: "",  tasks: [] }),
     education: (id: number) => ({id: id, start: {year: 0}, end: {year: 0}, present: false, faculty: "", university: "", field: "", degree: "", city: "", state: "", description: ""}),
-    courses: (id: number) => ({id: id, name: "", org: "", description: "", start: {month: "", year: 0}, end: {month: "", year: 0}, url: "" }),
+    courses: (id: number) => ({id: id, name: "", org: "", description: "", start: {month: 0, year: 0}, end: {month: 0, year: 0}, url: "" }),
     projects: (id: number) => ({id: id, name: "", description: "", tech: "", url: "" }),
 };
 
