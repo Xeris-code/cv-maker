@@ -1,11 +1,11 @@
-type MainLayout = {
+type MainLayoutProps = {
     header: React.ReactNode;
     selector: React.ReactNode;
     sidebar: React.ReactNode;
     children: React.ReactNode;
 };
 
-export function MainLayout({ header, selector, sidebar, children }: MainLayout){
+export function MainLayout({ header, selector, sidebar, children }: MainLayoutProps){
 
     return (
         <main className="app-shell">

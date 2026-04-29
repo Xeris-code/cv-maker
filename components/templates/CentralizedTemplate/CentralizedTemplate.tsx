@@ -134,7 +134,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                     {basics.summary &&
                         <div className="flex flex-col justify-end">
                             <h1 className="text-[14px] tracking-wider">{t.fields.summary.title.toUpperCase()}</h1>
-                            <span className="mt-1 text-[11px] text-[#9CA3AF]">{basics.summary}</span>
+                            <span className="mt-1 text-[11px] text-[#9CA3AF] break-words">{basics.summary}</span>
                         </div>
                     }
                     {hasSkills && 
@@ -286,7 +286,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                     
                 </div>
             </div>
-            <div className="flex justify-center gap-10 px-10 py-10">
+            <div className="flex justify-center gap-10 px-10 pt-5">
                 {contactItems.map((item, index) => (
                     <div
                     key={index}

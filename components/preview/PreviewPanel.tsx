@@ -3,7 +3,9 @@ import { ModernTemplate, ClassicTemplate, GraphicTemplate, InitialTemplate, Cent
 
 type PreviewProps = {
     state: CvState;
-    t: TranslationSchema
+    t: TranslationSchema;
+    styleWrapper?: string;
+    stylePage?: string;
 }
 
 const templateMap: Record<AllowedTemplateType, TemplateComponent> = {
@@ -14,13 +16,13 @@ const templateMap: Record<AllowedTemplateType, TemplateComponent> = {
     centralized: CentralizedTemplate,
 }
 
-export function PreviewPanel({ state, t }: PreviewProps){
+export function PreviewPanel({ state, t, styleWrapper="preview-panel", stylePage="cv-page" }: PreviewProps){
 
     const Template = templateMap[state.template];
 
-    return <div className="preview-panel">
-        <div className="cv-page">
-                <Template state={state} t={t}/>
+    return <div className={styleWrapper}>
+        <div className={stylePage}>
+            <Template state={state} t={t}/>
         </div>
     </div> 
 }
