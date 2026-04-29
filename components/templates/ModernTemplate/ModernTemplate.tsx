@@ -1,7 +1,7 @@
 import { CvState, TranslationSchema } from "@/lib/types"
 
 import { Inter } from "next/font/google";
-import { SkillBar, LanguageBar, SidebarHeading, MainHeader, WorkTimeline, EducationTimeline, CoursesBlock } from "@/components/templates/ModernTemplate";
+import { SkillBar, LanguageBar, SidebarHeading, MainHeader, WorkTimeline, EducationTimeline, CoursesBlock, ProfileBlock } from "@/components/templates/ModernTemplate";
 import { ProjectsBlock } from "./blocks/ProjectsBlock";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,6 +15,8 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
 
     const { currentPosition, basics, skills, languages, work, education, courses, projects } = state
 
+    const hasSummary = basics.summary
+    const hasTitle = basics.titleFront || basics.titleBack
     const hasHeader = basics.name || basics.surname || currentPosition
     const hasName = basics.name || basics.surname
     const hasAdress = basics.adress_state || basics.adress_city
@@ -31,8 +33,9 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
             <div className="bg-white text-[#0F172A] flex flex-col h-full w-full">
                 <div className="flex-1 pb-10">
                     {hasHeader &&
-                    <MainHeader basics={basics} currentPosition={currentPosition} hasName={hasName} hasAdress={hasAdress}/>}
+                    <MainHeader basics={basics} currentPosition={currentPosition} hasName={hasName} hasAdress={hasAdress} hasTitle={hasTitle}/>}
                     <div className="flex flex-col gap-3 px-5">
+                        {hasSummary && <ProfileBlock summary={basics.summary} t={t}/>}
                         {hasWork && <WorkTimeline work={work} t={t} />}
                         {hasEducation && <EducationTimeline education={education} t={t}/>}
                         {hasCourses && <CoursesBlock courses={courses} t={t}/>}

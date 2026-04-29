@@ -37,7 +37,9 @@ export function EducationTimeline(
                         {[e.start.year, e.end.year].filter(Boolean).join(" - ")}
                     </p>}
                     </div>
-
+                    <div className="text-[11px] mt-1">
+                        {e.description}
+                    </div>
                 </div>}
                 </div>))}
             </div>

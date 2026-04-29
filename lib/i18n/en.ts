@@ -49,6 +49,10 @@ export const en = {
             name: "Email",
             placeholder: "e.g. peter@email.com"
         },
+        portfolio: {
+            name: "Portfolio",
+            placeholder: "e.g. github.com/PeterSmith"
+        },
         phone: {
             name: "Phone number",
             placeholder: "e.g. +421 901 234 567",
@@ -70,6 +74,7 @@ export const en = {
         },
         summary: {
             name: "Summary",
+            title: "Personal profile",
             placeholder: "Write a short summary of your profile...",
         },
         position: {
@@ -162,6 +167,7 @@ export const en = {
                 name: "Description",
                 placeholder: "Briefly describe what you learned, achieved or focused on...",
             },
+            date: "Date",
             from: "From",
             end: "To"
         },

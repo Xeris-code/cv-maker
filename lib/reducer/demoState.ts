@@ -12,6 +12,7 @@ export const demoState: CvState = {
     name: "Peter",
     surname: "Novák",
     mail: "peter.novak@email.com",
+    portfolio: "https://github.com/Xeris-code",
     phone: "+421 900 123 456",
     adress_city: "Bratislava",
     adress_state: "Slovakia",
@@ -101,8 +102,7 @@ export const demoState: CvState = {
         id: 1,
         name: "React - The Complete Guide",
         org: "Udemy",
-        start: { month: 3, year: 2022 },
-        end: { month: 6, year: 2022 },
+        date: { month: 3, year: 2022 },
         description:
           "Learned advanced React concepts including hooks, state management and performance optimization.",
         url: ""
@@ -111,8 +111,7 @@ export const demoState: CvState = {
         id: 2,
         name: "TypeScript Fundamentals",
         org: "Frontend Masters",
-        start: { month: 8, year: 2022 },
-        end: { month: 9, year: 2022 },
+        date: { month: 8, year: 2022 },
         description:
           "Deep dive into TypeScript types, generics and best practices.",
         url: ""

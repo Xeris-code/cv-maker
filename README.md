@@ -2,6 +2,8 @@
 
 Simple CV builder built with React and TypeScript.
 
+![alt text]({74AA9DCC-1637-4932-9164-69D6A7D38D14}.png)
+
 ## 👤 Author
 
 Peter Cisovsky

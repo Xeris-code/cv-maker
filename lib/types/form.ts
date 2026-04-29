@@ -27,6 +27,7 @@ export type BasicInformation = {
     interest: string;
     driving: string;
     mail: string;
+    portfolio: string;
     phone: string;
     adress_city: string;
     adress_state: string;
@@ -70,8 +71,7 @@ export type CoursesCertificates = {
     name: string;
     org: string;
     description: string;
-    start: {month: number, year: number};
-    end: {month: number, year: number};
+    date: {month: number, year: number};
     url: string;
 };
 

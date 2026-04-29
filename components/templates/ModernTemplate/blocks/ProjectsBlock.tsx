@@ -15,7 +15,7 @@ export function ProjectsBlock(
                     <div key={p.id} className="border-l-2 border-[#3B82F6] pl-4">
                         
                         <p className="text-[12px]">
-                            <span className="font-bold">{p.name}</span><span className="text-[10px]">{p.url ? " | " : ""}</span><a className="text-[10px] text-[#3B82F6] underline">{p.url}</a>
+                            <span className="font-bold">{p.name}</span><span className="text-[10px]">{p.url ? " | " : ""}</span><a className="text-[10px] text-[#3B82F6]">{p.url}</a>
                         </p>
 
                         <p className="text-[10px] text-[#64748B]">

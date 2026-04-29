@@ -10,9 +10,9 @@ export function WorkTimeline(
         if (!date.month && !date.year) return "";
 
         if (!date.month) return String(date.year);
-        if (!date.year) return date.month;
+        if (!date.year) return `${date.month > 9 ? "" : 0}${date.month}`;
 
-        return `${date.month}/${date.year}`;
+        return `${date.month > 9 ? "" : 0}${date.month}/${date.year}`;
     }
     
     return (

@@ -47,6 +47,10 @@ export const de: TranslationSchema = {
             month: "Monat",
             year: "Jahr",
         },
+        portfolio: {
+            name: "Portfolio",
+            placeholder: "z.B. github.com/PeterSmith"
+        },
         email: {
             name: "E-Mail",
             placeholder: "z.B. peter@email.com"
@@ -72,6 +76,7 @@ export const de: TranslationSchema = {
         },
         summary: {
             name: "Zusammenfassung",
+            title: "Personal profile",
             placeholder: "Schreiben Sie eine kurze Zusammenfassung über sich...",
         },
         position: {
@@ -164,6 +169,7 @@ export const de: TranslationSchema = {
                 name: "Beschreibung",
                 placeholder: "Beschreiben Sie kurz, was Sie gelernt oder erreicht haben...",
             },
+            date: "Date",
             from: "Start",
             end: "Ende"
         },

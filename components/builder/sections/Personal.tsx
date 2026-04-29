@@ -109,6 +109,12 @@ export function PersonalSection({
                 placeholder={translation.summary.placeholder}
                 onValueChange={ (e) => onPersonalChange("summary", e.target.value)}/>
             <LabeledInput
+                label={translation.portfolio.name}
+                value={personal.portfolio}
+                placeholder={translation.portfolio.placeholder}
+                onValueChange={ (e) => onPersonalChange("portfolio", e.target.value)}
+            />
+            <LabeledInput
                 label={translation.email.name}
                 value={personal.mail}
                 placeholder={translation.email.placeholder}

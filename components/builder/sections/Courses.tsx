@@ -39,38 +39,20 @@ export function CourseSection({
                         <Input value={course.org} placeholder={translationCourse.organization.placeholder} onValueChange={e => onCourseChange(course.id, "org", e.target.value)}/>
                         <Input value={course.url} placeholder={translationCourse.link.placeholder} onValueChange={e => onCourseChange(course.id, "url", e.target.value)}/>
                         <DateSelectorWrapper
-                            label={translationCourse.from}
+                            label={translationCourse.date}
                             wrapperClass="grid grid-cols-5 gap-2 w-full">
                             <div className="col-span-2">
                                 <DateSelector
-                                    value={course.start.month}
+                                    value={course.date.month}
                                     options={monthDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "start", {month: Number(e.target.value), year: course.start.year})}
+                                    onChange={(e) => onCourseChange(course.id, "date", {month: Number(e.target.value), year: course.date.year})}
                                 />
                             </div>
                             <div className="col-span-2">
                                 <DateSelector
-                                    value={course.start.year}
+                                    value={course.date.year}
                                     options={yearDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "start", {month: course.start.month, year: Number(e.target.value)})}
-                                />
-                            </div>
-                        </DateSelectorWrapper>
-                        <DateSelectorWrapper
-                            label={translationCourse.end}
-                            wrapperClass="grid grid-cols-5 gap-2 w-full">
-                            <div className="col-span-2">
-                                <DateSelector
-                                    value={course.end.month}
-                                    options={monthDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "end", {month: Number(e.target.value), year: course.end.year})}
-                                />
-                            </div>
-                            <div className="col-span-2">
-                                <DateSelector
-                                    value={course.end.year}
-                                    options={yearDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "end", {month: course.end.month, year: Number(e.target.value)})}
+                                    onChange={(e) => onCourseChange(course.id, "date", {month: course.date.month, year: Number(e.target.value)})}
                                 />
                             </div>
                         </DateSelectorWrapper>

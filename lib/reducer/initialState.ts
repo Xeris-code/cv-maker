@@ -17,6 +17,7 @@ export const initialState: CvState = {
     interest: "",
     driving: "",
     mail: "",
+    portfolio: "",
     phone: "",
     adress_city: "",
     adress_state: "",

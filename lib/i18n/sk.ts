@@ -47,6 +47,10 @@ export const sk: TranslationSchema = {
             month: "Mesiac",
             year: "Rok",
         },
+        portfolio: {
+            name: "Portfolio",
+            placeholder: "napr. github.com/PeterSmith"
+        },
         email: {
             name: "Email",
             placeholder: "napr. peter@email.com"
@@ -72,6 +76,7 @@ export const sk: TranslationSchema = {
         },
         summary: {
             name: "Zhrnutie",
+            title: "O mne",
             placeholder: "Napíšte krátke zhrnutie o sebe...",
         },
         position: {
@@ -164,6 +169,7 @@ export const sk: TranslationSchema = {
                 name: "Popis",
                 placeholder: "Stručne opíšte, čo ste sa naučili alebo dosiahli...",
             },
+            date: "Kedy",
             from: "Od",
             end: "Do"
         },
