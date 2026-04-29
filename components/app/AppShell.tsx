@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { cvReducer, initialState } from "@/lib/reducer";
 import { translations } from "@/lib/i18n";
 import { Sidebar, BuilderPanel } from "../builder";
@@ -10,7 +10,47 @@ import { MainLayout, Header, TemplateSelector} from "@/components/app";
 
 export function AppShell(){
 
+    const STORAGE_KEY = "cv-maker-state"
     const [state, dispatch] = useReducer(cvReducer, initialState);
+
+    useEffect(() => {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (!stored) return;
+
+            const saved = JSON.parse(stored);
+
+            const mergedState = {
+            ...initialState,
+            ...saved,
+            basics: {
+                ...initialState.basics,
+                ...saved.basics,
+            },
+            work: saved.work ?? initialState.work,
+            education: saved.education ?? initialState.education,
+            skills: saved.skills ?? initialState.skills,
+            languages: saved.languages ?? initialState.languages,
+            courses: saved.courses ?? initialState.courses,
+            projects: saved.projects ?? initialState.projects,
+            };
+
+            dispatch({
+            type: "LOAD_SAVED",
+            value: mergedState,
+            });
+        } catch {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+        }, []
+    );
+
+    useEffect(() => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+        } catch {}
+    }, [state]);
+
     const t = translations[state.webLang];
 
     const templates: TemplateOption[] = [

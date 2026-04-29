@@ -111,14 +111,21 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                 </div>
 
                 <div className="grid grid-cols-[1fr_220px_1fr] justify-center items-center">
+
                     <span className={`${montserrat.className} break-words leading-tight text-right text-[36px] uppercase tracking-widest text-[#60A5FA]`}>
-                    {basics.name}
+                        <div className="flex flex-col">
+                            {basics.titleActive && basics.titleFront && <span>{basics.titleFront}</span>}
+                            <span>{basics.name}</span>
+                        </div>
                     </span>
 
                     <div/>
 
                     <span className={`${montserrat.className} break-words leading-tight text-left text-[36px] uppercase tracking-widest text-[#60A5FA]`}>
-                    {basics.surname}
+                        <div className="flex flex-col">
+                            <span>{basics.surname}{basics.titleActive && basics.titleBack ? "," : ""}</span>
+                            {basics.titleActive && basics.titleBack && <span>{basics.titleBack}</span>}
+                        </div>
                     </span>
                 </div>
             </div>

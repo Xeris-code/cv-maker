@@ -149,4 +149,5 @@ export type CvAction =
     | { type: "SET_BIRTH_FIELD", field: keyof BirthDate, value: number | null }
     | { type: "LOAD_DEMO" }
     | { type: "CLEAR" }
+    | { type: "LOAD_SAVED", value: CvState}
 

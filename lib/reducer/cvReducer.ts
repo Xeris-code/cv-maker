@@ -50,10 +50,15 @@ export function cvReducer(state: CvState, action: CvAction): CvState {
             return {...state, birth: {...state.birth, [action.field]: action.value}};
 
         case "LOAD_DEMO":
+            localStorage.setItem("cv-maker-state", JSON.stringify(demoState));
             return preserveUIState(demoState, state);
 
         case "CLEAR":
+            localStorage.removeItem("cv-maker-state");
             return preserveUIState(initialState, state);
+
+        case "LOAD_SAVED":
+            return action.value;
 
         default:
             return state;
