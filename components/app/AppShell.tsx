@@ -133,7 +133,7 @@ export function AppShell(){
             
             setTimeout(() => {
                 window.print();
-            }, 100);
+            }, 400);
         } else {
             window.print();
         }
