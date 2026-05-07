@@ -1,5 +1,5 @@
 import { BasicInformation, UiPersonalTranslations, DayOption, MonthOption, YearOption, BirthDate } from "@/lib/types";
-import { TextArea, ToggleButton, DateSelector, PhotoUpload, UiSectionHeader, UiInputField } from "@/components/ui";
+import { UiTextArea, ToggleButton, DateSelector, PhotoUpload, UiSectionHeader, UiInputField } from "@/components/ui";
 
 
 type PersonalSectionProps = {
@@ -135,7 +135,7 @@ export function PersonalSection({
                 </div>
             </div>
             <div className="col-span-2">
-                <TextArea
+                <UiTextArea
                 label={translation.fields.summary.name}
                 value={personal.summary}
                 placeholder={translation.fields.summary.placeholder}

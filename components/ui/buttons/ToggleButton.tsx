@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui";
 import { twMerge } from "tailwind-merge";
 
 type ToggleButtonProps = {
@@ -27,7 +26,7 @@ export function ToggleButton({
 
     return <div className={styles.wrapper}>
             <div className="flex justify-start gap-2">
-                <Label label={label} />
+                <label className="text-[14px] text-[#475569]">{label}</label>
                 <button className={`${styles.button} ${condition ? styles.buttonActive : styles.buttonNotActive}`} onClick={onChange}>
                     <div className={`${styles.pointer} ${condition ? styles.pointerActive : styles.pointerNotActive}`} />
                 </button>
