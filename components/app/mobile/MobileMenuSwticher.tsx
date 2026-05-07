@@ -1,9 +1,9 @@
-import { MenuCategory } from "@/lib/types";
+import { MenuCategory, MenuTranslations } from "@/lib/types";
 
 type MobileMenuSwitcherProps = {
   activeMenu: MenuCategory;
   onMenuChange: (menu: MenuCategory) => void;
-  translations: Record<MenuCategory, string>;
+  translations: MenuTranslations;
 };
 
 export function MobileMenuSwitcher({
@@ -34,7 +34,7 @@ export function MobileMenuSwitcher({
               : "bg-slate-100 text-slate-700"
           }`}
         >
-          {translations[item]}
+          {translations[item].title}
         </button>
       ))}
     </div>

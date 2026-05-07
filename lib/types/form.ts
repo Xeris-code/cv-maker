@@ -1,4 +1,4 @@
-import { Skill, Language, WebLanguage, AllowedTemplateType, MenuCategory } from "@/lib/types";
+import { SkillLevel, LanguageLevel, WebLanguage, AllowedTemplateType, MenuCategory } from "@/lib/types";
 
 export type DayOption = {
     num: number;
@@ -22,9 +22,9 @@ export type BasicInformation = {
     titleActive: boolean;
     titleFront: string;
     titleBack: string;
+    position: string;
     photo: string | null;
     summary: string;
-    interest: string;
     driving: string;
     mail: string;
     portfolio: string;
@@ -34,9 +34,26 @@ export type BasicInformation = {
 };
 
 export type BirthDate = {
-    day: number | null;
-    month: number | null;
-    year: number | null;
+    day: number;
+    month: number;
+    year: number;
+};
+
+export type Skill = {
+    id: number;
+    name: string;
+    level: SkillLevel;
+};
+
+export type Interest = {
+    id: number;
+    name: string;
+};
+
+export type Language = {
+    id: number,
+    name: string,
+    level: LanguageLevel
 };
 
 export type WorkExperience = {
@@ -54,9 +71,8 @@ export type WorkExperience = {
 
 export type Education = {
     id: number;
-    start: {year: number};
-    end: {year: number};
-    present: boolean;
+    start: {month: number, year: number};
+    end: {month: number, year: number};
     faculty: string;
     university: string;
     field: string;
@@ -95,7 +111,7 @@ export type CvState = {
     menu: MenuCategory,
     basics: BasicInformation,
     birth: BirthDate,
-    currentPosition: string,
+    interests: CollectionState<Interest>,
     skills: CollectionState<Skill>,
     languages: CollectionState<Language>,
     work: CollectionState<WorkExperience>,
@@ -150,4 +166,5 @@ export type CvAction =
     | { type: "LOAD_DEMO" }
     | { type: "CLEAR" }
     | { type: "LOAD_SAVED", value: CvState}
+    | { type: "REORDER_COLLECTION", target: CollectionKey, items: CvState[CollectionKey]["items"]}
 

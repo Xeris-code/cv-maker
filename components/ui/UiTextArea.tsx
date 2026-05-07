@@ -1,21 +1,24 @@
-import { Label } from "./Label";
 import { useRef, useEffect } from "react";
 
-type AreaProps = {
+type UiTextAreaProps = {
     value: string;
     label?: string;
     placeholder: string;
     onValueChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-export function TextArea({
+export function UiTextArea({
     value,
     label="",
     placeholder,
-    onValueChange
-}:AreaProps){
+    onValueChange,
+}: UiTextAreaProps){
 
-    const styleTextArea = "resize-none h-[100px] border-[#E2E8F0] overflow-hidden border focus:border-[#3B82F6] focus:outline-none p-2 px-3 rounded w-full text-[15px] text-[#1e293b] placeholder:text-[#94A3B8]";
+    const styles = {
+        wrapper: "flex flex-col gap-2",
+        label: "text-[14px] text-gray-800",
+        textArea: "min-h-[80px] w-full overflow-hidden py-2 px-3 border border-[#E2E8F0] rounded text-[12px] text-[#1e293b] placeholder:text-[#94A3B8] transition hover:bg-[#F8FAFC] hover:border-blue-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100",
+    };
 
     const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -27,14 +30,16 @@ export function TextArea({
     }, [value]);
 
     return (
-        <div className="flex flex-col gap-1">
-            <Label label={label}/>
+        <div className={styles.wrapper}>
+            {label && <span className={styles.label}>
+                {label}
+            </span>}
             <textarea 
                 ref={ref}
                 value={value}
                 placeholder={placeholder}
                 onChange={onValueChange}
-                className={styleTextArea}
+                className={styles.textArea}
             />
         </div>
     );

@@ -8,7 +8,7 @@ export function EducationTimeline(
     
     return (
         <section className="px-5">
-            <h1 className="font-semibold mb-2 mt-4">{t.sections.common.education.toUpperCase()} </h1>
+            <h1 className="font-semibold mb-2 mt-4">{t.sections.common.education.title.toUpperCase()} </h1>
 
             <div className="mt-4 flex flex-col gap-4">
                 {education.items.map((e) => (

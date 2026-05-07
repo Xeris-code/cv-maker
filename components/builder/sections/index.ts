@@ -6,3 +6,5 @@ export * from "./Personal"
 export * from "./Work"
 export * from "./Languages"
 export * from "./Interests"
+
+export * from "./cards"

@@ -1,5 +1,78 @@
 @import "tailwindcss";
 
+/* To stay */
+body {
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
+    sans-serif;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  background: #F8FAFC;
+  color: #0F172A;
+  padding: 0;
+  height: 100vh;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.noScroll{
+  scrollbar-width: none;
+}
+
+.header {
+  height: 88px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.footer {
+  height: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.app-shell {
+  min-width: max-content;
+  overflow: hidden;
+  height: 100vh;
+  background: #F8FAFC;
+}
+
+.app-body-scroll{
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns:
+    280px minmax(380px, 520px) minmax(560px, 1fr);
+  height: calc(100vh - 88px - 40px);
+  min-height: 0;
+  gap: 24px;
+  padding: 15px;
+}
+
+
+
+
+/* To think about */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -13,11 +86,7 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+
 
 @media print {
   @page {
@@ -85,26 +154,16 @@ body {
   }
 }
 
-.app-layout {
-  display: grid;
-  grid-template-columns:
-    clamp(270px, 16vw, 300px)
-    clamp(360px, 28vw, 480px)
-    minmax(0, 1fr);
-  min-height: calc(100vh - 80px);
-  gap: 0;
-  border-bottom: 2px solid #E2E8F0;
-  border-top: 2px solid #E2E8F0;
-}
+
 
 .preview-panel {
   min-width: 0;
-  overflow: auto;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
   background-color: #ffffff;
-  padding: 2.5rem;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .cv-page {
@@ -117,18 +176,4 @@ body {
   overflow: hidden;
 }
 
-.app-shell {
-  min-width: max-content;
-  min-height: screen;
-  background: #F8FAFC;
-}
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 7.25rem;
-  padding-right: 7.25rem;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 2px solid #E2E8F0;
-}

@@ -1,25 +1,23 @@
-import { AddButton, DeleteButton, SectionTitle, Input, TextArea, CollectionHeader, DateSelectorWrapper, DateSelector } from "@/components/ui";
-import { CoursesCertificates, CollectionState, CoursesTranslations, YearOption, MonthOption } from "@/lib/types"
-
+import { useState } from "react";
+import { AddButton, UiSectionHeader } from "@/components/ui";
+import { CoursesCertificates, CollectionState, UiCoursesTranslations, YearOption, MonthOption, TooltipTranslations } from "@/lib/types"
+import { CourseEditingCard, CoursePreviewCard } from "./cards";
 
 type CourseSectionProps = {
-    title: string;
     courses: CollectionState<CoursesCertificates>;
-    addButtonLabel: string;
-    translationCourse: CoursesTranslations;
+    translationCourse: UiCoursesTranslations;
+    translationTooltip: TooltipTranslations;
     monthDateOptions: MonthOption[];
     yearDateOptions: YearOption[];
     onCourseChange: (id: number, field: keyof CoursesCertificates, value: CoursesCertificates[keyof CoursesCertificates]) => void;
     onAddCourse: () => void;
     onDeleteCourse: (id: number) => void;
-}
-
+};
 
 export function CourseSection({
-    title,
     courses,
-    addButtonLabel,
     translationCourse,
+    translationTooltip,
     monthDateOptions,
     yearDateOptions,
     onCourseChange,
@@ -27,43 +25,49 @@ export function CourseSection({
     onDeleteCourse, 
 }: CourseSectionProps){
 
+    const [editingId, setEditingId] = useState< number | null >(null);
+
     return <>
-        <SectionTitle label={title}/>
-        <div className="flex flex-col gap-3">
-            {courses.items.map((course, index) => (
-                <div key={course.id} className="flex flex-col w-full gap-2 p-2 border">
-                        <CollectionHeader label={`${index + 1}. ${translationCourse.name}`}>
-                            <DeleteButton onClick={() => onDeleteCourse(course.id)}/>
-                        </CollectionHeader>
-                        <Input value={course.name} placeholder={translationCourse.title.placeholder} onValueChange={e => onCourseChange(course.id, "name", e.target.value)}/>
-                        <Input value={course.org} placeholder={translationCourse.organization.placeholder} onValueChange={e => onCourseChange(course.id, "org", e.target.value)}/>
-                        <Input value={course.url} placeholder={translationCourse.link.placeholder} onValueChange={e => onCourseChange(course.id, "url", e.target.value)}/>
-                        <DateSelectorWrapper
-                            label={translationCourse.date}
-                            wrapperClass="grid grid-cols-5 gap-2 w-full">
-                            <div className="col-span-2">
-                                <DateSelector
-                                    value={course.date.month}
-                                    options={monthDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "date", {month: Number(e.target.value), year: course.date.year})}
-                                />
-                            </div>
-                            <div className="col-span-2">
-                                <DateSelector
-                                    value={course.date.year}
-                                    options={yearDateOptions}
-                                    onChange={(e) => onCourseChange(course.id, "date", {month: course.date.month, year: Number(e.target.value)})}
-                                />
-                            </div>
-                        </DateSelectorWrapper>
-                        <TextArea 
-                            value={course.description}
-                            placeholder={translationCourse.describe.placeholder}
-                            onValueChange={e => onCourseChange(course.id, "description", e.target.value)}
-                        />
-                    </div>
+        <UiSectionHeader
+            title={translationCourse.title}
+            description={translationCourse.description}
+            counter={courses.items.length}
+            itemLabel={translationCourse.items}
+        />
+        <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
+        <div className="flex flex-col gap-5 p-5">
+            {courses.items.map((c) => (
+                (editingId === c.id)
+                    ? <CourseEditingCard
+                        key={c.id}
+                        course={c}
+                        t={translationCourse}
+                        translationTooltip={translationTooltip}
+                        monthOptions={monthDateOptions}
+                        yearOptions={yearDateOptions}
+                        onClose={() => setEditingId(null)}
+                        onCourseChange={onCourseChange}
+                    />
+                    : <CoursePreviewCard
+                        key={c.id}
+                        course={c}
+                        translationTooltip={translationTooltip}
+                        months={monthDateOptions}
+                        onEdit={() => setEditingId(c.id)}
+                        onDeleteCourse={onDeleteCourse}  
+                    />
             ))}
-            <AddButton label={addButtonLabel} onClick={onAddCourse}/>
+        </div>
+    </div>
+        <div className="flex items-center px-5 py-5 border-t-1 border-gray-200">
+            <AddButton
+                label={`+ ${translationCourse.add}`}
+                onClick={
+                    () => {onAddCourse();
+                    const newId = courses.nextId;
+                    setEditingId(newId)}
+                }
+            />
         </div>
     </>
 }

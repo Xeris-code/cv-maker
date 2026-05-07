@@ -1,48 +1,66 @@
-import { AddButton, DeleteButton, SectionTitle, CollectionHeader, Input, TextArea } from "@/components/ui";
-import { CollectionState, Projects, ProjectsTranslations } from "@/lib/types";
+import { AddButton, UiSectionHeader } from "@/components/ui";
+import { CollectionState, Projects, UiProjectsTranslations, TooltipTranslations } from "@/lib/types";
+import { useState } from "react";
+import { ProjectEditingCard, ProjectPreviewCard } from "./cards";
 
 type ProjectsSectionProps = {
-    title: string;
     projects: CollectionState<Projects>;
-    addButtonLabel: string;
-    translationsProjects: ProjectsTranslations;
+    translationsProjects: UiProjectsTranslations;
+    translationTooltip: TooltipTranslations;
     onProjectChange: (id: number, field: keyof Projects, value: string) => void;
     onAddProject: () => void;
     onDeleteProject: (id: number) => void;
 };
 
-
 export function ProjectsSection({
-    title,
     projects,
-    addButtonLabel,
     translationsProjects,
+    translationTooltip,
     onProjectChange,
     onAddProject,
     onDeleteProject,
 }: ProjectsSectionProps){
 
-    return <>
-        <SectionTitle label={title}/>
-        <div className="flex flex-col gap-3">
-            {projects.items.map((project, index: number) => (
-                <div key={project.id} className="flex flex-col w-full gap-2 p-2 border">
-                    <CollectionHeader label={`${index + 1}. ${translationsProjects.name}`}>
-                        <DeleteButton onClick={() => onDeleteProject(project.id)}/>
-                    </CollectionHeader>
+    const [editingId, setEditingId] = useState< number | null >(null);
 
-                    <Input value={project.name} placeholder={translationsProjects.title.placeholder} onValueChange={e => onProjectChange(project.id, "name", e.target.value)}/>
-                    <Input value={project.tech} placeholder={translationsProjects.technology.placeholder} onValueChange={e => onProjectChange(project.id, "tech", e.target.value)}/>
-                    <Input value={project.url} placeholder={translationsProjects.link.placeholder} onValueChange={e => onProjectChange(project.id, "url", e.target.value)}/>
-            
-                    <TextArea 
-                        value={project.description}
-                        placeholder={translationsProjects.describe.placeholder}
-                        onValueChange={e => onProjectChange(project.id, "description", e.target.value)}
+    return <>
+    <UiSectionHeader
+        title={translationsProjects.title}
+        description={translationsProjects.description}
+        counter={projects.items.length}
+        itemLabel={translationsProjects.items}
+    />
+    <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
+        <div className="flex flex-col gap-5 p-5">
+            {projects.items.map((p) => (
+                (editingId === p.id)
+                    ? <ProjectEditingCard
+                        key={p.id}
+                        project={p}
+                        t={translationsProjects}
+                        translationTooltip={translationTooltip}
+                        onClose={() => setEditingId(null)}
+                        onProjectChange={onProjectChange}
                     />
-            </div>
+                    : <ProjectPreviewCard
+                        key={p.id}
+                        project={p}
+                        translationTooltip={translationTooltip}
+                        onEdit={() => setEditingId(p.id)}
+                        onDeleteProject={onDeleteProject}  
+                    />
             ))}
-            <AddButton label={addButtonLabel} onClick={onAddProject}/>
         </div>
+    </div>
+    <div className="flex items-center px-5 py-5 border-t-1 border-gray-200">
+        <AddButton
+            label={`+ ${translationsProjects.add}`}
+            onClick={
+                () => {onAddProject();
+                const newId = projects.nextId;
+                setEditingId(newId)}
+            }
+        />
+    </div>
     </>
-};
+}; 

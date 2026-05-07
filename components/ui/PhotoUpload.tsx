@@ -1,5 +1,4 @@
 import { ContactRoundIcon } from "lucide-react";
-import { Label } from "@/components/ui";
 
 type PhotoUploadProps = {
     photo: string | null;
@@ -19,7 +18,7 @@ export function PhotoUpload({
     return (
         
         <div className="flex flex-col gap-1">
-            <Label label={sectionLabel}/>
+            <label className="text-[14px] text-[#475569]">{sectionLabel}</label>
             <div className="border-1 border-[#94A3B8] border-dashed rounded-xl bg-[#F1F5F9] py-5 flex flex-col gap-3">
                 {photo &&
                     <div className="self-center">
@@ -27,7 +26,7 @@ export function PhotoUpload({
                     </div>
                 }
                 <label className="self-center cursor-pointer bg-gradient-to-r from-[#CBD5F5] to-[#3B82F6] h-fit py-2 px-4 shadow-lg rounded-lg w-fit flex gap-2">
-                    <ContactRoundIcon className="shrink-0 self-center"/>{photoLabel}
+                    <ContactRoundIcon className="shrink-0 self-center text-[#ffffff]"/><span className="text-[#ffffff]">{photoLabel}</span>
                     <input className="hidden" type="file" accept="image/*" onChange={onPhotoChange}></input>
                 </label>
                 <label className="text-[14px] text-[#94A3B8] self-center">

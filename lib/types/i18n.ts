@@ -3,37 +3,46 @@ import { en } from "../i18n/en";
 export const languageCodes = ["en", "sk", "de"] as const;
 
 type DeepWiden<T> =
-  T extends string 
+  T extends string
     ? string
-    : T extends readonly (infer U)[]
-      ? readonly DeepWiden<U>[]
-      : T extends object
-        ? { [K in keyof T]: DeepWiden<T[K]> }
-        : T;
+    : T extends number
+      ? number
+      : T extends boolean
+        ? boolean
+        : T extends readonly (infer U)[]
+          ? Array<DeepWiden<U>>
+          : T extends object
+            ? { -readonly [K in keyof T]: DeepWiden<T[K]> }
+            : T;
 
 export type TranslationSchema = DeepWiden<typeof en>;
-export type WebLanguage = (typeof languageCodes)[number];
 
-export type Skill = { id: number, name: string, level: SkillLevel };
-export type SkillTranslations = Record<keyof TranslationSchema["fields"]["skills"], string>
-export type SkillLevel = keyof TranslationSchema["options"]["skills"];
+export type WebLanguage = (typeof languageCodes)[number];
+export type WebLanguageOptions = {language: WebLanguage, name: TranslationSchema["ui"]["languages"][WebLanguage]}[]
+
+export type SkillLevel = keyof TranslationSchema["ui"]["options"]["skills"];
 export type SkillOption = { value: SkillLevel, label: string };
 export type SkillOptionTranslations = Record<SkillLevel, string>
 
-export type Language = { id: number, name: string, level: LanguageLevel };
-export type LanguageTranslations = Record<keyof TranslationSchema["fields"]["languages"], string>
-export type LanguageLevel = keyof TranslationSchema["options"]["language"];
+export type LanguageLevel = keyof TranslationSchema["ui"]["options"]["language"];
 export type LanguageOption = { value: LanguageLevel, label: string };
 export type LanguageOptionTranslations = Record<LanguageLevel, string>
 
-export type MenuCategory = keyof TranslationSchema["sections"]["common"]
-export type MenuTranslations = Record<MenuCategory, string>
 
-export type ProjectsTranslations = TranslationSchema["fields"]["project"]
-export type CoursesTranslations = TranslationSchema["fields"]["courses"]
-export type WorkTranslations = TranslationSchema["fields"]["work"]
-export type EducationTranslations = TranslationSchema["fields"]["education"]
-export type InterestsTranslations = TranslationSchema["fields"]["interests"]
+export type MenuTranslations = TranslationSchema["ui"]["sections"]
+export type MenuCategory = keyof MenuTranslations
 
-export type CurrentPositionTranslations = TranslationSchema["fields"]["position"]
-export type FieldTranslations = TranslationSchema["fields"]
+export type TooltipTranslations = TranslationSchema["ui"]["tooltip"]
+
+export type AppTranslations = TranslationSchema["ui"]["app"]
+export type UiActionTranslations = TranslationSchema["ui"]["actions"]
+export type UiPersonalTranslations = TranslationSchema["ui"]["sections"]["personal"]
+export type UiSkillsTranslations = TranslationSchema["ui"]["sections"]["skills"]
+export type UiLanguagesTranslations = TranslationSchema["ui"]["sections"]["languages"]
+export type UiWorkTranslations = TranslationSchema["ui"]["sections"]["work"]
+export type UiEducationTranslations = TranslationSchema["ui"]["sections"]["education"]
+export type UiCoursesTranslations = TranslationSchema["ui"]["sections"]["courses"]
+export type UiProjectsTranslations = TranslationSchema["ui"]["sections"]["projects"]
+export type UiInterestsTranslations = TranslationSchema["ui"]["sections"]["interests"]
+
+

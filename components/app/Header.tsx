@@ -1,59 +1,69 @@
-import { ChevronDown } from "lucide-react";
-import { WebLanguage } from "@/lib/types";
+import { Download, Eye,  Sun } from "lucide-react";
+import { AppTranslations, UiActionTranslations, WebLanguage, WebLanguageOptions } from "@/lib/types";
+import { LanguageSelector, SettingsMenu } from "@/components/ui";
 
 type HeaderProps = {
-    appTitle: string;
-    appDescription: string;
-    printButtonTitle: string;
-    demoTitle: string;
-    resetTitle: string;
-    language: WebLanguage;
-    templateSelector: boolean;
+    appTranslations: AppTranslations;
+    uiActions: UiActionTranslations;
+    uiLanguage: WebLanguage;
+    languageOptions: WebLanguageOptions;
+    completion: number;
     onLanguageChange: (language: WebLanguage) => void;
-    onToggleTemplateSelector: () => void;
     onPrint: () => void;
     onDemo: () => void;
     onReset: () => void;
 };
 
-export function Header( { appTitle, appDescription, printButtonTitle, demoTitle, resetTitle, language, templateSelector, onLanguageChange, onToggleTemplateSelector, onPrint, onDemo, onReset }: HeaderProps ){
+export function Header({
+    appTranslations, uiActions, uiLanguage, languageOptions, completion,
+    onLanguageChange, onPrint, onDemo, onReset
+}: HeaderProps ){
 
-    const styles = {
-        title: "text-[32px] text-[#0F172A]",
-        description: "text-[15px] text-[#475569]",
-        buttonPrint: "cursor-pointer text-[#FFFFFF] h-fit bg-[#2563EB] hover:bg-[#1D4ED8] py-2 px-4 shadow-lg rounded-lg",
-        buttonTemplates: "cursor-pointer text-[#FFFFFF] h-fit bg-[#2563EB] hover:bg-[#1D4ED8] p-1 shadow-lg rounded-lg absolute right-5 top-full -translate-y-1/2", 
-        switchWrapper: "grid grid-cols-8 h-fit bg-[#F1F5F9] font-bold px-2 text-[#64748B] text-[14px] border-2 border-[#E2E8F0] rounded-md self-center",
-        switchDivider: "text-center text-lg text-[#E2E8F0] pt-0.5",
-    };
-
-    function renderLanguageButton( switchTo: WebLanguage ){
-        const style = `cursor-pointer col-span-2 text-center pt-2 pb-1 pl-3 pr-3 border-b-3 ${language === switchTo ? "border-[#2563EB] text-[#0F172A]" : "border-[#F1F5F9]"}`;
-        return <button type="button" className={style} onClick={() => onLanguageChange(switchTo)}>{switchTo.toUpperCase()}</button>
-    };
-
-    return (<div className="relative">
+    return (
         <div className="header">
-            <div>
-                <h1 className={styles.title}>{appTitle}</h1>
-                <p className={styles.description}>{appDescription}</p>
-            </div>
-            <div className="flex self-center gap-3">
-                <div className={styles.switchWrapper}>
-                    {renderLanguageButton("sk")}
-                    <div className={styles.switchDivider}>|</div>
-                    {renderLanguageButton("en")}
-                    <div className={styles.switchDivider}>|</div>
-                    {renderLanguageButton("de")}
+            <div className="flex items-center gap-2">
+                <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad" x1="" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#2563EB"/>
+                        <stop offset="100%" stopColor="#60A5FA"/>
+                        </linearGradient>
+                    </defs>
+
+                    <path d="M16 6h20l12 12v34a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z" fill="url(#grad)" />
+
+                    <path d="M36 6v12h12" fill="#93C5FD"/>
+
+                    <rect x="20" y="26" width="24" height="3" rx="1.5" fill="white"/>
+                    <rect x="20" y="32" width="20" height="3" rx="1.5" fill="white"/>
+                    <rect x="20" y="38" width="16" height="3" rx="1.5" fill="white"/>
+                </svg>
+                <div className="flex flex-col">
+                    <span className="text-[24px] font-semibold text-shadow-2xs">{appTranslations.name}</span>
+                    <span className="text-[12px] text-gray-500 text-shadow-2xs">{appTranslations.description}</span>
                 </div>
-                <button type="button" className={styles.buttonPrint} onClick={onPrint}>{printButtonTitle}</button>
-                <button type="button" className={styles.buttonPrint} onClick={onDemo}>{demoTitle}</button>
-                <button type="button" className={styles.buttonPrint} onClick={onReset}>{resetTitle}</button>
+            </div>
+            <div className="flex flex-col self-center gap-1 w-1/5">
+                <p className="text-[12px]">{completion}% {appTranslations.progressBar}</p>
+                <div className="w-full h-2 bg-gray-100 rounded-full ring-1 ring-[#E2E8F0]">
+                    <div style={{ width: `${completion}%`}} className="h-2 bg-linear-to-r from-[#2563EB] to-[#60A5FA] rounded-full"/>
+                </div>
+            </div>
+            <div className="flex gap-5 items-center text-gray-700">
+                <div className="flex items-center gap-4">
+                    <LanguageSelector language={uiLanguage} languageOptions={languageOptions} onClick={(language: WebLanguage) => onLanguageChange(language)}/>
+                    <button type="button" className="text-[15px] cursor-pointer flex h-fit items-center gap-2 px-5 py-3 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.02] active:scale-[0.98]  rounded-lg">
+                        <Eye className="size-5"/>{uiActions.preview}
+                    </button>
+                    <button type="button" onClick={onPrint} className="text-[15px] cursor-pointer flex h-fit items-center gap-2 px-5 py-3 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.02] active:scale-[0.98]  rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-[#FFFFFF]">
+                        <Download className="size-5"/>{uiActions.printPDF}
+                        </button>
+                </div>
+                <div className="flex items-center gap-4">
+                    <button type="button" className="cursor-pointer h-fit items-center px-3 py-2 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.05] active:scale-[0.98] rounded-lg"><Sun/></button>
+                    <SettingsMenu demoTitle={uiActions.demo} resetTitle={uiActions.reset} exportTitle={uiActions.exportJSON} onDemo={() => onDemo()} onReset={() => onReset()}/>
+                </div>
             </div>
         </div>
-        <button type="button" style={{ perspective: "600px" }} className={styles.buttonTemplates} onClick={onToggleTemplateSelector}>
-            <ChevronDown className="transition-transform duration-300" style={{transform: `rotateX(${templateSelector ? 180 : 0}deg)`}}/>
-        </button>
-    </div>
     );
-}
+};

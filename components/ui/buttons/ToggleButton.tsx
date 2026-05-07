@@ -17,10 +17,10 @@ export function ToggleButton({
 
     const styles = {
         wrapper: twMerge("flex flex-col gap-1", classNameWrapper),
-        button: "cursor-pointer transition-all relative h-6 w-10 rounded-xl self-center ring-1",
+        button: "cursor-pointer transition-all relative h-5 w-10 rounded-xl self-center ring-1 ring-gray-200 focus:outline-none",
         buttonActive: "bg-[#3B82F6]",
         buttonNotActive: "bg-[#E2E8F0]",
-        pointer: "transition-all absolute top-1 left-0.5 h-4 w-4 rounded-full bg-[#FFFFFF] transition-transform duration-300",
+        pointer: "transition-all absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-[#FFFFFF] transition-transform duration-300",
         pointerActive: "translate-x-4.5",
         pointerNotActive: "",
     };

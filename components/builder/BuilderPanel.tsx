@@ -6,10 +6,10 @@ type BuilderPanelProps = {
     state: CvState;
     t: TranslationSchema;
     onAdd: (key: CollectionKey) => void;
+    onReorder: (target: CollectionKey, items: CvState[CollectionKey]["items"]) => void;
     onDelete: (key: CollectionKey, id: number) => void;
     onBirthChange: (field: keyof BirthDate, value: BirthDate[keyof BirthDate]) => void;
     onPersonalChange: (field: keyof BasicInformation, value: BasicInformation[keyof BasicInformation]) => void;
-    onCurrentPositionChange: (value: string) => void;
     onCollectionChange: OnCollectionChange;
 }   
 
@@ -17,9 +17,9 @@ export function BuilderPanel({
     state,
     t,
     onAdd,
+    onReorder,
     onDelete,
     onBirthChange,
-    onCurrentPositionChange,
     onPersonalChange,
     onCollectionChange,
 }: BuilderPanelProps){
@@ -55,10 +55,6 @@ export function BuilderPanel({
         };
     };
 
-    const bindPersonalChange = (field: keyof BasicInformation) => {
-        return (value: BasicInformation[keyof BasicInformation]) => onPersonalChange(field, value);
-    };
-
     const bindCollectionChange = <T extends CollectionKey>(target: T) => {
         return <F extends Extract<keyof CollectionItem<T>, string>>(
             id: number,
@@ -69,43 +65,41 @@ export function BuilderPanel({
         };
     };
 
+    const bindReorder = (target: CollectionKey) => {
+        return (items: CvState[CollectionKey]["items"]) => onReorder(target, items)
+    }
+
     function renderContent() {
         switch (state.menu) {
             case "personal":
                 return <PersonalSection
-                    title={t.sections.common.personal}
                     birth={state.birth}
                     personal={state.basics}
-                    translation={t.fields}
+                    translation={t.ui.sections.personal}
                     dayDateOptions={dayDateOptions}
                     monthDateOptions={monthDateOptions}
                     yearDateOptions={yearDateOptions}
-                    addButtonPhotoLabel={t.actions.addPhoto}
                     onBirthChange={onBirthChange}
                     onPersonalChange={onPersonalChange}
                     onPhotoChange={bindPhotoChange()}
                 />
             case "work":
                 return <WorkSection 
-                    title={t.sections.common.work}
                     work={state.work}
-                    currentPosition={state.currentPosition}
-                    translationCurrentPosition={t.fields.position}
-                    addButtonLabel={t.actions.addWork}
-                    translationWork={t.fields.work}
+                    translationWork={t.ui.sections.work}
+                    translationTooltip={t.ui.tooltip}
                     monthDateOptions={monthDateOptions}
                     yearDateOptions={yearDateOptions}
                     onWorkChange={bindCollectionChange("work")}
                     onAddWork={bindAdd("work")}
                     onDeleteWork={bindDelete("work")}
-                    onCurrentPositionChange={onCurrentPositionChange}
                 />
             case "education":
                 return <EducationSection
-                    title={t.sections.common.education}
                     education={state.education}
-                    addButtonLabel={t.actions.addEducation}
-                    translationEducation={t.fields.education}
+                    translationEducation={t.ui.sections.education}
+                    translationTooltip={t.ui.tooltip}
+                    monthDateOptions={monthDateOptions}
                     yearDateOptions={yearDateOptions}
                     onEducationChange={bindCollectionChange("education")}
                     onAddEducation={bindAdd("education")}
@@ -113,10 +107,9 @@ export function BuilderPanel({
                 />
             case "courses":
                 return <CourseSection
-                    title={t.sections.common.courses}
                     courses={state.courses}
-                    addButtonLabel={t.actions.addCourse}
-                    translationCourse={t.fields.courses}
+                    translationCourse={t.ui.sections.courses}
+                    translationTooltip={t.ui.tooltip}
                     monthDateOptions={monthDateOptions}
                     yearDateOptions={yearDateOptions}
                     onCourseChange={bindCollectionChange("courses")}
@@ -125,39 +118,39 @@ export function BuilderPanel({
                 />
             case "skills":
                 return <SkillsSection
-                    title={t.sections.common.skills}
                     skills={state.skills}
-                    translationsSkill={t.fields.skills}
-                    translationsOption={t.options.skills}
-                    addButtonLabel={t.actions.addSkill}
+                    translationsSkill={t.ui.sections.skills}
+                    translationsOption={t.ui.options.skills}
+                    translationTooltip={t.ui.tooltip}
                     onSkillChange={bindCollectionChange("skills")}
                     onAddSkill={bindAdd("skills")}
+                    onReorderSkills={bindReorder("skills")}
                     onDeleteSkill={bindDelete("skills")}
                 />
             case "languages":
                 return <LanguagesSection 
-                    title={t.sections.common.languages}
                     languages={state.languages}
-                    translationsLanguage={t.fields.languages}
-                    translationsOption={t.options.language}
-                    addButtonLabel={t.actions.addLanguage}
+                    translationsLanguage={t.ui.sections.languages}
+                    translationsOption={t.ui.options.language}
+                    translationTooltip={t.ui.tooltip}
                     onLanguageChange={bindCollectionChange("languages")}
                     onAddLanguage={bindAdd("languages")}
+                    onReorderLanguages={bindReorder("languages")}
                     onDeleteLanguage={bindDelete("languages")}
                 />
             case "interests":
                 return <InterestsSection
-                    title={t.sections.common.interests}
-                    interests={state.basics.interest}
-                    translationsInterests={t.fields.interests}
-                    onInterestsChange={bindPersonalChange("interest")}
+                    interests={state.interests}
+                    translationsInterests={t.ui.sections.interests}
+                    onInterestsChange={bindCollectionChange("interests")}
+                    onAddInterests={bindAdd("interests")}
+                    onDeleteInterests={bindDelete("interests")}
                 />
             case "projects":
                 return <ProjectsSection
-                    title={t.sections.common.projects}
                     projects={state.projects}
-                    addButtonLabel={t.actions.addProject}
-                    translationsProjects={t.fields.project}
+                    translationsProjects={t.ui.sections.projects}
+                    translationTooltip={t.ui.tooltip}
                     onProjectChange={bindCollectionChange("projects")}
                     onAddProject={bindAdd("projects")}
                     onDeleteProject={bindDelete("projects")}
@@ -165,7 +158,9 @@ export function BuilderPanel({
         }
     }
 
-    return <div className="bg-[#ffffff] border-r-2 border-[#E2E8F0] p-6 print:hidden">
-        {renderContent()}
+    return <div className="card border border-gray-200 shadow-sm print:hidden">
+            <div className="flex flex-col h-full">
+                {renderContent()}
+            </div>    
     </div>
 }

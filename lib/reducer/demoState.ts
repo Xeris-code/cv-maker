@@ -5,21 +5,18 @@ import { initialState } from "@/lib/reducer";
 export const demoState: CvState = {
   ...initialState,
 
-  currentPosition: "Frontend Developer",
-
   basics: {
     ...initialState.basics,
     name: "Peter",
     surname: "Novák",
     mail: "peter.novak@email.com",
     portfolio: "https://github.com/Xeris-code",
+    position: "Frontend Developer",
     phone: "+421 900 123 456",
     adress_city: "Bratislava",
     adress_state: "Slovakia",
     summary:
       "Frontend developer focused on building clean, responsive and user-friendly web applications using React and TypeScript.",
-    interest:
-      "Cycling, coding side projects, UI/UX design, learning new technologies",
   },
 
   birth: {
@@ -81,15 +78,14 @@ export const demoState: CvState = {
     items: [
       {
         id: 1,
-        present: false,
         faculty: "Faculty of Informatics",
         university: "Slovak University of Technology",
         field: "Computer Science",
         city: "Bratislava",
         state: "Slovakia",
         degree: "Bachelor",
-        start: { year: 2017 },
-        end: { year: 2020 },
+        start: { month: 9, year: 2017 },
+        end: { month: 6, year: 2020 },
         description:
           "Focused on software development, algorithms and web technologies.",
       },
@@ -102,7 +98,7 @@ export const demoState: CvState = {
         id: 1,
         name: "React - The Complete Guide",
         org: "Udemy",
-        date: { month: 3, year: 2022 },
+        date: { month: 12, year: 2022 },
         description:
           "Learned advanced React concepts including hooks, state management and performance optimization.",
         url: ""

@@ -1,20 +1,21 @@
 import { useReducer, useEffect, useState } from "react";
 import { cvReducer, initialState } from "@/lib/reducer";
 import { translations } from "@/lib/i18n";
-import { Sidebar, BuilderPanel } from "../builder";
-import { WebLanguage, TemplateOption, AllowedTemplateType, MenuCategory, CollectionKey, BasicInformation, BirthDate, SingleUpdateAction, OnCollectionChange, CollectionItem, CvAction } from "@/lib/types";
-import { VisualClassicTemplate, VisualGraphicTemplate, VisualCentralizedTemplate, VisualInitialTemplate, VisualModernTemplate } from "@/components/templates";
+import { Sidebar, BuilderPanel } from "@/components/builder";
+import { TemplateOption, WebLanguageOptions } from "@/lib/types";
 import { PreviewPanel } from "@/components/preview";
-
-import { MainLayout, Header, TemplateSelector} from "@/components/app";
-import { MobileLayout } from "./MobileLayout";
-import { MobileHeader } from "./MobileHeader";
-import { MobileSelector } from "./MobileSelector";
-import { MobileMenuSwitcher } from "./MobileMenuSwticher";
+import { MainLayout, Header, MobileLayout, MobileHeader, MobileSelector, MobileMenuSwitcher} from "@/components/app";
+import { getSectionCompletion, getTotalCompletion } from "@/lib/helpers";
+import { useCvActions } from "@/lib/hooks";
+import {
+    VisualClassicTemplate, VisualGraphicTemplate, VisualCentralizedTemplate,
+    VisualInitialTemplate, VisualModernTemplate
+} from "@/components/templates";
 
 const STORAGE_KEY = "cv-maker-state"
 
 function useIsMobileDevice() {
+    
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -41,11 +42,44 @@ function useIsMobileDevice() {
 
 export function AppShell(){
 
+    const [scale, setScale] = useState(1);
     const [state, dispatch] = useReducer(cvReducer, initialState);
+
+    const t = translations[state.webLang];
+    const actions = useCvActions(dispatch)
+    const sectionCompletion = getSectionCompletion(state)
+    const totalCompletion = getTotalCompletion(state)
+    
     const [mobileView, setMobileView] = useState<"builder" | "preview">("preview");
     const [forceDesktop, setForceDesktop] = useState(false);
     const isMobile = useIsMobileDevice();
     const finalIsMobile = forceDesktop ? false : isMobile;
+
+    const templates: TemplateOption[] = [
+        { type: "classic", label: t.ui.templates.classic, visual: VisualClassicTemplate },
+        { type: "modern", label: t.ui.templates.modern, visual: VisualModernTemplate },
+        { type: "graphic", label: t.ui.templates.graphic, visual: VisualGraphicTemplate },
+        { type: "initial", label: t.ui.templates.initial, visual: VisualInitialTemplate },
+        { type: "centralized", label: t.ui.templates.centralized, visual: VisualCentralizedTemplate },
+      ];
+
+    const languages: WebLanguageOptions = [
+        { language: "en", name: t.ui.languages["en"] },
+        { language: "sk", name: t.ui.languages["sk"] },
+        { language: "de", name: t.ui.languages["de"] },
+    ]
+
+    const handlePrint = () => {
+        if (isMobile) {
+            setForceDesktop(true);
+            
+            setTimeout(() => {
+                window.print();
+            }, 400);
+        } else {
+            window.print();
+        }
+    };
 
     useEffect(() => {
         try {
@@ -85,8 +119,6 @@ export function AppShell(){
         } catch {}
     }, [state]);
 
-    const [scale, setScale] = useState(1);
-
     useEffect(() => {
         const update = () => {
             const widthScale = window.innerWidth / 794;
@@ -109,84 +141,6 @@ export function AppShell(){
         return () => window.removeEventListener("afterprint", afterPrint);
     }, []);
 
-    const t = translations[state.webLang];
-
-    const templates: TemplateOption[] = [
-        { type: "classic", label: t.templates.classic, visual: VisualClassicTemplate },
-        { type: "modern", label: t.templates.modern, visual: VisualModernTemplate },
-        { type: "graphic", label: t.templates.graphic, visual: VisualGraphicTemplate },
-        { type: "initial", label: t.templates.initial, visual: VisualInitialTemplate },
-        { type: "centralized", label: t.templates.centralized, visual: VisualCentralizedTemplate },
-      ];
-    
-    const handleLanguageChange = ( language: WebLanguage ) => { 
-        dispatch({ type: "SET", target: "webLang", value: language });
-    };
-    
-    const handleToggleTemplateSelector = () => {
-        dispatch({ type: "SWITCH", target: "templateSelector", value: !state.templateSelector });
-    };
-    
-    const handlePrint = () => {
-        if (isMobile) {
-            setForceDesktop(true);
-            
-            setTimeout(() => {
-                window.print();
-            }, 400);
-        } else {
-            window.print();
-        }
-    };
-
-    const handleDemo = () => {
-        dispatch({ type: "LOAD_DEMO" });
-    };
-
-    const handleReset = () => {
-        dispatch({ type: "CLEAR" });
-    };
-
-    const handleTemplateChange = ( template: AllowedTemplateType ) => {
-        dispatch({ type: "SET", target: "template", value: template });
-    };
-
-    const handleMenuChange = ( menu: MenuCategory ) => {
-        dispatch({ type: "SET", target: "menu", value: menu});
-    };
-
-    const handleCurrentPositionChange = ( value: string ) => {
-        dispatch({ type: "SET", target: "currentPosition", value: value});
-    };
-
-    const addToCollection = ( key: CollectionKey ) => {
-        dispatch({ type: "ADD", target: key });
-    };
-
-    function updateCollectionItem<T extends CollectionKey, F extends Extract<keyof CollectionItem<T>, string>>(
-        target: T, id: number, field: F, value: CollectionItem<T>[F]
-    ): CvAction {
-        const action: SingleUpdateAction<T, F> = { type: "UPDATE", target, id, field, value};
-        return action as CvAction;
-    };
-
-    const handleCollectionChange: OnCollectionChange = (target, id, field, value) => {
-        dispatch(updateCollectionItem(target, id, field, value))
-    };
-    
-    const deleteCollectionItem = ( key: CollectionKey, id: number ) => {
-        dispatch({ type: "DELETE", target: key, id: id });
-    };
-
-    const handlePersonalChange = ( field: keyof BasicInformation, value: BasicInformation[keyof BasicInformation]) => {
-        dispatch({ type: "SET_BASICS_FIELD", field: field, value: value });
-    };
-
-    const handleBirthChange = ( field: keyof BirthDate, value: BirthDate[keyof BirthDate]) => {
-        dispatch({ type: "SET_BIRTH_FIELD", field: field, value: value });
-    };
-
-
     if (isMobile === null) {
         return null;
     }
@@ -195,17 +149,17 @@ export function AppShell(){
         <MobileLayout
             header={
                 <MobileHeader
-                    appTitle={t.app.name}
-                    printButtonTitle={t.actions.exportPdf}
-                    demoTitle={t.actions.demo}
-                    resetTitle={t.actions.reset}
+                    appTitle={t.ui.app.name}
+                    printButtonTitle={t.ui.actions.printPDF}
+                    demoTitle={t.ui.actions.demo}
+                    resetTitle={t.ui.actions.reset}
                     language={state.webLang}
                     templateSelector={state.templateSelector}
-                    onLanguageChange={handleLanguageChange}
-                    onToggleTemplateSelector={handleToggleTemplateSelector}
+                    onLanguageChange={actions.handleLanguageChange}
+                    onToggleTemplateSelector={() => actions.handleToggleTemplateSelector(state)}
                     onPrint={handlePrint}
-                    onDemo={handleDemo}
-                    onReset={handleReset}
+                    onDemo={actions.handleDemo}
+                    onReset={actions.handleReset}
                 />
             }
             selector={
@@ -213,7 +167,7 @@ export function AppShell(){
                     templates={templates} 
                     selectorActive={state.templateSelector}
                     selectedTemplate={state.template}
-                    onTemplateChange={handleTemplateChange}
+                    onTemplateChange={actions.handleTemplateChange}
                 />
             }
         >
@@ -240,19 +194,19 @@ export function AppShell(){
     <>
         <MobileMenuSwitcher
         activeMenu={state.menu}
-        onMenuChange={handleMenuChange}
-        translations={t.sections.common}
+        onMenuChange={actions.handleMenuChange}
+        translations={t.ui.sections}
         />
 
         <BuilderPanel
         state={state}
         t={t}
-        onAdd={addToCollection}
-        onDelete={deleteCollectionItem}
-        onBirthChange={handleBirthChange}
-        onCurrentPositionChange={handleCurrentPositionChange}
-        onPersonalChange={handlePersonalChange}
-        onCollectionChange={handleCollectionChange}
+        onAdd={actions.handleAddToCollection}
+        onReorder={actions.handleReorder}
+        onDelete={actions.handleDeleteCollectionItem}
+        onBirthChange={actions.handleBirthChange}
+        onPersonalChange={actions.handlePersonalChange}
+        onCollectionChange={actions.handleCollectionChange}
         />
     </>
     )}
@@ -289,43 +243,37 @@ export function AppShell(){
     )
     : (<MainLayout 
             header = {
-                <Header 
-                    appTitle={t.app.name}
-                    appDescription={t.app.description}
-                    printButtonTitle={t.actions.exportPdf}
-                    demoTitle={t.actions.demo}
-                    resetTitle={t.actions.reset}
-                    language={state.webLang}
-                    templateSelector={state.templateSelector}
-                    onLanguageChange={handleLanguageChange}
-                    onToggleTemplateSelector={handleToggleTemplateSelector}
+                <Header
+                    appTranslations={t.ui.app}
+                    uiActions={t.ui.actions}
+                    uiLanguage={state.webLang}
+                    languageOptions={languages}
+                    completion={totalCompletion}
+                    onLanguageChange={actions.handleLanguageChange}
                     onPrint={handlePrint}
-                    onDemo={handleDemo}
-                    onReset={handleReset}
+                    onDemo={actions.handleDemo}
+                    onReset={actions.handleReset}
                 />}
             selector = {
-                <TemplateSelector 
-                    templates={templates} 
-                    selectorActive={state.templateSelector}
-                    selectedTemplate={state.template}
-                    onTemplateChange={handleTemplateChange}
-                />}
+                <></>}
             sidebar = {
                 <Sidebar
                     activeMenu={state.menu}
-                    translations={t.sections.common}
-                    onMenuChange={handleMenuChange}
+                    appTranslations={t.ui.app}
+                    translations={t.ui.sections}
+                    completion={sectionCompletion}
+                    onMenuChange={actions.handleMenuChange}
                 />}
         >
             <BuilderPanel
                 state={state}
                 t={t}
-                onAdd={addToCollection}
-                onDelete={deleteCollectionItem}
-                onBirthChange={handleBirthChange}
-                onCurrentPositionChange={handleCurrentPositionChange}
-                onPersonalChange={handlePersonalChange}
-                onCollectionChange={handleCollectionChange}
+                onAdd={actions.handleAddToCollection}
+                onReorder={actions.handleReorder}
+                onDelete={actions.handleDeleteCollectionItem}
+                onBirthChange={actions.handleBirthChange}
+                onPersonalChange={actions.handlePersonalChange}
+                onCollectionChange={actions.handleCollectionChange}
             />
             <PreviewPanel
                 state={state}

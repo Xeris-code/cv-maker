@@ -3,10 +3,11 @@ import { demoState } from "./demoState";
 import { initialState } from "./initialState";
 
 const factories: Factory = {
+    interests: (id: number) => ({ id: id, name: ""}),
     skills: (id: number) => ({ id: id, name: "", level: 0}),
     languages: (id: number) => ({ id: id, name: "", level: 0}),
     work: (id: number) => ({id: id, start: {month: 0, year: 0}, end: {month: 0, year: 0}, present: false, position: "", company: "", city: "", state: "", description: "",  tasks: [] }),
-    education: (id: number) => ({id: id, start: {year: 0}, end: {year: 0}, present: false, faculty: "", university: "", field: "", degree: "", city: "", state: "", description: ""}),
+    education: (id: number) => ({id: id, start: {month: 0, year: 0}, end: {month: 0, year: 0}, present: false, faculty: "", university: "", field: "", degree: "", city: "", state: "", description: ""}),
     courses: (id: number) => ({id: id, name: "", org: "", description: "", date: {month: 0, year: 0}, url: "" }),
     projects: (id: number) => ({id: id, name: "", description: "", tech: "", url: "" }),
 };
@@ -59,6 +60,9 @@ export function cvReducer(state: CvState, action: CvAction): CvState {
 
         case "LOAD_SAVED":
             return action.value;
+        
+        case "REORDER_COLLECTION":
+            return {...state, [action.target]: {...state[action.target], items: action.items}};
 
         default:
             return state;

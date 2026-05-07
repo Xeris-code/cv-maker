@@ -49,7 +49,7 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
                 </div>}
                 <div className="px-6">
                     {hasSkills && <>
-                        <SidebarHeading label={t.sections.common.skills}/>
+                        <SidebarHeading label={t.sections.common.skills.title}/>
                         <div className="mt-4 flex flex-col gap-3">
                             {skills.items.map((s) => (
                             <div key={s.id} className="grid grid-cols-[120px_1fr] items-center gap-3">
@@ -62,7 +62,7 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
                         </div>
                     </>}
                     {hasLanguages && <>
-                        <SidebarHeading label={t.sections.common.languages}/>
+                        <SidebarHeading label={t.sections.common.languages.title}/>
                         <div className="mt-4 flex flex-col gap-3">
                             {languages.items.map((s) => (
                             <div key={s.id} className="grid grid-cols-[120px_1fr] items-center gap-3">
@@ -75,7 +75,7 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
                         </div>
                     </>}
                     {basics.interest && <>
-                        <SidebarHeading label={t.sections.common.interests}/>
+                        <SidebarHeading label={t.sections.common.interests.title}/>
                         <p className="text-[12px] pt-3 break-words">
                             {basics.interest}
                         </p>

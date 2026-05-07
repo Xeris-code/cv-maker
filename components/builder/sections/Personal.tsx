@@ -1,138 +1,160 @@
-import { BasicInformation, FieldTranslations, DayOption, MonthOption, YearOption, BirthDate } from "@/lib/types";
-import { TextArea, LabeledInput, SectionTitle, ToggleButton, Label, DateSelectorWrapper, DateSelector, PhotoUpload } from "@/components/ui";
+import { BasicInformation, UiPersonalTranslations, DayOption, MonthOption, YearOption, BirthDate } from "@/lib/types";
+import { TextArea, ToggleButton, DateSelector, PhotoUpload, UiSectionHeader, UiInputField } from "@/components/ui";
 
 
 type PersonalSectionProps = {
-    title: string;
     birth: BirthDate;
     personal: BasicInformation;
-    translation: FieldTranslations;
+    translation: UiPersonalTranslations;
     dayDateOptions:  DayOption[];
     monthDateOptions: MonthOption[];
     yearDateOptions: YearOption[];
-    addButtonPhotoLabel: string;
     onBirthChange: (field: keyof BirthDate, value: BirthDate[keyof BirthDate]) => void;
     onPersonalChange: (field: keyof BasicInformation, value: BasicInformation[keyof BasicInformation]) => void;
     onPhotoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function PersonalSection({
-    title,
     birth,
     personal,
     translation,
     dayDateOptions,
     monthDateOptions,
     yearDateOptions,
-    addButtonPhotoLabel,
     onBirthChange,
     onPersonalChange,
     onPhotoChange,
 }: PersonalSectionProps){
 
-    const zeroNullConverter = (value: number): number | null => {
-        return value === 0 ? null: value
-    }
-
     return <>
-        <SectionTitle label={title}/>
-        <div className="flex flex-col pt-2 gap-3">
-            <LabeledInput
-                label={translation.firstName.name}
+        <UiSectionHeader
+            title={translation.title}
+            description={translation.description}
+        />
+        <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
+        <div className="grid grid-cols-2 pt-2 gap-y-5 gap-x-3">
+            <UiInputField
+                label={translation.fields.firstName.name}
                 value={personal.name}
-                placeholder={translation.firstName.placeholder}
-                onValueChange={ (e) => onPersonalChange("name", e.target.value)}
+                placeholder={translation.fields.firstName.placeholder}
+                onChange={ (e) => onPersonalChange("name", e.target.value)}
             />
-            <LabeledInput
-                label={translation.lastName.name}
+            <UiInputField
+                label={translation.fields.lastName.name}
                 value={personal.surname}
-                placeholder={translation.lastName.placeholder}
-                onValueChange={ (e) => onPersonalChange("surname", e.target.value)}
+                placeholder={translation.fields.lastName.placeholder}
+                onChange={ (e) => onPersonalChange("surname", e.target.value)}
             />
-            <ToggleButton
-                label={translation.title.name}
-                condition={personal.titleActive}
-                onChange={() => onPersonalChange("titleActive", !personal.titleActive)}
-            />
+            <div className="col-span-2 justify-end">
+                <ToggleButton
+                    label={translation.toggleButton}
+                    condition={personal.titleActive}
+                    onChange={() => onPersonalChange("titleActive", !personal.titleActive)}
+                />
+            </div>
+            
             {personal.titleActive
                 ? <>
-                    <LabeledInput
-                        label={translation.title.front.name}
+                    <UiInputField
+                        label={translation.fields.title.front.name}
                         value={personal.titleFront}
-                        placeholder={translation.title.front.placeholder}
-                        onValueChange={ (e) => onPersonalChange("titleFront", e.target.value)}
+                        placeholder={translation.fields.title.front.placeholder}
+                        onChange={ (e) => onPersonalChange("titleFront", e.target.value)}
                     />
-                    <LabeledInput
-                        label={translation.title.back.name}
+                    <UiInputField
+                        label={translation.fields.title.back.name}
                         value={personal.titleBack}
-                        placeholder={translation.title.back.placeholder}
-                        onValueChange={ (e) => onPersonalChange("titleBack", e.target.value)}
+                        placeholder={translation.fields.title.back.placeholder}
+                        onChange={ (e) => onPersonalChange("titleBack", e.target.value)}
                     />
                 </>
-                : <div className="border-b-1"></div>
+                : null
             }
-            <LabeledInput
-                label={translation.address.city.name}
+            <div className="col-span-2">
+                <UiInputField
+                    label={translation.fields.position.name}
+                    value={personal.position}
+                    placeholder={translation.fields.position.placeholder}
+                    onChange={ (e) => onPersonalChange("position", e.target.value)}
+                />
+            </div>
+
+            <UiInputField
+                label={translation.fields.address.city.name}
                 value={personal.adress_city}
-                placeholder={translation.address.city.placeholder}
-                onValueChange={ (e) => onPersonalChange("adress_city", e.target.value)}
+                placeholder={translation.fields.address.city.placeholder}
+                onChange={ (e) => onPersonalChange("adress_city", e.target.value)}
             />
-            <LabeledInput
-                label={translation.address.state.name}
+            <UiInputField
+                label={translation.fields.address.state.name}
                 value={personal.adress_state}
-                placeholder={translation.address.state.placeholder}
-                onValueChange={ (e) => onPersonalChange("adress_state", e.target.value)}
+                placeholder={translation.fields.address.state.placeholder}
+                onChange={ (e) => onPersonalChange("adress_state", e.target.value)}
             />
-            <Label label={translation.birth.name}/>
-            <DateSelectorWrapper wrapperClass="w-full flex justify-center gap-3">
-                <DateSelector
+
+            <UiInputField
+                label={translation.fields.email.name}
+                value={personal.mail}
+                placeholder={translation.fields.email.placeholder}
+                onChange={ (e) => onPersonalChange("mail", e.target.value)}
+            />
+            <UiInputField
+                label={translation.fields.phone.name}
+                value={personal.phone}
+                placeholder={translation.fields.phone.placeholder}
+                onChange={ (e) => onPersonalChange("phone", e.target.value)}
+            />
+
+            <div className="col-span-2">
+            <UiInputField
+                label={translation.fields.portfolio.name}
+                value={personal.portfolio}
+                placeholder={translation.fields.portfolio.placeholder}
+                onChange={ (e) => onPersonalChange("portfolio", e.target.value)}
+            />
+            </div>
+
+            <div className="col-span-2 flex flex-col gap-2">
+                <span className="text-[14px] text-gray-800">{translation.fields.birth.name}</span>
+                <div className="grid grid-cols-3 w-full gap-2">
+                    <DateSelector
                     value={birth.day}
                     options={dayDateOptions}
-                    onChange={ (e) => onBirthChange("day", zeroNullConverter(Number(e.target.value)))}
-                />
-                <div className="border-r-1 border-[#E2E8F0]"></div>
-                <DateSelector
-                    value={birth.month}
-                    options={monthDateOptions}
-                    onChange={ (e) => onBirthChange("month", zeroNullConverter(Number(e.target.value)))}
-                />
-                <div className="border-r-1 border-[#E2E8F0]"></div>
-                <DateSelector
-                    value={birth.year}
-                    options={yearDateOptions}
-                    onChange={ (e) => onBirthChange("year", zeroNullConverter(Number(e.target.value)))}
-                />
-            </DateSelectorWrapper>
-            <TextArea 
-                label={translation.summary.name}
+                    onChange={(value: number) => onBirthChange("day", value)}
+                    />
+                    <DateSelector
+                        value={birth.month}
+                        options={monthDateOptions}
+                        onChange={(value: number) => onBirthChange("month", value)}
+                    />
+                    <DateSelector
+                        value={birth.year}
+                        options={yearDateOptions}
+                        onChange={(value: number) => onBirthChange("year", value)}
+                    />
+                </div>
+            </div>
+            <div className="col-span-2">
+                <TextArea
+                label={translation.fields.summary.name}
                 value={personal.summary}
-                placeholder={translation.summary.placeholder}
+                placeholder={translation.fields.summary.placeholder}
                 onValueChange={ (e) => onPersonalChange("summary", e.target.value)}/>
-            <LabeledInput
-                label={translation.portfolio.name}
-                value={personal.portfolio}
-                placeholder={translation.portfolio.placeholder}
-                onValueChange={ (e) => onPersonalChange("portfolio", e.target.value)}
-            />
-            <LabeledInput
-                label={translation.email.name}
-                value={personal.mail}
-                placeholder={translation.email.placeholder}
-                onValueChange={ (e) => onPersonalChange("mail", e.target.value)}
-            />
-            <LabeledInput
-                label={translation.phone.name}
-                value={personal.phone}
-                placeholder={translation.phone.placeholder}
-                onValueChange={ (e) => onPersonalChange("phone", e.target.value)}
-            />
-            <PhotoUpload
+            </div>
+            
+            <div className="col-span-2">
+                <PhotoUpload
                 photo={personal.photo}
-                sectionLabel={translation.photo.name}
-                photoLabel={addButtonPhotoLabel}
-                placeholder={translation.photo.placeholder}
+                sectionLabel={translation.fields.photo.name}
+                photoLabel={translation.addPhoto}
+                placeholder={translation.fields.photo.placeholder}
                 onPhotoChange={onPhotoChange}
             />
+            </div>
+        </div>
+        </div>
+        <div className="flex items-center px-5 py-5 border-t-1 border-gray-200">
+        
         </div>
     </>
 }
