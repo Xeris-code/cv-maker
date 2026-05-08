@@ -2,15 +2,12 @@ import { useReducer, useEffect, useState } from "react";
 import { cvReducer, initialState } from "@/lib/reducer";
 import { translations } from "@/lib/i18n";
 import { Sidebar, BuilderPanel } from "@/components/builder";
-import { TemplateOption, WebLanguageOptions } from "@/lib/types";
+import { WebLanguageOptions } from "@/lib/types";
 import { PreviewPanel } from "@/components/preview";
-import { MainLayout, Header, MobileLayout, MobileHeader, MobileSelector, MobileMenuSwitcher} from "@/components/app";
+import { MainLayout, PrintDocument, Header, MobileLayout, MobileHeader, MobileSelector, MobileMenuSwitcher} from "@/components/app";
 import { getSectionCompletion, getTotalCompletion } from "@/lib/helpers";
 import { useCvActions } from "@/lib/hooks";
-import {
-    VisualClassicTemplate, VisualGraphicTemplate, VisualCentralizedTemplate,
-    VisualInitialTemplate, VisualModernTemplate
-} from "@/components/templates";
+import { getTemplates } from "@/components/templates";
 
 const STORAGE_KEY = "cv-maker-state"
 
@@ -55,13 +52,7 @@ export function AppShell(){
     const isMobile = useIsMobileDevice();
     const finalIsMobile = forceDesktop ? false : isMobile;
 
-    const templates: TemplateOption[] = [
-        { type: "classic", label: t.ui.templates.classic, visual: VisualClassicTemplate },
-        { type: "modern", label: t.ui.templates.modern, visual: VisualModernTemplate },
-        { type: "graphic", label: t.ui.templates.graphic, visual: VisualGraphicTemplate },
-        { type: "initial", label: t.ui.templates.initial, visual: VisualInitialTemplate },
-        { type: "centralized", label: t.ui.templates.centralized, visual: VisualCentralizedTemplate },
-      ];
+    const templates = getTemplates(t)
 
     const languages: WebLanguageOptions = [
         { language: "en", name: t.ui.languages["en"] },
@@ -183,7 +174,8 @@ export function AppShell(){
         <div className="w-[794px] h-[1123px]">
             <PreviewPanel
                 state={state}
-                t={t}
+                appTranslations={t.ui.app}
+                t={t.preview}
                 styleWrapper="bg-transparent p-0"
                 stylePage="cv-page"
             />
@@ -241,7 +233,8 @@ export function AppShell(){
   </div>
         </MobileLayout>
     )
-    : (<MainLayout 
+    : (<>
+        <MainLayout 
             header = {
                 <Header
                     appTranslations={t.ui.app}
@@ -277,8 +270,12 @@ export function AppShell(){
             />
             <PreviewPanel
                 state={state}
-                t={t}
+                appTranslations={t.ui.app}
+                t={t.preview}
             />
         </MainLayout>
+
+        <PrintDocument state={state} t={t.preview}/>
+        </>
     );
 };

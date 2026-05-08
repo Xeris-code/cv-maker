@@ -1,4 +1,21 @@
-import { VisualTemplateComponent } from "@/lib/types";
+import { VisualTemplateComponent, AllowedTemplateType, TemplateComponent, TemplateOption, TranslationSchema } from "@/lib/types";
+import { ClassicTemplate, ModernTemplate, GraphicTemplate, CentralizedTemplate } from "@/components/templates";
+
+export const templateMap: Record<AllowedTemplateType, TemplateComponent> = {
+    classic: ClassicTemplate,
+    modern: ModernTemplate,
+    graphic: GraphicTemplate,
+    centralized: CentralizedTemplate,
+};
+
+export function getTemplates(t: TranslationSchema): TemplateOption[] { 
+    return [
+    { type: "classic", label: t.ui.templates.classic, visual: VisualClassicTemplate },
+    { type: "modern", label: t.ui.templates.modern, visual: VisualModernTemplate },
+    { type: "graphic", label: t.ui.templates.graphic, visual: VisualGraphicTemplate },
+    { type: "centralized", label: t.ui.templates.centralized, visual: VisualCentralizedTemplate },
+    ];
+};
 
 export const VisualClassicTemplate: VisualTemplateComponent = (
     <div className="space-y-2">
@@ -65,25 +82,6 @@ export const VisualGraphicTemplate: VisualTemplateComponent = (
             <div className="h-8 rounded bg-gray-300" />
             <div className="h-8 rounded bg-gray-300" />
             <div className="h-8 rounded bg-gray-300" />
-        </div>
-    </div>
-);
-
-export const VisualInitialTemplate: VisualTemplateComponent = (
-    <div>
-        <div className="flex gap-1">
-            <div className="h-6 w-4/5 rounded bg-gray-800" />
-            <div className="h-6 rounded border-1 w-1/5 border-black mb-2"/>
-        </div>
-        <div className="grid grid-cols-3 gap-1">
-            <div className="h-2 col-span-2 rounded bg-gray-800" />
-            <div className="h-2 rounded bg-gray-800" />
-            <div className="h-2 col-span-2 rounded bg-gray-300" />
-            <div className="h-2 rounded bg-gray-300" />
-            <div className="h-2 col-span-2 rounded bg-gray-300" />
-            <div className="h-2 rounded bg-gray-300" />
-            <div className="h-2 col-span-2 rounded bg-gray-300" />
-            <div className="h-2 rounded bg-gray-300" />
         </div>
     </div>
 );

@@ -1,4 +1,4 @@
-import { CvState, LanguageLevel, SkillLevel, TranslationSchema } from "@/lib/types"
+import { CvState, LanguageLevel, PreviewTranslations, SkillLevel } from "@/lib/types"
 import { Earth, Mail, MapPin, Phone } from "lucide-react";
 import { Montserrat, Inter } from "next/font/google"
 import { TextList } from "../ModernTemplate";
@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 
 type CentralizedTemplateProps = {
     state: CvState;
-    t: TranslationSchema;
+    t: PreviewTranslations;
 }
 
 export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
@@ -26,12 +26,6 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
     const hasSkills = skills.items.length > 0;
     const hasLanguages = languages.items.length > 0;
     const hasAdress = basics.adress_city || basics.adress_state
-
-    const popisyDatumy = "#9CA3AF"
-    const accent = "#3B82F6"
-    const dividerLines = "#444444"
-    const accentLight = "#60A5FA"
-    const skillBar = "#3F3F46"
 
     type ContactItem = {
         icon: React.ReactNode;
@@ -133,13 +127,13 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                 <div className="border-r-4 border-[#444444] pt-10 px-6 text-end">
                     {basics.summary &&
                         <div className="flex flex-col justify-end">
-                            <h1 className="text-[14px] tracking-wider">{t.fields.summary.title.toUpperCase()}</h1>
+                            <h1 className="text-[14px] tracking-wider">{t.sections.pesonal.name.toUpperCase()}</h1>
                             <span className="mt-1 text-[11px] text-[#9CA3AF] break-words">{basics.summary}</span>
                         </div>
                     }
                     {hasSkills && 
                         <div className="mt-5 flex flex-col">
-                            <h1 className="text-[14px] tracking-wider">{t.sections.common.skills.title.toUpperCase()}</h1>
+                            <h1 className="text-[14px] tracking-wider">{t.sections.skills.name.toUpperCase()}</h1>
                             <div className="flex flex-col gap-2 mt-1">
                             {skills.items.map((s) => (
                                 <div key={s.id} className="flex flex-col gap-1">
@@ -152,7 +146,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                     }
                     {hasLanguages &&
                         <div className="mt-5">
-                            <h1 className="text-[14px] tracking-wider">{t.sections.common.languages.title.toUpperCase()}</h1>
+                            <h1 className="text-[14px] tracking-wider">{t.sections.languages.name.toUpperCase()}</h1>
                             <div className="flex flex-col gap-2 mt-1">
                             {languages.items.map((l) => (
                                 <div key={l.id} className="flex flex-col gap-1">
@@ -165,7 +159,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                     }
                     {hasPojects && 
                         <div className="mt-5">
-                            <h1 className="text-[14px] tracking-wider">{t.sections.common.projects.title.toUpperCase()}</h1>
+                            <h1 className="text-[14px] tracking-wider">{t.sections.projects.name.toUpperCase()}</h1>
                             <div className="flex flex-col gap-2 w-full items-end text-right mt-1">
                                 {projects.items.map((p) => (
                                     <div key={p.id}>
@@ -198,7 +192,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                 <div className="pt-10 px-6">
                     {hasWork && 
                         <div>
-                            <h1 className="text-[14px] tracking-wider">{t.sections.common.work.title.toUpperCase()}</h1>
+                            <h1 className="text-[14px] tracking-wider">{t.sections.work.name.toUpperCase()}</h1>
                             <div className="flex flex-col gap-2">
                                 {work.items.map((w) => (
                                     <div key={w.id}>
@@ -224,7 +218,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                             </div>
                         </div>}
                             {hasEducation && <div className="mt-5">
-                                <h1 className="text-[14px] tracking-wider">{t.sections.common.education.title.toUpperCase()}</h1>
+                                <h1 className="text-[14px] tracking-wider">{t.sections.education.name.toUpperCase()}</h1>
                                 <div className="flex flex-col gap-2">
                                     {education.items.map((e) => (
                                         <div key={e.id}>
@@ -250,7 +244,7 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                                 </div>
                             </div>}
                             {hasCourses && <div className="mt-5">
-                                <h1 className="text-[14px] tracking-wider">{t.sections.common.courses.title.toUpperCase()}</h1>
+                                <h1 className="text-[14px] tracking-wider">{t.sections.courses.name.toUpperCase()}</h1>
                                 <div className="flex flex-col gap-2">
                                     {courses.items.map((c) => (
                                         <div key={c.id}>
@@ -275,10 +269,10 @@ export function CentralizedTemplate({state, t}: CentralizedTemplateProps){
                                     ))}
                                 </div>
                             </div>}
-                            {basics.interest && <div className="mt-5">
-                                <h1 className="text-[14px] tracking-wider">{t.sections.common.interests.title.toUpperCase()}</h1>
+                            {state.interests.items.length > 0 && <div className="mt-5">
+                                <h1 className="text-[14px] tracking-wider">{t.sections.interests.name.toUpperCase()}</h1>
                                 <TextList
-                                    text={basics.interest}
+                                    text={state.interests.items.join(", ")}
                                     classList="list-disc pl-5 text-[12px] text-[#9CA3AF]"
                                 />
                             </div>}

@@ -1,6 +1,25 @@
 @import "tailwindcss";
 
-/* To stay */
+/* =========================================
+   ROOT
+========================================= */
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   font-family:
     Inter,
@@ -11,73 +30,165 @@ body {
     "Segoe UI Emoji",
     "Noto Color Emoji",
     sans-serif;
+
   line-height: 1.5;
   letter-spacing: -0.01em;
-  background: #F8FAFC;
-  color: #0F172A;
-  padding: 0;
-  height: 100vh;
+
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-.card {
-  background-color: #ffffff;
-  border-radius: var(--radius-xl);
-  height: 100%;
-  overflow-y: hidden;
-}
+/* =========================================
+   HELPERS
+========================================= */
 
-.noScroll{
+.noScroll {
   scrollbar-width: none;
 }
 
-.header {
-  height: 88px;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.noScroll::-webkit-scrollbar {
+  display: none;
 }
 
-.footer {
-  height: 40px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  text-align: center;
-}
+/* =========================================
+   LAYOUT
+========================================= */
 
 .app-shell {
   min-width: max-content;
   overflow: hidden;
   height: 100vh;
-  background: #F8FAFC;
+  background: #f8fafc;
 }
 
-.app-body-scroll{
+.app-body-scroll {
   overflow-x: auto;
   overflow-y: hidden;
 }
 
 .app-layout {
   display: grid;
+
   grid-template-columns:
-    280px minmax(380px, 520px) minmax(560px, 1fr);
+    280px
+    minmax(380px, 520px)
+    minmax(560px, 1fr);
+
   height: calc(100vh - 88px - 40px);
+
   min-height: 0;
+  min-width: 0;
+
   gap: 24px;
   padding: 15px;
 }
 
+/* =========================================
+   HEADER / FOOTER
+========================================= */
 
+.header {
+  height: 88px;
 
+  display: flex;
+  justify-content: space-between;
 
-/* To think about */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+  padding-inline: 20px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  background: white;
 }
 
+.footer {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.card {
+  background: white;
+
+  border-radius: 16px;
+
+  height: 100%;
+
+  overflow: hidden;
+}
+
+/* =========================================
+   PREVIEW
+========================================= */
+
+.preview-panel {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+  contain: layout size;
+
+  background: white;
+}
+
+/* =========================================
+   CV DOCUMENT
+========================================= */
+
+.cv-document {
+  position: relative;
+}
+
+/* =========================================
+   CV PAGE
+========================================= */
+
+.cv-page {
+  width: 794px;
+  min-height: 1123px;
+
+  background: white;
+
+  border-radius: 10px;
+
+  border: 2px solid #e2e8f0;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   PREVIEW PAGE SWITCHING
+========================================= */
+
+.preview-page {
+  display: none;
+}
+
+.preview-page.is-active {
+  display: block;
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -86,9 +197,16 @@ body {
   }
 }
 
+/* =========================================
+   PRINT
+========================================= */
 
+.print-document {
+  display: none;
+}
 
 @media print {
+
   @page {
     size: A4;
     margin: 0;
@@ -96,12 +214,12 @@ body {
 
   html,
   body {
-    width: 210mm;
-    height: 297mm;
     margin: 0 !important;
     padding: 0 !important;
+
     background: white !important;
-    overflow: hidden !important;
+
+    overflow: visible !important;
   }
 
   body {
@@ -109,71 +227,59 @@ body {
     print-color-adjust: exact;
   }
 
-  /* Skry úplne všetko */
-  body * {
-    visibility: hidden !important;
+  /* ======================================
+     SKRY CELÚ APPKU
+  ====================================== */
+
+  .app-shell {
+    display: none !important;
   }
 
-  /* Zobraz iba CV */
-  .cv-page,
-  .cv-page * {
-    visibility: visible !important;
-  }
+  /* ======================================
+     ZOBRAZ IBA PRINT DOCUMENT
+  ====================================== */
 
-  .cv-page {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
+  .print-document {
+    display: block !important;
+
     width: 210mm !important;
-    transform: none !important;
-    min-width: 210mm !important;
-    max-width: 210mm !important;
 
-    margin: 0 !important;
-    padding: 0 !important;
+    background: white !important;
+  }
+
+  .print-page {
+    width: 210mm !important;
+    height: 297mm !important;
+
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+
+    overflow: hidden !important;
+
+    background: white !important;
+
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-page > * {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* ======================================
+     ODSTRÁŇ SCREEN STYLING
+  ====================================== */
+
+  .print-page .cv-page {
+    width: 210mm !important;
+    height: 297mm !important;
+
+    min-height: 297mm !important;
 
     border: none !important;
     border-radius: 0 !important;
+
     box-shadow: none !important;
-    background: white !important;
-
-    aspect-ratio: auto !important;
-  }
-
-  .header,
-  .app-shell,
-  .app-layout,
-  .preview-panel,
-  .no-print {
-    margin: 0 !important;
-    padding: 0 !important;
-    min-height: auto !important;
-    min-width: auto !important;
-    background: transparent !important;
-    border: none !important;
   }
 }
-
-
-
-.preview-panel {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  height: 100%;
-  min-height: 0;
-  overflow: hidden;
-}
-
-.cv-page {
-  width: 794px;
-  min-height: 1123px;
-  background: #ffffff;
-  border-radius: 10px;
-  border: solid 2px #E2E8F0;
-  box-shadow: 10px 10px 84px -7px rgba(0, 0, 0, 0.19);
-  overflow: hidden;
-}
-
-

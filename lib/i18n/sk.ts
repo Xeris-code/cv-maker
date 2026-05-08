@@ -6,6 +6,7 @@ export const sk = {
       name: "CV Maker",
       description: "Vytvorte si profesionálny životopis rýchlo a zadarmo.",
       progressBar: "vyplnené",
+      page: "Strana",
       tips: {
         title: "Pro Tip",
         items: [
@@ -305,5 +306,37 @@ export const sk = {
     },
   },
 
-  preview: {},
+  preview: {
+        sections: {
+            pesonal: {
+                name: "Profile",
+            },
+            contacts: {
+                name: "Contacts",
+            },
+            skills: {
+                name: "Skills",
+            },
+            languages: {
+                name: "Langauges",
+            },
+            interests: {
+                name: "Interests & Hobbies",
+            },
+            work: {
+                name: "Work Experience",
+                present: "Currently",
+            },
+            education: {
+                name: "Education",
+            },
+            courses: {
+                name: "Courses / Certificates",
+            },
+            projects: {
+                name: "Projects",
+            }
+        },
+    },
+
 } satisfies TranslationSchema;

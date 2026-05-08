@@ -5,6 +5,7 @@ export const en = {
             name: "CV Maker",
             description: "Create your professional CV quickly and for free.",
             progressBar: "completed",
+            page: "Page",
             tips: {
                 title: "Pro Tip",
                 items:[
@@ -308,7 +309,36 @@ export const en = {
     },
 
     preview: {
-        
+        sections: {
+            pesonal: {
+                name: "Profile",
+            },
+            contacts: {
+                name: "Contacts",
+            },
+            skills: {
+                name: "Skills",
+            },
+            languages: {
+                name: "Langauges",
+            },
+            interests: {
+                name: "Interests & Hobbies",
+            },
+            work: {
+                name: "Work Experience",
+                present: "Currently",
+            },
+            education: {
+                name: "Education",
+            },
+            courses: {
+                name: "Courses / Certificates",
+            },
+            projects: {
+                name: "Projects",
+            }
+        },
     },
 
 };

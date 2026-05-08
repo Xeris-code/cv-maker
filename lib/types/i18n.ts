@@ -45,4 +45,4 @@ export type UiCoursesTranslations = TranslationSchema["ui"]["sections"]["courses
 export type UiProjectsTranslations = TranslationSchema["ui"]["sections"]["projects"]
 export type UiInterestsTranslations = TranslationSchema["ui"]["sections"]["interests"]
 
-
+export type PreviewTranslations = TranslationSchema["preview"]

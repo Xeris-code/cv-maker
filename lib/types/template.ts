@@ -1,9 +1,9 @@
-import { TranslationSchema } from "./i18n";
+import { PreviewTranslations } from "./i18n";
 import { CvState } from "@/lib/types";
 
 export type TemplateComponent = React.FC<{
     state: CvState;
-    t: TranslationSchema;
+    t: PreviewTranslations;
 }>;
 
 export type VisualTemplateComponent = React.ReactNode
@@ -12,7 +12,6 @@ export type AllowedTemplateType =
     | "classic"
     | "modern"
     | "graphic"
-    | "initial"
     | "centralized"
 
 export type TemplateOption = {

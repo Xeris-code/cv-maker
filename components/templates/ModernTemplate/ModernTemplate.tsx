@@ -1,4 +1,4 @@
-import { CvState, TranslationSchema } from "@/lib/types"
+import { CvState, PreviewTranslations } from "@/lib/types"
 
 import { Inter } from "next/font/google";
 import { SkillBar, LanguageBar, SidebarHeading, MainHeader, WorkTimeline, EducationTimeline, CoursesBlock, ProfileBlock } from "@/components/templates/ModernTemplate";
@@ -8,16 +8,16 @@ const inter = Inter({ subsets: ["latin"] });
 
 type ModernTemplateProps = {
     state: CvState;
-    t: TranslationSchema
+    t: PreviewTranslations
 }
 
 export function ModernTemplate({state, t}: ModernTemplateProps){
 
-    const { currentPosition, basics, skills, languages, work, education, courses, projects } = state
+    const { basics, skills, interests, languages, work, education, courses, projects } = state
 
     const hasSummary = basics.summary
     const hasTitle = basics.titleFront || basics.titleBack
-    const hasHeader = basics.name || basics.surname || currentPosition
+    const hasHeader = basics.name || basics.surname || basics.position
     const hasName = basics.name || basics.surname
     const hasAdress = basics.adress_state || basics.adress_city
     const hasSkills = skills.items.length > 0
@@ -28,12 +28,12 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
     const hasProjects = projects.items.length > 0
 
     return (
-        <div className={`flex min-h-[1123px] ${inter.className}`}>
+        <div className={`flex h-full w-full template-root ${inter.className}`}>
             
             <div className="bg-white text-[#0F172A] flex flex-col h-full w-full">
                 <div className="flex-1 pb-10">
                     {hasHeader &&
-                    <MainHeader basics={basics} currentPosition={currentPosition} hasName={hasName} hasAdress={hasAdress} hasTitle={hasTitle}/>}
+                    <MainHeader basics={basics} currentPosition={basics.position} hasName={hasName} hasAdress={hasAdress} hasTitle={hasTitle}/>}
                     <div className="flex flex-col gap-3 px-5">
                         {hasSummary && <ProfileBlock summary={basics.summary} t={t}/>}
                         {hasWork && <WorkTimeline work={work} t={t} />}
@@ -49,7 +49,7 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
                 </div>}
                 <div className="px-6">
                     {hasSkills && <>
-                        <SidebarHeading label={t.sections.common.skills.title}/>
+                        <SidebarHeading label={t.sections.skills.name}/>
                         <div className="mt-4 flex flex-col gap-3">
                             {skills.items.map((s) => (
                             <div key={s.id} className="grid grid-cols-[120px_1fr] items-center gap-3">
@@ -62,7 +62,7 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
                         </div>
                     </>}
                     {hasLanguages && <>
-                        <SidebarHeading label={t.sections.common.languages.title}/>
+                        <SidebarHeading label={t.sections.languages.name}/>
                         <div className="mt-4 flex flex-col gap-3">
                             {languages.items.map((s) => (
                             <div key={s.id} className="grid grid-cols-[120px_1fr] items-center gap-3">
@@ -74,10 +74,12 @@ export function ModernTemplate({state, t}: ModernTemplateProps){
                             ))}
                         </div>
                     </>}
-                    {basics.interest && <>
-                        <SidebarHeading label={t.sections.common.interests.title}/>
+                    {interests.items.length > 0 && <>
+                        <SidebarHeading label={t.sections.interests.name}/>
                         <p className="text-[12px] pt-3 break-words">
-                            {basics.interest}
+                            {Array(interests.items.map((i) => (
+                                ` ${i.name}`
+                            ))).join(" ,")}
                         </p>
                     </>}
                 </div>

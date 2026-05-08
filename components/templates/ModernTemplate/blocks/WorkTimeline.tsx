@@ -1,9 +1,9 @@
 
-import { CvState, TranslationSchema } from "@/lib/types";
+import { CvState, PreviewTranslations } from "@/lib/types";
 import { TextList } from "@/components/templates/ModernTemplate/blocks";
 
 export function WorkTimeline(
-    { work, t }: { work: CvState["work"]; t: TranslationSchema }
+    { work, t }: { work: CvState["work"]; t: PreviewTranslations }
 ) {
 
     function formatWorkDate(date: { month: number; year: number }) {
@@ -17,7 +17,7 @@ export function WorkTimeline(
     
     return (
         <section className="px-5">
-        <h1 className="font-semibold mb-2 mt-4">{t.sections.common.work.title.toUpperCase()} </h1>
+        <h1 className="font-semibold mb-2 mt-4">{t.sections.work.name.toUpperCase()} </h1>
 
         <div className="mt-4 flex flex-col gap-4">
             {work.items.map((item) => (
@@ -47,7 +47,7 @@ export function WorkTimeline(
                             <span>|</span>
                             <span>
                             {formatWorkDate(item.start)} {" - "}
-                            {item.present ? t.fields.work.present : formatWorkDate(item.end)}
+                            {item.present ? t.sections.work.present : formatWorkDate(item.end)}
                             </span>
                         </>
                         )}

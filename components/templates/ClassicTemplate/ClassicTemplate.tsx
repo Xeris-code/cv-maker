@@ -1,8 +1,8 @@
-import { CvState, TranslationSchema } from "@/lib/types"
+import { CvState, PreviewTranslations } from "@/lib/types"
 
 type ClassicTemplateProps = {
     state: CvState;
-    t: TranslationSchema;
+    t: PreviewTranslations;
 }
 
 export function ClassicTemplate({state, t}: ClassicTemplateProps){

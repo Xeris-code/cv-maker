@@ -1,8 +1,7 @@
-
-import { TranslationSchema } from "@/lib/types";
+import { PreviewTranslations } from "@/lib/types";
 
 export function ProfileBlock(
-    { summary, t }: { summary: string; t: TranslationSchema }
+    { summary, t }: { summary: string; t: PreviewTranslations }
 ) {
 
     

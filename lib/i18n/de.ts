@@ -6,6 +6,7 @@ export const de = {
       name: "CV Maker",
       description: "Erstellen Sie schnell und kostenlos Ihren professionellen Lebenslauf.",
       progressBar: "vollendet",
+      page: "Page",
       tips: {
         title: "Pro Tipp",
         items: [
@@ -305,5 +306,37 @@ export const de = {
     },
   },
 
-  preview: {},
+  preview: {
+        sections: {
+            pesonal: {
+                name: "Profile",
+            },
+            contacts: {
+                name: "Contacts",
+            },
+            skills: {
+                name: "Skills",
+            },
+            languages: {
+                name: "Langauges",
+            },
+            interests: {
+                name: "Interests & Hobbies",
+            },
+            work: {
+                name: "Work Experience",
+                present: "Currently",
+            },
+            education: {
+                name: "Education",
+            },
+            courses: {
+                name: "Courses / Certificates",
+            },
+            projects: {
+                name: "Projects",
+            }
+        },
+    },
+
 } satisfies TranslationSchema;
