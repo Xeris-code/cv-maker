@@ -176,8 +176,6 @@ export function AppShell(){
                 state={state}
                 appTranslations={t.ui.app}
                 t={t.preview}
-                styleWrapper="bg-transparent p-0"
-                stylePage="cv-page"
             />
           </div>
         </div>
