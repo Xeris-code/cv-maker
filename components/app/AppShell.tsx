@@ -50,7 +50,7 @@ export function AppShell(){
     const [mobileView, setMobileView] = useState<"builder" | "preview">("preview");
     const [forceDesktop, setForceDesktop] = useState(false);
     const isMobile = useIsMobileDevice();
-    const finalIsMobile = forceDesktop ? false : isMobile;
+    const finalIsMobile = false /*forceDesktop ? false : isMobile;*/
 
     const templates = getTemplates(t)
 
