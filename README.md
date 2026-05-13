@@ -19,9 +19,14 @@ Peter Cisovsky
 
 ## 🎯 Future Improvements
 - Improve validation
-- Add more templates
+- Improve language translations
+- Add more templates / Template switcher
 - Sidebar spliting
 - Better mobile support
+- Export to json file
+- Dark mode
+- Preview feature
+- AI helper / AI summary filler
 
 ## 🛠️ Tech Stack
 
