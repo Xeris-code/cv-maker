@@ -1,19 +1,40 @@
-import { CvState, PreviewTranslations } from "@/lib/types";
-import { templateMap } from "../templates";
+import { templateMap } from "@/components/templates";
+import {
+  CvState,
+  PreviewTranslations,
+} from "@/lib/types";
 
-export function PrintDocument ({ state, t } : {
-    state: CvState;
-    t: PreviewTranslations;
-}) {
-    const Template = templateMap[state.template];
+import { useTemplatePages } from "@/lib/helpers";
 
-    return (
-        <div className="print-document">
-            <div className="print-page">
-                <div className="cv-page print-cv-page">
-                    <Template state={state} t={t}/>
-                </div>
-            </div>
-        </div>
-    )
+type Props = {
+  state: CvState;
+  t: PreviewTranslations;
+};
+
+export function PrintDocument({
+  state,
+  t,
+}: Props) {
+
+  const Template = templateMap[state.template];
+
+  const { pages, measurer } =
+    useTemplatePages(Template, state, t);
+
+  return (
+    <>
+      {measurer}
+
+      <div className="print-root hidden print:block">
+        {pages.map((page, index) => (
+          <div
+            key={index}
+            className="print-page"
+          >
+            {page}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }

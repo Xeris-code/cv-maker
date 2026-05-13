@@ -307,36 +307,36 @@ export const de = {
   },
 
   preview: {
-        sections: {
-            pesonal: {
-                name: "Profile",
-            },
-            contacts: {
-                name: "Contacts",
-            },
-            skills: {
-                name: "Skills",
-            },
-            languages: {
-                name: "Langauges",
-            },
-            interests: {
-                name: "Interests & Hobbies",
-            },
-            work: {
-                name: "Work Experience",
-                present: "Currently",
-            },
-            education: {
-                name: "Education",
-            },
-            courses: {
-                name: "Courses / Certificates",
-            },
-            projects: {
-                name: "Projects",
-            }
+    sections: {
+        pesonal: {
+            name: "Profil",
         },
+        contacts: {
+            name: "Kontakte",
+        },
+        skills: {
+            name: "Fähigkeiten",
+        },
+        languages: {
+            name: "Sprachen",
+        },
+        interests: {
+            name: "Interessen & Hobbys",
+        },
+        work: {
+            name: "Berufserfahrung",
+            present: "Aktuell",
+        },
+        education: {
+            name: "Ausbildung",
+        },
+        courses: {
+            name: "Kurse / Zertifikate",
+        },
+        projects: {
+            name: "Projekte",
+        }
     },
+  },
 
 } satisfies TranslationSchema;

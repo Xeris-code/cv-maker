@@ -2,7 +2,7 @@
 
 Simple CV builder built with React and TypeScript.
 
-![alt text]({F09E3B8A-782A-4E9B-9B6F-5124E7C2D58A}.png)
+![alt text]({51DE17FB-6CBA-4DF6-86D1-1762222E38C5}.png)
 
 ## 👤 Author
 
@@ -11,7 +11,7 @@ Peter Cisovsky
 ## 🚀 Features
 
 - Create and edit CV sections (Personal, Work, Education, Skills, etc.)
-- Multiple templates
+- Currently only one template is available.
 - Language switch (EN / SK / DE)
 - Live preview
 - Print to PDF
@@ -20,7 +20,7 @@ Peter Cisovsky
 ## 🎯 Future Improvements
 - Improve validation
 - Add more templates
-- Export as PDF file (server-side)
+- Sidebar spliting
 - Better mobile support
 
 ## 🛠️ Tech Stack
@@ -33,7 +33,7 @@ Peter Cisovsky
 - AppShell – main state and layout
 - BuilderPanel – form sections
 - PreviewPanel – CV preview
-- sections/ – individual form sections
+- templates/ – individual template blocks and pages
 - ui/ – reusable components
 - lib/ – types, reducer, helpers
 

@@ -307,36 +307,36 @@ export const sk = {
   },
 
   preview: {
-        sections: {
-            pesonal: {
-                name: "Profile",
-            },
-            contacts: {
-                name: "Contacts",
-            },
-            skills: {
-                name: "Skills",
-            },
-            languages: {
-                name: "Langauges",
-            },
-            interests: {
-                name: "Interests & Hobbies",
-            },
-            work: {
-                name: "Work Experience",
-                present: "Currently",
-            },
-            education: {
-                name: "Education",
-            },
-            courses: {
-                name: "Courses / Certificates",
-            },
-            projects: {
-                name: "Projects",
-            }
+    sections: {
+        pesonal: {
+            name: "Profil",
         },
+        contacts: {
+            name: "Kontakty",
+        },
+        skills: {
+            name: "Zručnosti",
+        },
+        languages: {
+            name: "Jazyky",
+        },
+        interests: {
+            name: "Záujmy a hobby",
+        },
+        work: {
+            name: "Pracovné skúsenosti",
+            present: "Súčasnosť",
+        },
+        education: {
+            name: "Vzdelanie",
+        },
+        courses: {
+            name: "Kurzy / Certifikáty",
+        },
+        projects: {
+            name: "Projekty",
+        }
     },
+  },
 
 } satisfies TranslationSchema;

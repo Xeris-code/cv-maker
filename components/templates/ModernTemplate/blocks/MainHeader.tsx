@@ -4,22 +4,21 @@ import { Phone, Mail, MapPin, Earth } from "lucide-react";
 
 const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"] });
 
-export function MainHeader({ basics, currentPosition, hasName, hasAdress, hasTitle }: {
+export function MainHeader({ basics, currentPosition, hasName, hasAdress }: {
         basics: CvState["basics"];
         currentPosition: string;
         hasName: string;
         hasAdress: string;
-        hasTitle: string;
     }) {
         const address = [basics.adress_city, basics.adress_state]
             .filter(Boolean)
             .join(", ");
 
         return (
-            <div className="px-8 pt-8 pb-4">
+            <div className="px-4">
             
             {hasName && <h1 className={`${poppins.className} text-[36px] font-bold leading-none tracking-wider text-[#0F172A]`}>
-                {basics.titleFront} {basics.name} {basics.surname}{basics.titleBack ? "," : ""} {basics.titleBack}
+                {basics.titleActive && basics.titleFront} {basics.name} {basics.surname}{basics.titleBack && basics.titleActive ? "," : ""} {basics.titleActive && basics.titleBack}
             </h1>}
 
             {currentPosition && (
