@@ -26,7 +26,7 @@ export function ToggleButton({
 
     return <div className={styles.wrapper}>
             <div className="flex justify-start gap-2">
-                <label className="text-[14px] text-[#475569]">{label}</label>
+                <label className="text-[14px] text-gray-800">{label}</label>
                 <button className={`${styles.button} ${condition ? styles.buttonActive : styles.buttonNotActive}`} onClick={onChange}>
                     <div className={`${styles.pointer} ${condition ? styles.pointerActive : styles.pointerNotActive}`} />
                 </button>

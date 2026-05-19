@@ -135,7 +135,7 @@ export const sk = {
         description: "Pridajte svoje pracovné skúsenosti a pozície.",
         add: "Pridať skúsenosť",
         items: "pozícií",
-        present: "Súčasnosť",
+        present: "Súčastnosť",
         from: "Od",
         end: "Do",
         fields: {
@@ -325,7 +325,7 @@ export const sk = {
         },
         work: {
             name: "Pracovné skúsenosti",
-            present: "Súčasnosť",
+            present: "Súčastnosť",
         },
         education: {
             name: "Vzdelanie",

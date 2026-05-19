@@ -1,5 +1,5 @@
 import { WorkExperience, UiWorkTranslations, TooltipTranslations, MonthOption, YearOption } from "@/lib/types"
-import { UiInputField, UiTooltip, CheckButton, DateSelector, UiTextArea } from "@/components/ui"
+import { UiInputField, UiTooltip, CheckButton, DateSelector, UiTextArea, ToggleButton } from "@/components/ui"
 
 type WorkEditingCardProps = {
     work: WorkExperience;
@@ -40,12 +40,14 @@ export function WorkEditingCard({
             onChange={e => onWorkChange(work.id, "city", e.target.value)}
         />
 
+        
         <UiInputField
             label={t.fields.state.name}
             value={work.state}
             placeholder={t.fields.state.placeholder}
             onChange={e => onWorkChange(work.id, "state", e.target.value)}
         />
+
 
         <div className="flex flex-col gap-2">
             <span className="text-[14px] text-gray-800">{t.from}</span>
@@ -63,6 +65,12 @@ export function WorkEditingCard({
             </div>
         </div>
 
+        <ToggleButton
+            label={t.present}
+            condition={work.present}
+            onChange={() => onWorkChange(work.id, "present", !work.present)}
+        />
+        {!work.present &&
         <div className="flex flex-col gap-2">
             <span className="text-[14px] text-gray-800">{t.end}</span>
             <div className="grid grid-cols-2 gap-2">
@@ -77,7 +85,7 @@ export function WorkEditingCard({
                     onChange={(value: number) => onWorkChange(work.id, "end", {month: work.end.month, year: value})}
                 />
             </div>
-        </div>
+        </div>}
 
         <UiTextArea
             label={t.fields.describe.name}
