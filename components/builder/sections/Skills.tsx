@@ -52,7 +52,7 @@ export function SkillsSection({
         <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
             <div className={`flex flex-col gap-5 p-5 ${draggingId !== null ? "select-none cursor-grab active:cursor-grabbing": ""}`}>
                 {skills.items.map((skill) => (
-                    <div key={skill.id} ref={(el) => {itemRefs.current[skill.id] = el}} className={`grid grid-cols-[max-content_1fr_1fr_max-content] justify-between gap-2 items-center w-full pl-1 pr-2 py-3 ring-1 ring-gray-200 rounded-lg ${draggingId === skill.id ? "opacity-50 scale-[0.98" : ""}`}>
+                    <div key={skill.id} ref={(el) => {itemRefs.current[skill.id] = el}} className={`grid grid-cols-[max-content_1fr_1fr_max-content] justify-between gap-2 items-center w-full pl-1 pr-2 py-3 ring-1 ring-gray-200 rounded-lg ${draggingId === skill.id ? "opacity-50 scale-[0.98]" : ""}`}>
                         <GripVertical onMouseDown={() => {handleDragStart(skill.id)}} className="size-6 text-gray-300 cursor-grab"/>
                         <input className="w-full text-[12px] p-1 border border-gray-200 rounded-lg px-3 py-2 transition hover:bg-[#F8FAFC] hover:border-blue-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" value={skill.name} placeholder={translationsSkill.placeholder} onChange={(e) => onSkillChange(skill.id, "name", e.target.value)}/>
                         <Selector 

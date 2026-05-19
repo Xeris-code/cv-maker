@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AddButton, UiSectionHeader } from "@/components/ui";
 import { WorkExperience, CollectionState, UiWorkTranslations, YearOption, MonthOption, TooltipTranslations } from "@/lib/types";
 import { WorkEditingCard, WorkPreviewCard } from "./cards";
+import { useReorderList } from "@/lib/hooks";
 
 type WorkSectionProps = {
     work: CollectionState<WorkExperience>;
@@ -12,6 +13,7 @@ type WorkSectionProps = {
     onWorkChange: (id: number, field: keyof WorkExperience, value: WorkExperience[keyof WorkExperience]) => void;
     onAddWork: () => void;
     onDeleteWork: (id: number) => void;
+    onReorderSkills: (items: WorkExperience[]) => void;
 };
 
 export function WorkSection({
@@ -23,9 +25,16 @@ export function WorkSection({
     onWorkChange,
     onAddWork,
     onDeleteWork,
+    onReorderSkills,
 }: WorkSectionProps){
 
     const [editingId, setEditingId] = useState< number | null >(null);
+
+    const {
+            draggingId,
+            itemRefs,
+            handleDragStart,
+        } = useReorderList(work.items, onReorderSkills)
 
     return <>
             <UiSectionHeader
@@ -35,7 +44,7 @@ export function WorkSection({
                 itemLabel={translationWork.items}
             />
             <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
-            <div className="flex flex-col gap-5 p-5">
+            <div className={`flex flex-col gap-5 p-5 ${draggingId !== null ? "select-none cursor-grab active:cursor-grabbing": ""}`}>
                 {work.items.map((w) => (
                     (editingId === w.id)
                         ? <WorkEditingCard
@@ -49,17 +58,20 @@ export function WorkSection({
                             onWorkChange={onWorkChange}
                         />
                         : <WorkPreviewCard
+                            ref={(el) => {itemRefs.current[w.id] = el}}
                             key={w.id}
                             work={w}
                             months={monthDateOptions}
                             translationTooltip={translationTooltip}
+                            dragging={draggingId===w.id}
                             onEdit={() => setEditingId(w.id)}
-                            onDeleteWork={onDeleteWork}  
+                            onDeleteWork={onDeleteWork}
+                            handleDrag={handleDragStart}
                         />
                 ))}
             </div>
         </div>
-            <div className="flex items-center px-5 py-5 border-t-1 border-gray-200">
+            <div className="flex items-center px-5 py-5 border-t border-gray-200">
                 <AddButton
                     label={`+ ${translationWork.add}`}
                     onClick={

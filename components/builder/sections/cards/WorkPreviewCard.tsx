@@ -1,17 +1,21 @@
 import { WorkExperience, MonthOption, TooltipTranslations } from "@/lib/types";
 import { UiTooltip, EditButton, BinButton, UiTextList } from "@/components/ui";
-import { MapPin, Calendar, Minus } from "lucide-react";
+import { MapPin, Calendar, Minus, GripHorizontal } from "lucide-react";
+import { Ref } from "react";
 
 type WorkPreviewCardProps = {
     work: WorkExperience;
     months: MonthOption[];
     translationTooltip: TooltipTranslations;
+    dragging: boolean;
+    ref: Ref<HTMLDivElement>;
     onEdit: () => void;
     onDeleteWork: (id: number) => void;
+    handleDrag: (id: number) => void;
 }
 
 export function WorkPreviewCard({
-    work, months, translationTooltip, onEdit, onDeleteWork
+    work, months, translationTooltip, ref, dragging, onEdit, onDeleteWork, handleDrag
 }: WorkPreviewCardProps){
     
     const hasAdress = work.city || work.state;
@@ -19,12 +23,13 @@ export function WorkPreviewCard({
     const hasEndDate = work.end.month !== 0 && work.end.year !== 0;
     const hasDate = hasStartDate && hasEndDate;
 
-    return (<div className="ring-1 ring-gray-200 rounded-lg p-3">
+    return (<div ref={ref} className={`ring-1 ring-gray-200 rounded-lg p-3 ${dragging ? "opacity-50 scale-[0.98]" : ""}`}>
                 <div className="flex justify-between">
                     <div className="flex flex-col">
                         <span className="text-[14px] font-semibold">{work.position}</span>
                     </div>
                     <div className="flex gap-3 h-6">
+                        <GripHorizontal onMouseDown={() => handleDrag(work.id)} className="size-6 text-gray-300 cursor-grab"/>
                         <UiTooltip label={translationTooltip.edit}>
                             <EditButton onClick={() => onEdit()}/>
                         </UiTooltip>

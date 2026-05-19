@@ -54,7 +54,7 @@ export function LanguagesSection({
         <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
             <div className={`flex flex-col gap-5 p-5 ${draggingId !== null ? "select-none cursor-grab active:cursor-grabbing": ""}`}>
                 {languages.items.map((language) => (
-                    <div key={language.id} ref={(el) => {itemRefs.current[language.id] = el}} className={`grid grid-cols-[max-content_1fr_1fr_max-content] justify-between gap-2 items-center w-full pl-1 pr-2 py-3 ring-1 ring-gray-200 rounded-lg ${draggingId === language.id ? "opacity-50 scale-[0.98" : ""}`}>
+                    <div key={language.id} ref={(el) => {itemRefs.current[language.id] = el}} className={`grid grid-cols-[max-content_1fr_1fr_max-content] justify-between gap-2 items-center w-full pl-1 pr-2 py-3 ring-1 ring-gray-200 rounded-lg ${draggingId === language.id ? "opacity-50 scale-[0.98]" : ""}`}>
                         <GripVertical onMouseDown={() => handleDragStart(language.id)} className="size-6 text-gray-300 cursor-grab"/>
                         <input className="w-full text-[12px] p-1 border border-gray-200 rounded-lg px-3 py-2 transition hover:bg-[#F8FAFC] hover:border-blue-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" value={language.name} placeholder={translationsLanguage.placeholder} onChange={(e) => onLanguageChange(language.id, "name", e.target.value)}/>
                         <Selector

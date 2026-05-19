@@ -46,7 +46,7 @@ export function useReorderList<T extends ReorderItem>(
             onReorder(reordered);
         };
 
-        function handleUp(e: MouseEvent) {
+        function handleUp() {
             setDraggingId(null)
         };
         console.log(draggingId)

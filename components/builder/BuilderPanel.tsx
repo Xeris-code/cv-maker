@@ -93,6 +93,7 @@ export function BuilderPanel({
                     onWorkChange={bindCollectionChange("work")}
                     onAddWork={bindAdd("work")}
                     onDeleteWork={bindDelete("work")}
+                    onReorderSkills={bindReorder("work")}
                 />
             case "education":
                 return <EducationSection
