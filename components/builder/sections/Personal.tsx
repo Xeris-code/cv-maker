@@ -32,7 +32,7 @@ export function PersonalSection({
             description={translation.description}
         />
         <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
-        <div className="grid grid-cols-2 pt-2 gap-y-5 gap-x-3">
+        <div className="grid grid-cols-2 pt-2 px-5 gap-y-5 gap-x-3">
             <UiInputField
                 label={translation.fields.firstName.name}
                 value={personal.name}

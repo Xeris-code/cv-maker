@@ -18,11 +18,12 @@ Peter Cisovsky
 - Local Storage
 
 ## 🎯 Future Improvements
+- Add remove button for CV photo
 - Improve validation
 - Improve language translations
 - Add more templates / Template switcher
 - Sidebar spliting
-- Better mobile support
+- Mobile support
 - Export to json file
 - Dark mode
 - Preview feature
