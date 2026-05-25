@@ -60,9 +60,9 @@ export function EducationPreviewCard({
                             <div className="flex items-center gap-3">
                                 <Calendar className="size-4"/>
                                 <div className="flex gap-1 text-[12px] items-center">
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{months[education.start.month].name}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{months[education.start.month].name}</span>
                                     
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{education.start.year}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{education.start.year}</span>
                                 </div>
                             </div>
                         }
@@ -70,9 +70,9 @@ export function EducationPreviewCard({
                         {hasEndDate &&
                             <div className="flex items-center gap-3">
                                 <div className="flex gap-1 text-[12px] items-center">
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{months[education.end.month].name}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{months[education.end.month].name}</span>
                                     
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{education.end.year}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{education.end.year}</span>
                                 </div>
                             </div>
                         }

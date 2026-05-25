@@ -42,9 +42,9 @@ export function CoursePreviewCard({
                         <div className="flex items-center gap-3">
                             <Calendar className="size-4"/>
                             <div className="flex gap-1 text-[12px] items-center">
-                                <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{months[course.date.month].name}</span>
+                                <span className="border border-gray-200 rounded px-1 text-center w-20">{months[course.date.month].name}</span>
                                 
-                                <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{course.date.year}</span>
+                                <span className="border border-gray-200 rounded px-1 text-center w-20">{course.date.year}</span>
                             </div>
                         </div>
                     }

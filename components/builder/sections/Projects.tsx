@@ -64,7 +64,7 @@ export function ProjectsSection({
             ))}
         </div>
     </div>
-    <div className="flex items-center px-5 py-5 border-t-1 border-gray-200">
+    <div className="flex items-center px-5 py-5 border-t border-gray-200">
         <AddButton
             label={`+ ${translationsProjects.add}`}
             onClick={

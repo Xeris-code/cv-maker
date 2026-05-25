@@ -51,9 +51,9 @@ export function WorkPreviewCard({
                             <div className="flex items-center gap-3">
                                 <Calendar className="size-4"/>
                                 <div className="flex gap-1 text-[12px] items-center">
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{months[work.start.month].name}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{months[work.start.month].name}</span>
                                     
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{work.start.year}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{work.start.year}</span>
                                 </div>
                             </div>
                         }
@@ -61,9 +61,9 @@ export function WorkPreviewCard({
                         {hasEndDate &&
                             <div className="flex items-center gap-3">
                                 <div className="flex gap-1 text-[12px] items-center">
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{months[work.end.month].name}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{months[work.end.month].name}</span>
                                     
-                                    <span className="border border-gray-200 rounded px-1 text-center w-[80px]">{work.end.year}</span>
+                                    <span className="border border-gray-200 rounded px-1 text-center w-20">{work.end.year}</span>
                                 </div>
                             </div>
                         }
