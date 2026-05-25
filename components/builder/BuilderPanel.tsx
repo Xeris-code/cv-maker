@@ -105,6 +105,7 @@ export function BuilderPanel({
                     onEducationChange={bindCollectionChange("education")}
                     onAddEducation={bindAdd("education")}
                     onDeleteEducation={bindDelete("education")}
+                    onReorderEducation={bindReorder("education")}
                 />
             case "courses":
                 return <CourseSection
@@ -116,6 +117,7 @@ export function BuilderPanel({
                     onCourseChange={bindCollectionChange("courses")}
                     onAddCourse={bindAdd("courses")}
                     onDeleteCourse={bindDelete("courses")}
+                    onReorderCourse={bindReorder("courses")}
                 />
             case "skills":
                 return <SkillsSection
@@ -155,6 +157,7 @@ export function BuilderPanel({
                     onProjectChange={bindCollectionChange("projects")}
                     onAddProject={bindAdd("projects")}
                     onDeleteProject={bindDelete("projects")}
+                    onReorderProjects={bindReorder("projects")}
                 />
         }
     }

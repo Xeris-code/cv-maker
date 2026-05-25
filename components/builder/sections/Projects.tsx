@@ -2,6 +2,7 @@ import { AddButton, UiSectionHeader } from "@/components/ui";
 import { CollectionState, Projects, UiProjectsTranslations, TooltipTranslations } from "@/lib/types";
 import { useState } from "react";
 import { ProjectEditingCard, ProjectPreviewCard } from "./cards";
+import { useReorderList } from "@/lib/hooks";
 
 type ProjectsSectionProps = {
     projects: CollectionState<Projects>;
@@ -10,6 +11,7 @@ type ProjectsSectionProps = {
     onProjectChange: (id: number, field: keyof Projects, value: string) => void;
     onAddProject: () => void;
     onDeleteProject: (id: number) => void;
+    onReorderProjects: (items: Projects[]) => void;
 };
 
 export function ProjectsSection({
@@ -19,9 +21,16 @@ export function ProjectsSection({
     onProjectChange,
     onAddProject,
     onDeleteProject,
+    onReorderProjects,
 }: ProjectsSectionProps){
 
     const [editingId, setEditingId] = useState< number | null >(null);
+
+    const {
+        draggingId,
+        itemRefs,
+        handleDragStart
+    } = useReorderList(projects.items, onReorderProjects)
 
     return <>
     <UiSectionHeader
@@ -31,7 +40,7 @@ export function ProjectsSection({
         itemLabel={translationsProjects.items}
     />
     <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
-        <div className="flex flex-col gap-5 p-5">
+        <div className={`flex flex-col gap-5 p-5 ${draggingId !== null ? "select-none cursor-grab active:cursor-grabbing": ""}`}>
             {projects.items.map((p) => (
                 (editingId === p.id)
                     ? <ProjectEditingCard
@@ -43,11 +52,14 @@ export function ProjectsSection({
                         onProjectChange={onProjectChange}
                     />
                     : <ProjectPreviewCard
+                        ref={(el) => {itemRefs.current[p.id] = el}}
                         key={p.id}
                         project={p}
                         translationTooltip={translationTooltip}
+                        dragging={draggingId===p.id}
                         onEdit={() => setEditingId(p.id)}
-                        onDeleteProject={onDeleteProject}  
+                        onDeleteProject={onDeleteProject}
+                        handleDrag={handleDragStart}
                     />
             ))}
         </div>

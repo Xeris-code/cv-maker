@@ -1,19 +1,23 @@
 import { UiTooltip, EditButton, BinButton, UiTextList } from "@/components/ui";
 import { Education, MonthOption, UiEducationTranslations, TooltipTranslations } from "@/lib/types";
-import { GraduationCap, MapPin, Calendar, Minus } from "lucide-react";
+import { GraduationCap, MapPin, Calendar, Minus, GripHorizontal } from "lucide-react";
+import { Ref } from "react";
 
 type EducationPreviewCardProps = {
     education: Education;
     months: MonthOption[];
     translation: UiEducationTranslations;
     translationTooltip: TooltipTranslations;
+    dragging: boolean;
+    ref: Ref<HTMLDivElement>;
     onEdit: () => void;
     onDeleteEducation: (id: number) => void;
+    handleDrag: (id: number) => void;
 };
 
 export function EducationPreviewCard({
-    education, months, translation, translationTooltip,
-    onEdit, onDeleteEducation
+    education, months, translation, translationTooltip, ref, dragging,
+    onEdit, onDeleteEducation, handleDrag
 }: EducationPreviewCardProps){
     
     const hasAdress = education.city || education.state;
@@ -22,15 +26,16 @@ export function EducationPreviewCard({
     const hasDate = hasStartDate && hasEndDate;
     const hasEducation = education.degree || education.field;
 
-    return (<div className="ring-1 ring-gray-200 rounded-lg p-3">
+    return (<div ref={ref} className={`ring-1 ring-gray-200 rounded-lg p-3 ${dragging ? "opacity-50 scale-[0.98]" : ""}`}>
                 <div className="flex justify-between">
                     <div className="flex flex-col">
                         <span className="text-[14px] font-semibold">{education.university}</span>
                     </div>
                     <div className="flex gap-3 h-6">
-                            <UiTooltip label={translationTooltip.edit}>
-                                <EditButton onClick={() => onEdit()}/>
-                            </UiTooltip>
+                        <GripHorizontal onMouseDown={() => handleDrag(education.id)} className="size-6 text-gray-300 cursor-grab"/>
+                        <UiTooltip label={translationTooltip.edit}>
+                            <EditButton onClick={() => onEdit()}/>
+                        </UiTooltip>
                         <UiTooltip label={translationTooltip.delete}>
                             <BinButton onClick={() => onDeleteEducation(education.id)}/>
                         </UiTooltip>

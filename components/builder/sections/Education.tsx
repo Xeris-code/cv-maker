@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AddButton, UiSectionHeader } from "@/components/ui";
 import { Education, CollectionState, UiEducationTranslations, YearOption, MonthOption, TooltipTranslations } from "@/lib/types"
 import { EducationEditingCard, EducationPreviewCard } from "./cards";
+import { useReorderList } from "@/lib/hooks";
 
 type EducationSectionProps = {
     education: CollectionState<Education>;
@@ -12,6 +13,7 @@ type EducationSectionProps = {
     onEducationChange: (id: number, field: keyof Education, value: Education[keyof Education]) => void;
     onAddEducation: () => void;
     onDeleteEducation: (id: number) => void;
+    onReorderEducation: (items: Education[]) => void;
 };
 
 export function EducationSection({
@@ -23,9 +25,16 @@ export function EducationSection({
     onEducationChange,
     onAddEducation,
     onDeleteEducation,
+    onReorderEducation,
 }: EducationSectionProps){
 
     const [editingId, setEditingId] = useState< number | null >(null);
+
+    const {
+        draggingId,
+        itemRefs,
+        handleDragStart
+    } = useReorderList(education.items, onReorderEducation)
 
     return <>
         <UiSectionHeader
@@ -35,7 +44,7 @@ export function EducationSection({
             itemLabel={translationEducation.items}
         />
         <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
-        <div className="flex flex-col gap-5 p-5">
+        <div className={`flex flex-col gap-5 p-5 ${draggingId !== null ? "select-none cursor-grab active:cursor-grabbing": ""}`}>
             {education.items.map((e) => (
                 (editingId === e.id)
                     ? <EducationEditingCard
@@ -49,13 +58,16 @@ export function EducationSection({
                         onEducationChange={onEducationChange}
                     />
                     : <EducationPreviewCard
+                        ref={(el) => {itemRefs.current[e.id] = el}}
                         key={e.id}
                         education={e}
                         months={monthDateOptions}
                         translation={translationEducation}
                         translationTooltip={translationTooltip}
+                        dragging={draggingId===e.id}
                         onEdit={() => setEditingId(e.id)}
-                        onDeleteEducation={onDeleteEducation}  
+                        onDeleteEducation={onDeleteEducation} 
+                        handleDrag={handleDragStart} 
                     />
             ))}
         </div>

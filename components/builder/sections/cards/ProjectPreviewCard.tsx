@@ -1,25 +1,30 @@
 import { Projects, TooltipTranslations } from "@/lib/types";
 import { BinButton, UiTooltip, EditButton, UiTextList } from "@/components/ui";
-import { Link } from "lucide-react";
+import { GripHorizontal, Link } from "lucide-react";
+import { Ref } from "react";
 
 type ProjectPreviewCardProps = {
     project: Projects;
     translationTooltip: TooltipTranslations;
+    dragging: boolean;
+    ref: Ref<HTMLDivElement>;
     onEdit: () => void;
     onDeleteProject: (id: number) => void;
+    handleDrag: (id: number) => void;
 };
 
 export function ProjectPreviewCard({
-    project, translationTooltip,
-    onEdit, onDeleteProject
+    project, translationTooltip, ref, dragging,
+    onEdit, onDeleteProject, handleDrag
 }: ProjectPreviewCardProps){
     return (
-        <div className="ring-1 ring-gray-200 rounded-lg p-3">
+        <div ref={ref} className={`ring-1 ring-gray-200 rounded-lg p-3 ${dragging ? "opacity-50 scale-[0.98]" : ""}`}>
             <div className="flex justify-between w-full">
                 <div className="flex flex-col">
                     <span className="text-[14px] font-semibold">{project.name}</span>
                 </div>
                 <div className="flex gap-3 h-6">
+                    <GripHorizontal onMouseDown={() => handleDrag(project.id)} className="size-6 text-gray-300 cursor-grab"/>
                     <UiTooltip label={translationTooltip.edit}>
                         <EditButton onClick={() => onEdit()}/>
                     </UiTooltip>

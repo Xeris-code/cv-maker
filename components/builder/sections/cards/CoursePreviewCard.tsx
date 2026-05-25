@@ -1,28 +1,33 @@
 import { CoursesCertificates, MonthOption, TooltipTranslations } from "@/lib/types";
 import { UiTooltip, UiTextList, EditButton, BinButton } from "@/components/ui";
-import { Calendar, Link } from "lucide-react";
+import { Calendar, Link, GripHorizontal } from "lucide-react";
+import { Ref } from "react";
 
 type CoursePreviewCardProps = {
     course: CoursesCertificates;
     months: MonthOption[];
     translationTooltip: TooltipTranslations;
+    dragging: boolean;
+    ref: Ref<HTMLDivElement>;
     onEdit: () => void;
     onDeleteCourse: (id: number) => void;
+    handleDrag: (id: number) => void;
 };
 
 export function CoursePreviewCard({
-    course, months, translationTooltip,
-    onEdit, onDeleteCourse
+    course, months, translationTooltip, ref, dragging,
+    onEdit, onDeleteCourse, handleDrag
 }: CoursePreviewCardProps){
     
     const hasDate = course.date.month !== 0 && course.date.year !== 0
     
-    return <div className="ring-1 ring-gray-200 rounded-lg p-3">
+    return <div ref={ref} className={`ring-1 ring-gray-200 rounded-lg p-3 ${dragging ? "opacity-50 scale-[0.98]" : ""}`}>
                 <div className="flex justify-between">
                     <div className="flex flex-col">
                         <span className="text-[14px] font-semibold">{course.name}</span>
                     </div>
                     <div className="flex gap-3">
+                        <GripHorizontal onMouseDown={() => handleDrag(course.id)} className="size-6 text-gray-300 cursor-grab"/>
                         <UiTooltip label={translationTooltip.edit}>
                             <EditButton onClick={() => onEdit()}/>
                         </UiTooltip>

@@ -15,7 +15,8 @@ type WorkPreviewCardProps = {
 }
 
 export function WorkPreviewCard({
-    work, months, translationTooltip, ref, dragging, onEdit, onDeleteWork, handleDrag
+    work, months, translationTooltip, ref, dragging,
+    onEdit, onDeleteWork, handleDrag
 }: WorkPreviewCardProps){
     
     const hasAdress = work.city || work.state;

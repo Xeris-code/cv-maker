@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AddButton, UiSectionHeader } from "@/components/ui";
 import { CoursesCertificates, CollectionState, UiCoursesTranslations, YearOption, MonthOption, TooltipTranslations } from "@/lib/types"
 import { CourseEditingCard, CoursePreviewCard } from "./cards";
+import { useReorderList } from "@/lib/hooks";
 
 type CourseSectionProps = {
     courses: CollectionState<CoursesCertificates>;
@@ -12,6 +13,7 @@ type CourseSectionProps = {
     onCourseChange: (id: number, field: keyof CoursesCertificates, value: CoursesCertificates[keyof CoursesCertificates]) => void;
     onAddCourse: () => void;
     onDeleteCourse: (id: number) => void;
+    onReorderCourse: (items: CoursesCertificates[]) => void;
 };
 
 export function CourseSection({
@@ -22,10 +24,17 @@ export function CourseSection({
     yearDateOptions,
     onCourseChange,
     onAddCourse,
-    onDeleteCourse, 
+    onDeleteCourse,
+    onReorderCourse,
 }: CourseSectionProps){
 
     const [editingId, setEditingId] = useState< number | null >(null);
+
+    const {
+        draggingId,
+        itemRefs,
+        handleDragStart
+    } = useReorderList(courses.items, onReorderCourse)
 
     return <>
         <UiSectionHeader
@@ -35,7 +44,7 @@ export function CourseSection({
             itemLabel={translationCourse.items}
         />
         <div className="overflow-y-auto noScroll h-full border-gray-200 p-2">
-        <div className="flex flex-col gap-5 p-5">
+        <div className={`flex flex-col gap-5 p-5 ${draggingId !== null ? "select-none cursor-grab active:cursor-grabbing": ""}`}>
             {courses.items.map((c) => (
                 (editingId === c.id)
                     ? <CourseEditingCard
@@ -49,12 +58,15 @@ export function CourseSection({
                         onCourseChange={onCourseChange}
                     />
                     : <CoursePreviewCard
+                        ref={(el) => {itemRefs.current[c.id] = el}}
                         key={c.id}
                         course={c}
                         translationTooltip={translationTooltip}
+                        dragging={draggingId===c.id}
                         months={monthDateOptions}
                         onEdit={() => setEditingId(c.id)}
-                        onDeleteCourse={onDeleteCourse}  
+                        onDeleteCourse={onDeleteCourse} 
+                        handleDrag={handleDragStart}
                     />
             ))}
         </div>
