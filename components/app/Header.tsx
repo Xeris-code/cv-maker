@@ -52,15 +52,15 @@ export function Header({
             <div className="flex gap-5 items-center text-gray-700">
                 <div className="flex items-center gap-4">
                     <LanguageSelector language={uiLanguage} languageOptions={languageOptions} onClick={(language: WebLanguage) => onLanguageChange(language)}/>
-                    <button type="button" className="text-[15px] cursor-pointer flex h-fit items-center gap-2 px-5 py-3 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.02] active:scale-[0.98]  rounded-lg">
+                    {/*<button type="button" className="text-[15px] cursor-pointer flex h-fit items-center gap-2 px-5 py-3 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.02] active:scale-[0.98]  rounded-lg">
                         <Eye className="size-5"/>{uiActions.preview}
-                    </button>
+                    </button>*/}
                     <button type="button" onClick={onPrint} className="text-[15px] cursor-pointer flex h-fit items-center gap-2 px-5 py-3 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.02] active:scale-[0.98]  rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-[#FFFFFF]">
                         <Download className="size-5"/>{uiActions.printPDF}
                         </button>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button type="button" className="cursor-pointer h-fit items-center px-3 py-2 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.05] active:scale-[0.98] rounded-lg"><Sun/></button>
+                    {/*<button type="button" className="cursor-pointer h-fit items-center px-3 py-2 ring-1 shadow-md ring-[#E2E8F0] hover:scale-[1.05] active:scale-[0.98] rounded-lg"><Sun/></button>*/}
                     <SettingsMenu demoTitle={uiActions.demo} resetTitle={uiActions.reset} exportTitle={uiActions.exportJSON} onDemo={() => onDemo()} onReset={() => onReset()}/>
                 </div>
             </div>

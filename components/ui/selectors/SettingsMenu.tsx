@@ -61,7 +61,7 @@ export function SettingsMenu({
                                 {resetTitle}
                             </span> 
                         </button>
-                        <button 
+                        {/*<button 
                             type="button"
                             onClick={onReset}
                             className="hover:scale-[1.02] active:scale-[0.98] text-[15px] cursor-pointer grid grid-cols-[30px_1fr] h-fit items-center gap-1 px-5 py-3 ring-1 shadow-md ring-[#E2E8F0] hover:ring-[#2563EB] hover:text-[#2563EB] rounded-lg"
@@ -70,7 +70,7 @@ export function SettingsMenu({
                             <span className="text-start">
                                 {exportTitle}
                             </span> 
-                        </button>
+                        </button>*/}
                     </div>
                 </div>
             }
