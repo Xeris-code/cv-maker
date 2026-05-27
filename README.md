@@ -134,6 +134,9 @@ This project was also used to improve:
 ## Future Improvements
 
 - multiple CV templates
+- mobile support
+- import from Linkedin, PDF
+- export JSON file
 - drag & drop section ordering
 - dark/light themes
 - cloud save support
