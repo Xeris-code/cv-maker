@@ -1,4 +1,5 @@
 import { Projects } from "@/lib/types";
+import { TextList } from "../blocks";
 
 export function ProjectItem({
     project
@@ -17,9 +18,9 @@ export function ProjectItem({
                 {project.tech}
             </p>
 
-            <p className="mt-1 text-[11px] text-[#0F172A]">
-                {project.description}
-            </p>
+            <div className="mt-1 text-[11px] text-[#0F172A]">
+                <TextList text={project.description}/>
+            </div>
         </div>
     )
 }
