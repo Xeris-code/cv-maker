@@ -1,11 +1,12 @@
 import { Poppins } from "next/font/google";
-import { CvState } from "@/lib/types";
-import { Phone, Mail, MapPin, Earth } from "lucide-react";
+import { BirthDate, CvState } from "@/lib/types";
+import { Phone, Mail, MapPin, Earth, Cake } from "lucide-react";
 
 const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"] });
 
-export function MainHeader({ basics, currentPosition, hasName, hasAdress }: {
+export function MainHeader({ basics, birth, currentPosition, hasName, hasAdress }: {
         basics: CvState["basics"];
+        birth: BirthDate;
         currentPosition: string;
         hasName: string;
         hasAdress: string;
@@ -43,12 +44,7 @@ export function MainHeader({ basics, currentPosition, hasName, hasAdress }: {
                 </div>
                 )}
 
-                {basics.portfolio && (
-                <div className="flex items-center gap-4">
-                    <Earth size={20} className="shrink-0" />
-                    <span>{basics.portfolio}</span>
-                </div>
-                )}
+                
 
                 {hasAdress && (
                 <div className="flex items-center gap-4">
@@ -57,7 +53,21 @@ export function MainHeader({ basics, currentPosition, hasName, hasAdress }: {
                 </div>
                 )}
 
+                {birth.year && (
+                <div className="flex items-center gap-4">
+                    <Cake size={20} className="shrink-0" />
+                    <span>{[birth.day, birth.month, birth.year].join(".")}</span>
+                </div>
+                )}
+
             </div>
+            {basics.portfolio && (
+                <div className="flex mt-3 items-center gap-4 text-[12px] text-[#0F172A]">
+                    <Earth size={20} className="shrink-0" />
+                    <span>{basics.portfolio}</span>
+                </div>
+                )}
+
                 <div className="mt-4 h-[1px] w-full bg-[#94A3B8]" />
             </div>
         );

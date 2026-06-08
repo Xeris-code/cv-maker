@@ -16,7 +16,7 @@ export function getModernBlocks(
 ): TemplateBlock[] {
   const blocks: TemplateBlock[] = [];
 
-  const { basics, work, education, courses, projects } = state;
+  const { basics, work, education, courses, projects, birth } = state;
 
   const hasHeader = basics.name || basics.surname || basics.position;
   const hasName = basics.name || basics.surname;
@@ -28,6 +28,7 @@ export function getModernBlocks(
       element: (
         <MainHeader
           basics={basics}
+          birth={birth}
           currentPosition={basics.position}
           hasName={hasName}
           hasAdress={hasAddress}
